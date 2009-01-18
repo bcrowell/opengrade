@@ -1,0 +1,13 @@
+Make sure it still runs with all possible combinations of plugins installed and not installed.
+Do this from a directory that's not the same as the directory the Spotter source is in, or else it will
+find the plugins in that directory.
+  make install_spotter_plugin
+  make install_online_grades_plugin
+  make deinstall_spotter_plugin
+  make deinstall_online_grades_plugin
+Change version number in:
+  /home/bcrowell/Documents/web/source/ogr/ogr.source , and remake
+  Makefile
+  Version.pm
+make dist
+make post

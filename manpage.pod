@@ -1,0 +1,65 @@
+#!/usr/bin/perl 
+
+#----------------------------------------------------------------
+# The man page is generated from this, using pod2man.
+#----------------------------------------------------------------
+
+=head1 NAME
+
+OpenGrade - software for teachers to keep track of grades
+
+=head1 SYNOPSIS
+
+opengrade [options] [filename]
+
+=head1 DESCRIPTION
+
+B<OpenGrade> is a desktop application that lets teachers keep track of their
+students' grades. It can put the
+students' grade reports on a web server, and allow the students password-protected
+access to them.
+
+=head1 OPTIONS
+
+=over 8
+
+=item -t
+
+Use the text-based interface rather than the graphical user interface.
+
+=back
+
+=head1 FILES
+
+/usr/local/share/icons/hicolor/48x48/apps/opengrade_icon.png - the program's icon
+
+/usr/share/apps/opengrade/sounds/*.wav - sounds used for auditory feedback while entering grades
+
+B<$HOME>/.OpenGrade_prefs - a text file containing the user's preferences
+
+=head1 OTHER INFORMATION
+
+OpenGrade's web page is at
+
+        http://www.lightandmatter.com/ogr/ogr.html   ,
+
+where you can always find the latest version of the software. There is more
+extensive documentation available there as a PDF file.
+There is a page for OpenGrade on Freshmeat, at
+
+        http://freshmeat.net/projects/opengrade/   ,
+
+where you can give comments, rate it, and subscribe to e-mail announcements of new releases.
+
+=head1 AUTHOR
+
+OpenGrade was written by Ben Crowell, http://www.lightandmatter.com/personal/.
+
+=head1 COPYRIGHT AND LICENSE
+
+B<Copyright (C)> 2002-2009 by Benjamin Crowell.
+
+B<OpenGrade> is free software; you can redistribute it and/or modify it
+under the terms of the GPL, v. 2.
+
+=cut

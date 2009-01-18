@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   id="svg101"
+   sodipodi:version="0.31"
+   width="210mm"
+   height="297mm"
+   sodipodi:docname="/usr/home/admin/Documents/programming/ogr/icon/003.svg"
+   sodipodi:docbase="/usr/home/admin/Documents/programming/ogr/icon/"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs
+     id="defs103">
+    <linearGradient
+       id="linearGradient108">
+      <stop
+         style="stop-color:#fff27f;stop-opacity:1;"
+         offset="0.000000"
+         id="stop109" />
+      <stop
+         style="stop-color:#eaaf5a;stop-opacity:1;"
+         offset="1.000000"
+         id="stop110" />
+    </linearGradient>
+    <radialGradient
+       xlink:href="#linearGradient108"
+       id="radialGradient111"
+       cx="0.585185"
+       cy="0.476562"
+       fx="0.585185"
+       fy="0.476562"
+       r="0.512494"
+       gradientUnits="objectBoundingBox"
+       spreadMethod="pad" />
+    <linearGradient
+       xlink:href="#linearGradient108"
+       id="linearGradient112" />
+  </defs>
+  <sodipodi:namedview
+     id="base" />
+  <path
+     style="font-size:12;fill:url(#radialGradient111);fill-rule:evenodd;stroke-width:1pt;"
+     d="M 557.133 752.618 L 364.146 650.019 L 170.22 750.832 L 208.161 535.586 L 52.356 382.304 L 268.792 351.874 L 366.425 156.327 L 462.249 352.767 L 678.395 385.194 L 521.181 537.031 L 557.133 752.618 z "
+     id="path113"
+     transform="matrix(0.0958214,0,0,0.100602,330.364,408.751)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect110"
+     width="1.908397"
+     height="1.908398"
+     x="-26.005007"
+     y="572.836466"
+     transform="matrix(0.373276,-0.92772,0.668064,0.744104,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect111"
+     width="1.272265"
+     height="1.272265"
+     x="-356.312697"
+     y="328.985347"
+     transform="matrix(-0.140594,-0.990067,0.950612,0.310381,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect112"
+     width="1.272265"
+     height="1.272265"
+     x="-344.448905"
+     y="333.721714"
+     transform="matrix(-0.140594,-0.990067,0.950612,0.310381,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect113"
+     width="1.272265"
+     height="1.272265"
+     x="-518.394394"
+     y="122.595653"
+     transform="matrix(-0.470738,-0.882273,0.99944,-0.0334657,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect114"
+     width="1.272265"
+     height="1.272265"
+     x="-659.361198"
+     y="-306.465173"
+     transform="matrix(-0.92772,-0.373276,0.744104,-0.668064,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect115"
+     width="1.908397"
+     height="1.908398"
+     x="-657.642598"
+     y="-318.529142"
+     transform="matrix(-0.92772,-0.373276,0.744104,-0.668064,0,0)" />
+  <rect
+     style="font-size:12;fill:#fffff7;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect116"
+     width="1.908397"
+     height="1.908398"
+     x="-663.457469"
+     y="-324.826855"
+     transform="matrix(-0.92772,-0.373276,0.744104,-0.668064,0,0)" />
+  <rect
+     style="font-size:12;fill:#f4ee00;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect117"
+     width="1.908396"
+     height="1.908396"
+     x="-541.568040"
+     y="-577.608941"
+     transform="matrix(-0.990067,0.140594,0.310381,-0.950612,0,0)" />
+  <rect
+     style="font-size:12;fill:#f4e500;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;"
+     id="rect118"
+     width="1.908397"
+     height="1.908397"
+     x="-362.182772"
+     y="316.663777"
+     transform="matrix(-0.140594,-0.990067,0.950612,0.310381,0,0)" />
+</svg>

@@ -1,0 +1,1172 @@
+\documentclass{opengrade_doc}
+\begin{document}
+\parafmt
+\mytitle{OpenGrade} \\
+\emph{Benjamin Crowell}\hfill{}\emph{www.lightandmatter.com}
+
+\vspace{8mm}
+
+\formatlikesection{Contents}
+
+\noindent\large\begin{tabular}{ll}
+\hline
+Installing	& \pageref{installing} \\
+Upgrading       & \pageref{upgrading} \\
+Using the Graphical User Interface & \pageref{gui} \\
+Goodies & \pageref{goodies} \\
+Using the Text-Based User Interface & \pageref{textui} \\
+Safety Features & \pageref{safety}\\
+Passwords and Authentication & \pageref{authentication}\\
+Import and Export of Other File Formats & \pageref{import-export} \\
+Posting Grades on the Web & \pageref{web} \\
+How Grades Are Calculated & \pageref{howcalc} \\
+Format of Gradebook Files & \pageref{format} \\
+Scripting & \pageref{scripting} \\
+Future Improvements & \pageref{improve} \\
+Bugs & \pageref{bugs} \\
+Programming Stuff & \pageref{programming} \\
+Format of Gradebook Files for OpenGrade2 & \pageref{old-format} \\
+License	& \pageref{license} \\
+\hline
+\end{tabular}\normalsize
+
+
+\mysection{Installing}\label{installing}
+
+\mysubsection{Ubuntu Linux}
+First, download the \verb@opengrade-...tar.gz@ file from \verb@lightandmatter.com@.
+
+Open a terminal window.
+
+If your browser didn't automatically unpack the file,
+use a command such as \verb@cd Desktop@ to get into the directory in which the file was saved.
+Then use the Unix command \verb@tar -zxvf opengrade...tar.gz@ to unpack it.
+
+In the terminal window, do \verb@cd opengrade-...@ to move into the directory when opengrade's files are.
+
+Install the depenencies by doing this:
+
+\verb@sudo make ubuntu@
+
+Finally, to install OpenGrade itself, do:
+
+\verb@sudo make install@
+
+You can now run the program with the command \verb@opengrade@. If you want to be able to do this
+by clicking in a menu in GNOME, here's how to set that up. \emph{Right}-click on Applications in the top
+menu bar. Click Edit Menus, Education, New Item. Fill in both Name: and Command: with "opengrade".
+
+\mysubsection{Mandriva Linux}
+
+OpenGrade's web page has information about how to locate up to date Mandriva RPM files.
+
+\mysubsection{generic instructions for Linux}
+
+If you're running Linux, but it's not one of the distributions described above,
+the procedure for installing it should be similar to the one for Ubuntu, except that you'll want
+to use your system's method for installing
+the prerequisites.
+
+The following perl modules are prerequisites:
+\verb@Clone@,
+\verb@Term::ReadKey@,
+\verb@Date::Calc@,
+\verb@Digest::SHA1@,
+\verb@JSON@,
+\verb@Tk@.
+In addition, you'll need the ALSA \verb@aplay@ utility (needed only if you want sound).
+
+As a last resort for installing the prerequisites, you can install all the perl modules from CPAN
+by doing the command \verb@make depend@. This is a last resort, because CPAN probably won't play
+nicely with your distro's packaging system.
+
+\mysubsection{Windows}
+I do not officially support OpenGrade on Windows, but my wife reported a few years back that it worked.
+
+First you need to download Perl from \verb@http://www.activestate.com/@.
+Starting from their homepage, follow the links for downloading ActivePerl.
+They ask you for some registration information, which is optional, and then you download
+ActivePerl. I've gotten reports that ActivePerl 5.8 breaks the installer
+script for OpenGrade, so you should probably download and install 5.6
+instead.\footnote{I found it confusing navigating their web site. Although
+they change the site from time to time, here's what I had to do the last time
+I went through the process. From the ActiveState home page, click on ActivePerl
+under DOWNLOADS on the right side of the screen. Next, click on the red rectangle
+that says Download. Click through the registration step using the Next button. Click
+on MSI to download the Windows version of ActivePerl 5.6.}
+
+Once you have ActivePerl installed, download
+OpenGrade, and unpack the archive using WinZip or similar
+software --- double-clicking on the file will probably work.
+Reboot, make sure you have an active internet connection, and
+then double-click on the file \verb@install_win.pl@.\footnote{If you don't
+have privileges for administering your computer, you may find that installing
+ActivePerl didn't correctly associate the .pl extension with ActivePerl. If this
+is the case, then you'll have to run the installer by dragging it onto the file
+C:$\backslash$Perl$\backslash$bin$\backslash$perl.exe, and the same drag-and-drop method will be required
+in order to run OpenGrade later.} This file
+will download and install a bunch of open-source software that's
+required in order for OpenGrade to work; the last piece of software
+it downloads, Tk, is large, and will take a long time to download over
+a modem connection.
+Wait until it's done, and reboot again.
+
+ To run OpenGrade, double-click
+on the file \verb@opengrade.pl@.
+
+Starting with version 2.7.0, OpenGrade no longer has full support for sound on Windows.
+
+\mysubsection{MacOS X}
+The text-based user interface runs fine on MacOS X --- that's
+the system I developed it on. I haven't tried getting the GUI
+to run in X Windows on MacOS X.
+You need to install the Developer Tools, and also X Windows, which is
+now distributed with MacOS X.
+Since MacOS X is Unix, the procedure for installing OpenGrade itself is similar
+to the Linux procedure. 
+
+\mysection{Upgrading}\label{upgrading}
+The process of upgrading is similar to the process of installing, but if you're just
+upgrading a minor version (e.g., 2.4.12 to 2.4.13), you shouldn't need to redo the part with
+\verb@install_win@ (Windows) or \verb@get_dependecies_from_cpan.pl@ (Unix).
+If you're upgrading a major version (e.g., 2.4.13 to 2.5.0), then you should redo that part. 
+This applies in particular to the upgrade to versions 2.5\footnote{added dependency on Clone} and 
+2.9.\footnote{added dependency on JSON}
+
+
+\mysection{Using the Graphical User Interface}\label{gui}
+
+\mysubsection{entering grades}
+To see how OpenGrade works in everyday use, run the program as
+described above, and open the file \verb@sample.gb@ that was
+included among the files you downloaded. Enter \verb@secret@ for
+the password. (OpenGrade uses passwords for authentication, but
+there is no encryption. See page \pageref{authentication} for
+more information on how this works.) Click on
+exam 1 in the list on the left, and you should see something
+like the window shown below.
+
+\fig{doc_window}
+
+On the right, you have a list of the students enrolled in the
+class. Their scores on exam 1 have already been entered, but
+you can change them now if you like. If you click on exam 2
+from the list, you'll see their results from that exam.
+
+Note the popup menu at the top of the column of scores.
+With this menu, you can choose to see each student's average
+test grade, or each student's overall grade in the course.
+The two tests are the only assignments in the file right now,
+so the exam averages are the same as the overall grades.
+
+If you explore the other popup menu, above the list of assignments, you'll
+see that there is another category, homework,
+with no assignments in it. Let's add a new homework assignment.
+Select the homework category from the popup menu, and then select
+New Homework from the Assignments menu. Type 1 in the first space:
+this assignment will be known as Homework 1. Type a number in the second
+space for the maximum number of points possible on this assignment.
+Click on OK. A blank column of scores pops up in the main window, and you can
+enter the students' grades.
+
+When entering grades, make sure you have your Num Lock turned on, or
+else OpenGrade won't respond to numbers from the keypad. (It tries to
+detect this situation, and will normally beep at you if it appens.)
+When you hit
+the Return key (on either the keypad or the main keyboard), the grade
+will be entered, and the next student will automatically be selected.
+(You can also use the down-arrow key as a synonym for Return, and the up-arrow
+to select the preceding student.) This allows you to enter a list of
+grades quickly if you already have them in alphabetical order.
+
+If you have a stack of papers that is not in alphabetical order, and
+you're entering all the grades, the quickest way to do it is to
+use the keyboard to select each student. 
+Here's how it works. Normally when you're
+entering grades, the keyboard focus is in one of the little grade
+boxes on the right-hand column of the spreadsheet. If you hit the
+space bar, however, you'll see that now the student's name is highlighted
+rather than the student's grade. Once the focus is in the left-hand
+(names) column of the spreadsheet, you can use the keyboard to select
+a different student by typing the first few letters
+of her last name. 
+The characters you've typed
+will appear above the top of the list. Now hit the tab key, and
+you can enter the grade. 
+Note that if you keep on typing, the software assumes you're trying
+to be more specific about what student you have in mind rather than
+selecting a different student. For instance, if you have students
+named Jarret, Johnson, and Olson, then typing \verb@jo@ means
+that you're selecting Johnson; it doesn't mean you hit j, then
+changed your mind and wanted to select Olson instead. If you hit
+j and then change your mind and want to select Olson instead,
+then you need to hit the backspace key to erase the j.
+(The software will also forget about the letters you've typed
+when you hit tab and take the keyboard focus away from the list
+of students.)
+If you get a unique match after typing the first three
+letters, OpenGrade will make a little ``shk'' sound to let you know it worked.\footnote{This
+is only if you have beeping enabled in your preferences, and
+if you have the optional Audio::Data and Audio::Play Perl modules
+installed.}
+Once you get used to hearing it, you'll start to notice when you
+don't hear it, which happens when you have two students with similar
+last names; that's a warning that, e.g., you may have selected
+Wilberforce (the first one in alphabetical order) when you wanted
+Wilson.
+
+When entering grades, the $+$ key is a shortcut for .5. 
+For instance, a score of 3.5 points can be entered as $3+$.
+
+\mysubsection{creating a new file}
+To create a new gradebook file, choose New from the File menu
+and fill in the form. You've created a new gradebook file, which
+is empty. Now you need to get it set up correctly.
+
+If you use a fixed set of grading standards, you can now enter
+them by choosing Grading Standards from the Edit menu.
+
+Next you'll probably want to set up all your categories of
+assignments, such as exams, homework, and quizzes. To do this,
+choose New Category from the Assignments menu. The first thing
+you're asked for is a short name for the category.
+It doesn't matter too much what you pick; in the graphical
+user interface, you'll never even see it again. However, you will
+see this short name if you ever use the text-based user interface,
+or if you examine the gradebook file directly in an editor.
+Just pick something short, like e for exams, or q for quizzes.
+Make sure you don't use the same short name for two different
+categories. Most of the rest of the inputs are fairly self-explanatory,
+except for the space at the bottom for the weight of the category.
+(To see this space, you may have to use the scrollbar on the right-hand
+side of the window to scroll down to it.)
+This is optional. If your student's grades are simply going to be
+based on the sum of their points in the various categories, then
+you should always leave this space blank. On the other hand, if you
+want each category to have a certain weight, then you should enter
+a weight for every category you create. See page
+\pageref{weightedgrading} for more information on weighted grading.
+
+Once you've created your categories, you can enter your students'
+names using Add from the Students menu. If you already have your
+roster in a text file, you may find it more convenient simply to
+open your gradebook file in a text editor, paste in your roster,
+and then put it in the form OpenGrade requires, as documented in
+section \ref{format}.
+
+\mysubsection{reports}
+A variety of reports is available from the Reports menu.
+The reports offered in this menu will depend on what student,
+category, and assignment you've selected. When you choose
+a report from the menu, it's displayed on the screen. You can
+then hit OK if all you wanted to do was look at it, or Save
+to save it to disk as a plain text file, e.g. for printing.
+
+\mysection{Goodies}\label{goodies}
+This section documents various features of OpenGrade that you may
+or may not need. Almost everything in this section applies equally to the
+GUI and the text-based interface.
+
+
+\mysubsection{extra credit}
+If an assignment is going to be for extra credit, you can simply
+set it up with a maximum point value of zero, but enter scores that
+are greater than zero. Normally, the software beeps at you and asks
+for confirmation when you try to enter a grade that is higher than the
+nominal maximum for the assignment. But when the maximum is zero,
+it will accept nonzero values without complaining. 
+
+Sometimes you have an assignment that is not completely extra credit,
+but it may be possible for students to do something extra that gives
+them more than the nominal maximum number of points. 
+When you enter a score that's above the maximum, the software will
+pop up a dialog box asking you if that's what you really want. To
+avoid this dialog box, you can just type in the score with a trailing
+letter x, e.g. \verb@101x@ on an assignment with a nominal maximum score
+of 100.
+
+\mysubsection{dropping a student}
+When you drop a student, the student's grades will still be in
+the gradebook file, so that if you need to, you can add her back
+in later. In the GUI, you drop a student by clicking on her name
+in the main window, and then selecting Drop from the
+Students menu; to reinstate her, select Reinstate from the
+same menu.
+
+\mysubsection{scores that don't count}
+You may wish to record scores that don't count at all in a student's
+grade. (For instance, you might give a diagnostic test, or record whether
+the student has completed some safety training.)
+There is an option for this when you set up the category.
+
+\mysubsection{dropping some scores}
+When you're setting up categories, the software will ask you how many
+scores to drop in this category. For instance, you could choose not
+to count each student's two lowest homework scores.
+
+\mysubsection{cloning a file}
+The cloning feature allows you to make a new version of a gradebook file,
+with all the students and grades deleted. This is useful when you're
+starting a new semester, and want to get going with all the same
+categories and grading standards you used last time.
+
+\mysubsection{reconciling files}
+If you enter grades both at home and at work, you have to keep synchronizing
+your gradebook files between the two computers. If you forget to synchronize
+them, you can end up with two inconsistent versions of the file, and it may
+not be obvious what the differences are. To fix this, use Reconcile from the
+File menu. It asks you to select two files, the first being the file you
+want to change, and the second being the one from which you want to fold
+in changes. Let's say these files are a.gb and b.gb, respectively. Basically
+the result is to form the union of the two sets and put it in a.gb, i.e.,
+after you're done, a.gb will contain any scores you entered in either of
+the two files. It works the same way for students, categories, and assignments.
+If a grade for a particular student is inconsistent in the two files, the program
+will ask you whether to change a.gb so that it has the score from b.gb, or
+leave a.gb alone. Grading standards, as well as properties of students, categories, and assignments are
+left as in a.gb, so for example, if a student is marked as having been dropped
+in a.gb but not in b.gb, the student is still marked as dropped. 
+
+\mysubsection{marking periods}
+Elementary and secondary school teachers often have the same students for a whole year,
+but assign grades to them at the ends of certain marking periods, e.g., four quarters.
+By default, marking periods are not enabled when you create a new gradebook file.
+To enable them, choose Marking Periods from the Edit menu, and set the names and starting
+dates of the periods.
+
+\mysubsection{attendance}
+To record attendance, set up a new category for it, and under Type choose attendance
+rather then numerical. If you don't want attendance to affect students' grades,
+choose that option when you set up the category. Each assignment in this category will now be an attendance
+record for a particular day. A student's attendance score can be p for present,
+a for absent, e for an excused absence, or t for tardy. If you can't remember these
+codes, just try typing some other letter like z in the grade field, and you'll get
+a message telling you what the possibilities are. In reports, attendance will be
+shown as a percentage, with the convention that present, excused, and tardy all
+count as 1, while absent counts as 0.
+
+\mysubsection{printable rosters}
+I often end up doing my grading when I don't have a computer handy, so I keep a printout
+of my class roster in my binder and write grades on it. OpenGrade can print pretty
+rosters for this purpose. To do this, you have to be running Linux, and you have to
+have the free drawing program Inkscape installed. Do Roster from the Reports menu,
+and choose Print Graphical Version Using Inkscape.
+
+\mysection{Using the Text-Based User Interface}\label{textui}
+OpenGrade has a text-based user interface that can be used instead of the GUI.
+It only covers a small subset of GradeBook's functionality,
+but I find that it can come in handy once in a while.
+The user interface is menu-driven, and is fairly self-explanatory.
+
+Often you'll need to select a particular student. Typically
+you'll just enter the first few characters of the student's last name,
+and hit return. As you go along, the software will display a list of
+all students whose names match the characters you've typed so far. When
+you see that there's only one student on the list, then you know you're
+ready to hit return to select that student. Capitalization is ignored
+here.
+
+There is a time-saving trick that you can use when you have more than
+one student with the same last name. For instance, my school has a large
+Vietnamese population, and my classes usually have several students named
+Nguyen. Suppose my class includes both Phong Nguyen and
+Thu Nguyen. To select Phong Nguyen, I can type \verb@ng@, which narrows
+it down to these two students, then hit the tab key, and then type \verb@p@.
+
+\mysection{Safety Features}\label{safety}
+Grades are valuable information, and OpenGrade has a whole
+repertoire of methods to help you make sure you never lose any
+of them. 
+
+\mysubsection{auto-save}
+Let's say you're editing a gradebook file called \verb@foo.gb@. 
+OpenGrade will
+save a copy of your work once per minute\footnote{If you're using the text-based
+interface, it saves it every time you cycle through the main menu.}
+under the
+filename \verb@#foo.gb#@ (the same naming convention as the one
+used by the Emacs editor). If your computer crashes in the middle
+of an intense grade-recording session, you should be able to
+recover most of your work from this file. (You may want to wait
+one minute before rebooting, in case the program is still running and
+there are changes it hasn't saved yet.)
+The auto-save file is
+deleted when you eventually save your file in the normal way,
+so your directory should not get cluttered up with auto-save files.
+Note that if you're recovering from a crash, you should
+copy the auto-save file before starting OpenGrade again,
+because the auto-save file will be overwritten when you open the
+original file.
+
+\mysubsection{auto-backup}
+When you save the file \verb@foo.gb@, OpenGrade will
+preserve the old version of the file under the name
+\verb@foo.gb~@ (again, the name is based on the Emacs convention).
+This takes care of the situation where you
+save your file, and then realize you've messed something up.
+
+\mysection{Passwords and Authentication}\label{authentication}
+Every OpenGrade file has a digital watermark that is based on
+the password you choose for the file. 
+Suppose one of your students somehow gets access to your gradebook
+files. Of course, this shouldn't happen, because you should store
+your gradebook files on a computer account that nobody has access
+to without logging in, but let's assume that you got up from your
+desk without logging out, and a student has walked up and is trying
+to tamper with your files.
+If she tries to open one of your gradebook files using OpenGrade, it
+will demand the password, and will refuse to open it without it.
+(But don't leave your desk while you have a file open!)
+If she opens the file using a text editor, she could start messing
+around with its contents. However, when you get back to your computer
+and open the file in OpenGrade, it will detect the fact that the
+digital watermark is no longer valid. OpenGrade does not store your
+password anywhere, so it assumes that the problem with the watermark
+is because \emph{you} are an unauthorized person trying to tamper
+with the file! It will refuse to open the file for you. This is
+your warning that the file has been tampered with. OpenGrade will also
+let you view a report that shows more information about the tampering,
+e.g., which lines were tampered with, deleted, or added.
+
+In everyday use, you should go by the following rules to protect your
+files. Make frequent
+backups and printouts. Don't store your gradebook files on a computer
+that people can get access to without logging in. Never leave a file
+open in OpenGrade if you're getting up from your desk. 
+Use a good password: one that is at least eight characters long,
+isn't a dictionary word, and contains both letters and digits.
+Don't write your password down, and don't use passwords people can
+guess, such as your license plate number, your kid's birthday, or
+your pet's name. Don't type your password if someone can look at
+your hands and see your keystrokes. Don't give anyone access to copies of your
+gradebook file, because a determined hacker might be able to determine your
+password by writing a program to guess millions of possibilities.
+
+Here are some
+real-life situations that can arise, and methods for dealing with
+them:
+
+\emph{You try to open the file, and OpenGrade doesn't accept your password.\/}
+Don't panic! The most likely cause of this is that you've made a mistake
+typing in your password. Just try again.
+
+\emph{You've forgotten your password, and you need to edit the file.\/}
+OpenGrade does not store your password anywhere, so there is no
+way to get it back.
+Use Change Password under the File menu to change the file's password.
+
+\emph{You need to look at an old OpenGrade file from years
+ago, and can't remember the password}
+The easiest solution is to examine the file in a text editor. Otherwise,
+change the password as described above.
+
+\emph{A student tampers with your file using a text editor.\/}
+Once you've convinced yourself that you didn't just make a mistake typing
+in your password, here's what you should do. Click on the button to view
+the report on the tampering, and save the report to a file.
+Next, make a copy of
+the file. You'll probably also want to print out both of these files.
+Next, restore your gradebook file from your latest backup. (If you've been uploading
+your grade reports to a server, then you should have a recent backup copy
+there.) By examining the report on the tampering, you should be able to
+repair some or all of the damage, and you may be able to figure out who
+the tamperer might be, e.g., if all the changes were increases in a
+particular student's scores.
+
+\emph{A student changes the password of your file.\/}
+This could happen if the student has read this documentation! You'll find
+out that the file has been tampered with, because OpenGrade will refuse to
+open it with your password. The procedures for handling this are
+similar to the ones described in the preceding paragraph. However, you won't
+be able to get a line-by-line report on the tampering.
+
+\emph{This is too much security for you.
+You don't want to be bothered with passwords.\/}
+Just use a password with no characters in it. All you have to do is
+click on the OK button whenever OpenGrade asks for a password.
+
+\emph{This isn't enough security for you.\/}
+Download Gnu Privacy Guard (also known as GPG or GnuPG), and use it
+to encrypt your gradebook files.
+
+\mysection{Import and Export of Other File Formats}\label{import-export}
+OpenGrade has the ability to read and write several different file formats.
+
+To export a file to some other format than the one it's already in, choose Export
+from the File menu. After you export your file, you'll still have the one in the
+original format open.
+
+To convert a file from some other format to OpenGrade's format, open it, and then
+export it to OpenGrade's format.
+
+\mysubsection{OpenGrade (gb)}
+
+OpenGrade's own native file format uses the file extension .gb. 
+
+\mysubsection{OpenGrade version 2}
+
+For backward-compatibility, you can save files in the format used by OpenGrade version 2.
+This will result in the loss of data that are only supported by version 3 and later, e.g., attendance.
+
+\mysubsection{Online Grades}
+
+Opengrade can also write a format used by Online Grades, as described in the next
+section.
+
+\mysubsection{GradeL}
+
+GradeL is an open-source gradebook for Linux which is similar to OpenGrade, but more
+oriented toward primary and secondary education. OpenGrade can export files to
+GradeL's .gdl format.
+
+\mysubsection{spreadsheet}
+
+To export OpenGrade data to a spreadsheet, choose Spreadsheet from the Reports menu.
+This option is not really meant for exporting an entire gradebook to a huge spreadsheet,
+but rather to get certain specific date out. You will be presented with a list of
+choices for which grades you want to export. For example, suppose you wanted to
+make a scatter chart to see how well students' homework grades were correlated with
+their overall grades in the course. You would select homework and overall grade.
+The spreadsheet would then have the students' names in the first column, and homework
+and overall grades in the second and third columns. The data are written in a plain-text
+format called CSV (comma-separated values), which can be read by spreadsheet programs
+such as OpenOffice and Excel. You'll be shown the contents of the CSV file, and offered
+the opportunity either to save it or to open it directly in OpenOffice Calc. When you
+open it in OpenOffice Calc, Calc will present you with a dialog box asking you to choose
+some options for how to interpret the CSV file. The one you need to change from its
+default is "Separated by," which needs to be "comma."
+
+\mysection{Posting Grades on the Web}\label{web}
+
+This section describes OpenGrade's machinery
+for posting grades on the web.
+There are two different ways of doing this, both of which can
+be accomplished using free and open-source software on the server
+side. You can do it using Online Grades or Spotter.
+
+\mysubsection{Using Online Grades}
+
+Make sure the Online Grades plugin is enabled in the Preferences menu.
+Once the plugin is enabled, you will have an Online Grades menu in OpenGrade.
+
+Online Grades has a web site at \verb@http://www.onlinegrades.org@ that
+describes how their system works.
+They also have a demo you can try.
+Their demo account has username
+
+\verb|faculty@onlineNOSPAMgrades.org|
+
+(Delete the NOSPAM.) The password is \verb@faculty@. OpenGrade is designed so that if you're using Online Grades,
+your password for your gradebook file will be the same as your password for Online Grades.
+Since you want to use the demo account, whose password is \verb@faculty@, you'll need to change
+the password on your gradebook file to match that. Close any file you have open in OpenGrade,
+and then do Change Password in the File menu; select your gradebook file, and set the password.
+Now open that gradebook file, and do Settings from the Online Grades menu.
+Under "Username or email address," put the email address above. The rest of the data is optional,
+and can be set later, if you like. Now go back to the Online Grades menu and do
+"Export Grades to Online Grades Format for Uploading." You will be prompted to save a file
+with a filename ending in ".xml."
+
+Now go to the demo page at \verb@http://www.onlinegrades.org/demo_info@.
+Click on the button that says "Click Here to Automatically Login to the Online Grades
+Faculty Center." Click on Submit File. Click the Browse button, and locate the
+.xml file you just created. Click "Submit File to Online Grades." It should upload the file
+and display a summary for you.
+
+Note that the .xml file contains your password, which is a security risk if someone gets access
+to your computer. You should probably get in the habit of deleting these files immediately
+after uploading them.
+
+\mysubsection{Using Spotter}
+
+To post grades on the web, you'll need access to a server
+where you can install files and CGI software yourself.
+Install the \verb@ServerOG.cgi@ script
+distributed with OpenGrade. To view their grades, students
+will interact with a second CGI script, \verb@Spotter.cgi@, which
+is distributed with the Spotter software, also on the
+\verb@lightandmatter.com@ site. You will need to set up
+a directory tree on your server as described in the Spotter
+documentation, in the section titled ``Interfacing.''
+
+Make sure the Spotter plugin is enabled in the Preferences menu.
+Once the plugin is enabled, you will have a Spotter menu in OpenGrade.
+
+Once this is all set up, you can upload grades by selecting
+Post Grades from the Spotter menu.
+
+\mysection{How Grades Are Calculated}\label{howcalc}
+There may be situations where it's not obvious to you how the
+software is calculating students' grades. This may happen when
+you have categories in which you drop some low scores, or
+when you have assignments that aren't due yet, but which some
+students have already turned in. OpenGrade has definite mathematical
+rules, documented in this section,
+ for handling such situations. Although the rules are a little
+complex, there is one general principle that will usually keep things
+clear in your head: the number of possible points is always the same
+for every student.
+This principle has two advantages: (1) If we want to know who is
+doing better in the course, student A or student B, we don't have to specify
+whether we mean better in the sense of total points or better in percentage
+terms. (2) It makes sense to compute statistics like averages and standard
+deviations for the class as a whole, and these statistics can be computed
+in terms of points, not just in terms of percentages. 
+
+\mysubsection{dropping low scores}
+ When dropping low
+scores, we choose them so as to maximize the student's total points,
+not the student's percentage. The maximum number of possible points in
+the category is calculated by leaving out the assignments that have the
+lowest number of points possible. Thus, the numbers deleted from the
+list of scores do not necessarily correspond to the numbers deleted
+from the list of possible points. If there is extra credit on some
+assignments (i.e. the student has scores higher than the maximum),
+then these extra credit points are skimmed off the top before any
+of the calculations are carried out, and then added back on at the
+end.
+
+\mysubsection{due dates}
+When you create a new assignment, the default is to leave the due
+date blank; the software then assumes that the assignment has already
+fallen due.
+
+The only time you really need to enter a due date for an assignment is
+when it's something that some students will turn in early. You only need
+to enter the month and day, not the year; the year is figured out based
+on the date you gave for the beginning of the term when you set up the file.
+If an assignment isn't due yet, then it doesn't count in students' grades
+at all. This is in keeping with the general principle that the number of points
+possible is the same for all students. Thus, a student may turn in an important
+assignment early, know she had a certain grade on it, and know that her
+grade in the course is going to change a lot on the assignment's due date; but
+the effect will not show up in the software until the due date.
+
+An assignment is considered to have fallen due at the beginning of the day
+it was due. For instance, if June 3 is the day you'll be turning in final
+grades for your course, then you can set the due date on a term paper to
+June 3, and it will be included in the grades you calculate on June 3.
+
+\mysubsection{weighted grading}\label{weightedgrading}
+You can set up a gradebook file for either weighted or point-total grading; this
+is determined when you make your first category.
+
+The weights do not have to add up to any particular number. For example, if
+you had two categories, with weights of 80 and 20, the total would be
+100, and they could be interpreted as percentages. On the other hand, you
+could have used weights of 8 and 2, or 4 and 1, and the results would have
+been the same.
+
+With weighted
+grading, if the total number of points possible in a particular category
+is zero, then that category is treated as if it doesn't exist, and the
+other categories then become more important. For example, exams could
+count as 80 percent of your students' grades, but before the first exam
+OpenGrade still needs to be able to calculate grades.
+Because of this, there can be no such thing as an extra credit category
+when you use weighted grading; an extra credit category is one in which
+the number of points possible is always considered to be zero. If you
+want to do extra credit with weighted grading, you need to make extra-credit
+\emph{assignments} within specific categories.
+
+\mysection{Format of Gradebook Files}\label{format}
+This section describes the file format used by OpenGrade 3.
+The old format used by OpenGrade 2 is described on page \pageref{old-format}.
+The following is a listing of the sample.gb file distributed with OpenGrade,
+with some lines replaced by \verb@...@ for brevity. Generically, the file
+is in a format called JSON, defined at \verb@json.org@, which is a way of
+representing arrays and dictionary hashes in a string. Arrays are represented
+with square brackets, hashes with curly brackets. Although the files
+written by OpenGrade are formatted in a fairly readable way, as shown in the
+example below, the details of this formatting are not actually significant.
+Whitespace outside of quotes is not significant, and the order of the key-value
+pairs in hashes can be given in any order. In other words, if you're writing
+an application that writes output in OpenGrade format, you don't have to
+worry about doing any of these things in a particular way, but if you're
+writing one that reads OpenGrade format, you shouldn't assume that it
+will be formatted in a particular way.
+
+\pagebreak
+
+\begin{listing}{1}
+{
+"watermark":["SHA1","BehaQ3Z22YLptmbSwGzLw8dniPA"],
+"data":
+  {
+    "class":    {
+      "days":"MTWRF",
+      "dir":"web_reports",
+      "online_grades":{"cltext":"","course_code":"","section_number":"","term":""},
+      "staff":"bcrowell",
+      "standards":{"A":90,"B":80,"C":70,"D":60,"F":0},
+      "term":"2009-1",
+      "time":"",
+      "title":"B. Crowell's physics class"
+    },
+    "types":    {
+      "data":{
+        "attendance":{"description":"attendance",
+          "descriptions":{"a":"absent","e":"excused",
+                   "p":"present","t":"tardy"},
+          "order":["p","a","e","t"],
+          "value":{"a":0,"e":1,"p":1,"t":1}},
+        "numerical":{"description":"numerical"}},
+      "order":["numerical","attendance"]
+    },
+    "category_order":["e","hw","att"],
+    "categories":    {
+      "att":{"catname":"attendance,attendance","type":"attendance"},
+      "e":{"catname":"exam,exams"},
+      "hw":{"catname":"homework,homework"}
+    },
+    "roster":    {
+      "curie_marie":{},
+      ...
+      "goeppert-mayer_maria":{"dropped":"true"},
+      ...
+    },
+    "assignment_order":["e.1","e.2","att.first_meeting"],
+    "assignments":    {
+      "att":      {
+        "first_meeting":{"max":1,"name":"first meeting"}
+      },
+      "e":      {
+        "1":{"max":100},
+        "2":{"max":100}
+      }
+    },
+    "grades":    {
+      "att":      {
+        "curie_marie":{"first_meeting":"p"},
+        ...
+      },
+      "e":      {
+        "curie_marie":{"1":97,"2":99},
+         ...
+      }
+    }
+  }}
+\end{listing}
+
+At the outermost level, the file is a hash with two keys, \verb@watermark@ and \verb@data@. A file does not
+have to have a watermark; an unwatermarked file does not contain this outermost level of structure, which is
+like an envelope surrounding the data inside. If you're writing a program that writes OpenGrade format,
+you probably won't want to bother creating watermarks, and if the files are read into OpenGrade later,
+OpenGrade will add the envelope itself. 
+
+However, if you want to handle watermarks in your application, here's how they're computed.
+Line 2 of the example gives the watermark, computed using the SHA1 hash algorithm.
+The watermark is defined as follows. First, we take the bare data structure
+without the envelope, and then we format it as a JSON string in a canonical way (which is different
+from, and less readable than, the way it's formatted in the actual file).
+The canonical format represents all hashes with their key-value pairs
+in alphabetical order according to their keys. When a key-value pair has
+a value that can be represented as a JSON integer (i.e., a string of digits
+with no superfluous leading zeroes), the value is represented that way, not
+as a string in quotes. All whitespace outside of quotes is eliminated.
+On the front of this string, we concatenate the password. We then compute the
+hash function (in this case SHA1) on this string, and encode it in base64,
+an ascii representation of a bit string that is discussed in the Wikipedia
+article Base64, and defined officially in RFC 1421.
+Base64 strings are generally padded with \verb@=@ signs on the right in order
+to make their lengths a multiple of 4 characters, and OpenGrade requires this.
+
+Lines 5-14 give some per-class data.
+
+Lines 15-24 define two types for grades: numerical and attendance.
+
+Lines 26-30 define the grading categories: attendance, exams, and homework.
+Each category has certain properties, including the mandatory \verb@catname@,
+which gives singular and plural names for the assignments in that category.
+The fact that none of the categories have a \verb@weight@ property implies
+that this file uses straight points rather than weighted grading.
+
+Lines 31-36 list the students in the class. In most cases, the form of the name
+to be displayed is given implicitly by the database key, e.g., \verb@curie_marie@
+will be displayed on the screen as Marie Curie. However, students can have
+optional properties \verb@first@ and \verb@last@, which override this default.
+On line 34, Marie Goeppert-Mayer is listed as having been dropped. Her grades are
+still retained, and if she is reinstated in the class they will show up again.
+
+Line 37 gives the order in which assignments will be displayed. A key like
+\verb@e.1@ means the assignment named 1 in the category \verb@e@, i.e., exam 1.
+Lines 38-46 give data about the assignments. Normally the name to be displayed
+for an assignment is determined from its category and its name, so, e.g., exam
+1 is displayed as \verb@exam 1@. However, line 40 shows that this default can
+be overridden.
+
+\mysection{Scripting}\label{scripting}
+
+OpenGrade has some scripting features, which are probably mainly of interest to
+me, for testing purposes.
+
+Testing whether files are identical:
+
+\verb@opengrade --identical a.gb b.gb >report || echo "not identical"@
+
+Copying files, with parsing, error checking, and possible change of format:
+
+\verb@opengrade --copy a.gb >/dev/null || echo "invalid file"@
+
+\verb@opengrade --copy --output_format=old --output=b.gb a.gb@
+
+\verb@opengrade --copy --output_format=json --output=b.gb a.gb@
+
+By default, \verb@--copy@ strips the watermark.
+If \verb@--copy@ is used with \verb@--authenticate@ and
+\verb@--input_password=foo@, it will check the digital watermark on the input file
+and propagate it to the output file.
+(To use a null string for the input password, just omit the
+option.)
+Passwords can be added or changed by using \verb@--output_password=bar@.
+
+\mysection{Future Improvements}\label{improve}
+\mysubsection{general}
+Features for elementary school teachers: class behavior, outside behavior,
+letters to parents.
+It would be cool to be able to make custom-formatted report cards; I think
+the right way to do this is probably to use the facilities built into
+a word-processor (OpenOffice?)
+for merging data into a form.
+
+All client-server transactions should be wrapped in a subroutine. The
+subroutine should check whether the password works, and if not, prompt
+for the right one. If not connected, should give an error message.
+It should then reconcile the server and client:
+server's e-mail overrides client's, and all other data from client
+overrides server's: disabled accounts,...? Should also handle errors.
+Need to deal with cases where the keys for the same student on the server
+and client become inconsistent.
+
+Downloading grades: Needs more flexibility
+for scoring.
+
+MyWords.pm has a mechanism for defaulting to English if the translation
+in the preferred language isn't available. This should be generalized
+so that the fallback isn't always English, and it should be in
+Words, not MyWords.
+
+Some server operations should be made more efficient. When uploading
+grades, compression could be used. When listing work from the server,
+the algorithm that runs on the server shouldn't read each file more
+than once.
+
+Make a test suite, with gb files that test as many features as possible,
+and scripting.
+
+Make sure unrecognized data in gb files is maintained across copies.
+
+\mysubsection{GUI}
+When creating a new assignment in the category of attendance, automatically supply a default
+     name like "Monday, June 28," using the most recent class meeting.
+
+When it says it's going to add a watermark, it doesn't actually do it unless you make some
+other modification to the file to prompt it to write it to disk.
+
+When you click on the go-away box of a dialog, the program doesn't want to quit after that.
+
+There should be an easier way to look at your grading standards. You currently
+can't look at them without going through a couple of steps as if you were
+going to modify them.
+
+A bunch of the menu items should have ``...''
+
+When creating a new file, there needs to be a way to set whether weighted grading
+will be used. (TermUI does this when you add the first category, but don't do it
+that way in the GUI, too awkward. The decision really needs to be made when they
+open the file.) 
+
+Missing functionality: 
+change order of assignments or categories.
+
+The assignments listbox should start out positioned
+at the end, not the beginning, when you select a new category. This seems to be
+pretty difficult to do, however! Selecting and then unselecting the last item
+doesn't work, and it doesn't have set() and get() methods like a Scrollbar widget.
+
+The dialog box for creating a new file doesn't give all the
+help that the text-based version does. It doesn't check 
+ whether the days of the week are legal. Actually, I think
+I can do this by building new types and options in to the Input class.
+
+Should allow the user to view dropped students. Have a note in 
+\verb@add_or_drop()@
+about this.
+
+Resizing needs to be handled better. Some widgets have hardcoded sizes, which
+I'd like to avoid.
+
+\mysubsection{text interface}
+
+The terminal-based interface should figure out the width of your terminal
+window, rather than defaulting to 80 columns.
+
+Emacs-style tab completion is goofy in a case where one student's name
+is the same as the beginning of another's (Ng and Nguyen) --- you need
+to type the underbar!
+
+In the statistics report, there is no user interface to say if you want
+stats within a category, and the report routine doesn't support that,
+either. The formatting of the report could be improved a lot.
+
+When selecting a student, should be able to type in first name.
+The display is also kind of messed up during the process of selecing
+a student. And the underbar should be hidden.
+
+
+Give some message when they make a choice that's
+not on the menu, or not allowed because there is no open file, etc.
+In main loop, can make hashes to control the behavior of the commands.
+
+Menus should allow you to type multiple characters in a row and then
+hit return so you go into a sub-menu. (Don't just take keystrokes without
+hitting return, because some commands like ``revert'' are more than
+one character.) Beep when they do an illegal command, and flush the
+rest of the string out.
+
+\mysection{Bugs}\label{bugs}
+\mysubsection{general}
+Some errors should be checked for when reading in the gradebook
+file: two students with the same key; mangled syntax in parameter
+lists; grades for a student who isn't on the roster; more than one
+assignment in a single-assignment category.
+This should be done in \verb@misc_initialization@.
+
+The time zone correction in \verb@ServerOG.cgi@
+when downloading grades may be incorrect if the client and
+server are in different countries that have different definitions
+of daylight savings time. It will also not work correctly if either
+time zone is a non-integer. It might make more sense to have the time
+zone as part of the Spotter file tree, so Spotter can do the time
+zone correction when recording the grades.
+
+On Windows, the preferences file is always saved in My Documents. Since
+the My Documents folder could be on the C drive or the D drive, we search
+those drives for the directory. This should work for must users, but if
+it doesn't find My Documents on C or D, it just silently fails to create
+the preferences file, which is a bug. I don't know much about Windows,
+but I think preferences should probably go in Documents and Settings.
+
+\mysubsection{terminal-based user interface}
+The ``u'' command for uploading grades in the terminal-based interface is
+untested, and may not actually work.
+
+\mysubsection{GUI}
+It's not possible to resize the window and cause the list of students to be
+resized.
+
+When starting the program from the command line, with a filename given as
+an argument, it randomly sometimes makes the whole window too short. This
+is probably some kind of race condition.
+
+Sometimes a dialog box pops up as a small blank square instead of having
+the right size, shape, and contents. This may be triggered by certain
+WM actions such as tabbing the window with another window in Fluxbox,
+or moving the window to a different virtual desktop. The only workaround
+currently is to restart the program.
+
+Certain network operations can freeze, e.g., uploading grades. This seems
+to be because the network connection is flaking out. In this situation,
+it should time out with an error message.
+
+There is some GUI stuff relating to passwords in BrowserData::new().
+
+The dialog box for setting standards is too tall when you use
+ABCDF+- grading.
+
+When you change the name of an assignment, the popup window that shows
+the category above it is temporarily displayed incorrectly.
+
+I wrote stuff into the Browser.pm package at the outside level, assuming
+there would only ever be one window open. This needs to go into
+BrowserWindow. Likewise, what happens with stuff like \verb@grades_queue()@,
+ which
+is inside a \verb@BEGIN{}@ block? Will its variable get properly initialized when I
+make a new BrowserWindow object? Will each BrowserWindow object really have its
+own \verb@%queue@?
+
+\mysection{Programming Stuff}\label{programming}
+\mysubsection{version history}
+See freshmeat.net for a history of what changes have been made to the
+code over time.
+
+\mysubsection{internals}
+You can use \verb@make internals@ to make the file \verb@internals.html@ from the
+POD documentation.
+
+\mysubsection{contributing}
+If you'd like to make improvements to the software, please let me know!
+You can find my current e-mail address at
+\verb@www.lightandmatter.com/area4author.html@.
+I haven't set up OpenGrade in a version control system such as Subversion or Git, but I would be happy to do so if
+other people were really started doing a lot of work on the code.
+For now, I think it would be easiest if contributors e-mailed me
+patches. My current wish list/to-do list is given in the
+Improvements and Bugs sections above. I would rather not make
+any changes to the code that would add dependencies on
+libraries that aren't available as Ubuntu packages, complicate the installation process, complicate the
+user interface, or break cross-platform compatibility; if the feature
+you want would violate one of these criteria, maybe it would be
+better to contribute a separate utility to perform the function you
+have in mind.
+
+\mysection{Format of Gradebook Files for OpenGrade 2}\label{old-format}
+This section describes the file format used by OpenGrade for versions before 3.0.
+The following is a small example.
+
+\begin{listing}{1}
+class
+  .title "B. Crowell's Physics 205/210, spring 2002"
+  .staff "bcrowell"
+  .days "MW"
+  .time "13:30"
+  .term "2002-1"
+  .dir   "bcrowell/s2002/205"
+  .standards "A:90","B:80","C:70","D:60","F:0" 
+
+preferences
+  .file "/home/bcrowell/.OpenGrade_prefs"
+
+categories
+  .e "catname:exam,exams","max:120"
+  .hw "catname:homework,homework","drop:1"
+  .q "catname:quiz,quizzes","ignore:true"
+
+roster
+  .newton_ike "id:1234"
+  .einstein_al "id:5678","dropped:true"
+  .oflaherty_karen "id:3333","last:O'Flaherty"
+
+assignments
+  .e.1
+  .e.2 "max:135","name:midterm"
+
+grades
+  .newton_ike.e "1:119","2:135"
+  .einstein_al.e "1:120"
+  .oflaherty_karen.e "1:120","2:135"
+\end{listing}
+
+Lines 2-6 give general information about the class. The title is
+placed at the top of web reports. The staff list gives usernames
+of the instructors and TA's who may make changes to the gradebook.
+The list of
+days the class meets is
+used to make it easier to enter certain dates, and likewise for
+the line specifying the date on which the current
+term began.  The days, time, and term fields are all optional, and
+can be left as null strings.
+
+If you're using Online Grades to post students' grades on the web,
+the staff field is used
+for the username, time for period, and title for the class's title.
+In addition, there will be fields called \verb@online_grades_course_code@,
+\verb@online_grades_section_number@, \verb@online_grades_term@, and \verb@online_grades_cltext@.
+Some other settings for Online Grades will be stored in your preferences file.
+
+If you're using Spotter as a web interface, then the \verb@dir@ field
+is needed.
+Some other settings for Spotter will be stored in your preferences file.
+
+Line 7 gives a subdirectory of the directory \verb@cgi-bin/spotter@
+in which this class's
+grades will be stored; this is only needed if you're posting grades
+on the web and letting students view them with Spotter.
+Line 8 sets your grading standards for this class. On reports, these
+symbols will be displayed along with the numerical scores. If you
+don't want any grade symbols displayed, you can just leave the rest of
+the line blank after \verb@.preferences@. The symbols are entirely
+arbitrary.
+
+Lines 10-11 tell where your preferences file is located. OpenGrade
+tries to put this in the customary location for your operating system.
+
+Lines 13-16 specify that there are three categories of graded work in this
+class: exams, homework, and quizzes. The short tags \verb@e@, \verb@hw@, and \verb@q@
+are used internally, and are also as headings in some tables.
+The \verb@catname@ parameter
+gives two forms of the name, which are usually singular and plural. The
+first one is used in constructing strings like \verb@exam 1@ for use
+in reports, and the second one is for headings in reports.
+In line 14, we specify that exams are worth a maximum of 120 points by
+default; this is optional. In line 15, the parameter \verb@drop:1@
+says that we drop the lowest homework score. In line 16, \verb@ignore:true@
+says that quizzes don't count toward the students' grades at all.
+The category parameters \verb@ignore@ and \verb@max@ are just
+defaults that are applied when new assignments are created, and these
+defaults can be overridden for individual assignments.
+
+Lines 18-21 give the roster. Normally the names are given simply as
+database keys, in the format \verb@lastname_firstname@. When the name
+is displayed, the first character of each name is capitalized. When this
+is not the correct capitalization, or when the name contains punctuation,
+the correct form can be indicated separately, as in line 21.
+Line 20 indicates that Al Einstein has been dropped from the course,
+so he will not show up on reports. However, his data are still in the
+file, and he can be added back in at any time.
+
+Lines 23-25 list the assignments that have been scored so far: two
+exams. The first exam is worth 120 points, the default for the exam
+category. The second exam is worth a little more, and instead of
+being called ``exam 2,'' it will be labeled on resports as
+``midterm.''
+
+Lines 27-30 list the students' grades.
+
+This listing is different from the OpenGrade files you'd typically see, because
+it lacks authentication codes. Authentication adds some data to the file
+which is preceded by a \verb@#@ sign wherever it occurs. Every line
+has some authentication information at the end, and there are some
+separate authentication lnes at the beginning and end of the file.
+The format of the authentication codes is described in the source
+code of the \verb@LineByLine@ module. If you cut and paste this
+example into a file, and then try to open it with OpenGrade, it will
+refuse because it doesn't have valid authentication codes. You would
+have to do Change Password from the File menu to add authentication codes.
+
+I haven't written a formal grammar for the file format, but here's some
+practical information about some of the possible ambiguities.
+
+Sections
+are typically separated by a single blank line, but the number of blank
+lines between sections is not significant, and will not be
+preserved when OpenGrade reads a file and then writes it back out.
+The order of the sections is arbitrary, but to help
+make the files more readable to humans, it's recommended to start with
+the following sections in this order:
+class, preferences, categories, roster, assignments, grades.
+Other sections will be added in the future, and
+an application that reads and writes the format is responsible for
+preserving any sections that it doesn't understand.
+
+Although the authentication code at the end of each line
+is marked with a pound sign, it's
+not treated the same as comments are typically treated in Unix
+configuration files: it's required, not optional; it's not
+preserved verbatim when a file is read and rewritten; and it's
+not free-form.
+The remainder of the discussion applies to what's left of the line after
+the authentication code has been checked and stripped off.
+No significance is attached to leading or trailing
+whitespace, but for human readability, each section should be indented.
+Programs that read and write the format can and should indent their
+output consistently, disregarding the indentation of the original input.
+A line that ends with a comma continues onto the next
+line as if there was no newline after the comma.
+
+\mysection{License}\label{license}
+OpenGrade is free software, and it comes with source code. It is
+copyright 2002-2005 by Benjamin Crowell, is available under version
+2 of the GPL license,
+
+\verb@http://www.gnu.org/copyleft/gpl.html@.
+
+This documentation is copyright 2002-2008 by
+Benjamin Crowell, and is available under the Creative Commons
+Attribution-ShareAlike 2.0 license, 
+
+\verb@http://creativecommons.org/licenses/by-sa/2.0/@,
+
+or, at your option, under version 2 of the GPL license.
+
+\end{document}
