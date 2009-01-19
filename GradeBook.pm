@@ -2027,6 +2027,9 @@ sub delete_category {
     my $h = $self->categories_private_method();
     delete $h->{$cat};
     $self->categories_private_method($h);
+    my $h = $self->hashify();
+    delete $h->{'grades'}->{$cat};
+    $self->set_from_hash($h);
 }
 
 =head3 delete_assignment()
