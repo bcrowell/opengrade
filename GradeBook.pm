@@ -968,44 +968,13 @@ sub do_watermark_hash_function {
     if (eval("require Digest::Whirlpool;") ) { # faster
       my $whirlpool = Digest::Whirlpool->new();
       $whirlpool->add($data);
-      return pad_base64($whirlpool->base64digest());
+      return Fun::pad_base64($whirlpool->base64digest());
     }
     else { # slow, but easier to satisfy dependency, using whirlpooldeep, which is packaged in debian md5deep package
-      return cheesy_whirlpool($data);
+      return Fun::cheesy_whirlpool($data);
     }
   }
   die "unrecognized hash function $function in GradeBook::do_watermark_hash_function";
-}
-
-sub pad_base64 {
-  my $x = shift;
-  while (length($x)%4!=0) {$x = $x . '='} 
-  return $x;
-}
-
-# The following is an alternative to Digest::Whirlpool, used to avoid the dependency,
-# which isn't available in a debian package. The whirlpooldeep program is available
-# as part of the debian md5deep package. Returns undef if they don't have it installed.
-sub cheesy_whirlpool {
-  my $x = shift;
-
-  # Camel book, p. 900, has an example of open2 with a bunch of mistakes in it.
-  # See http://www.cs.wmich.edu/~hrvogel/perl/prog/ch16_03.htm for what looks like a correct example.
-  local(*OUT,*IN);
-  my $child_pid = open2(*OUT,*IN,'whirlpooldeep') or return undef;
-  print IN $x;
-  close IN;
-  my $y = <OUT>;
-  close OUT;
-  waitpid($child_pid,0);
-
-  # At this point, we have $y, the hash, in hex.
-
-  $y =~ s/ *\n*$//; # eliminate trailing whitespace
-  $y = pack "H*",$y; # convert hex to a string
-  $y = encode_base64($y);
-  $y =~ s/\n//g;
-  return $y;
 }
 
 sub set_from_hash {

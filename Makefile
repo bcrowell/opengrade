@@ -1,4 +1,4 @@
-VERSION = 3.0.3
+VERSION = 3.0.4
 # ... When changing this version number, make sure to change the one in Version.pm as well.
 
 prefix=/usr

@@ -41,11 +41,6 @@ our @open_files = ();
 
 catch_signals();
 
-my $whirlpool_err = '';
-if (!defined LineByLine::do_whirlpool('')) {
- $whirlpool_err = "You must install either Digest::Whirlpool (using the get_dependencies_from_cpan.pl script) or whirlpooldeep (debian package md5deep)";
-}
-
 our %options=(
   't'=>0,
   'help'=>0,
@@ -104,10 +99,9 @@ if ($options{'identical'}) {
 
 if (!$options{'t'}) {
   require Browser;
-  Browser::main_loop($command_line_file_argument,$whirlpool_err);
+  Browser::main_loop($command_line_file_argument);
 }
 else {
-  die $whirlpool_err if $whirlpool_err;
   TermUI::main_loop($command_line_file_argument);
 }
 

@@ -63,12 +63,13 @@ sub new {
   bless($self,$class);
   $self->{FILE_OPEN} = 0;
   $self->{GB} = "";
+  my ($success,$mark_modified);
 
   if ($file_name ne "") {
     my $yep_go_ahead = 0;
     my $sub = sub {
       my $password = shift;
-      $self->open($file_name,$password);
+      ($success,$mark_modified) = $self->open($file_name,$password);
       $yep_go_ahead = 1;
     };
     ExtraGUI::ask(PROMPT=>w('password'),CALLBACK=>$sub,PASSWORD=>1);
@@ -148,8 +149,8 @@ sub open {
   }
   if (!$gb->{HAS_WATERMARK}) {
     ExtraGUI::error_message("This file appears not to have authentication codes. Codes will be added.");
-		$gb->mark_modified_now();
-		$mark_modified = 1;
+    $gb->mark_modified_now();
+    $mark_modified = 1;
   }
 
   my $confirm_result = 2;
