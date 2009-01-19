@@ -75,7 +75,7 @@ sub main_loop {
     $browser_data->{GB}->undo_callback(sub{$browser_window->adjust_after_undo(@_)});
   }
   $browser_window->set_footer_text(w("startup_info"));
-  if (defined $browser_data->{GB}->when_last_modified()) {
+  if (ref $browser_data->{GB} && defined $browser_data->{GB}->when_last_modified()) {
     $browser_window->is_modified(1);
   }
   $mw->repeat(5000,\&periodic_actions); # every 5000 milliseconds, i.e., once every 5 seconds
