@@ -148,39 +148,7 @@ post: opengrade_doc.pdf
 	cp opengrade_doc.pdf $(HOME)/Lightandmatter/ogr
 
 dist: manpage.pod
-	# Making public tarball...
-	#
-	make internals.html
-
-	rm -f $(DIST_TARBALL)
-	rm -Rf $(DIST_DIR)
-	#
-	mkdir $(DIST_DIR)
-	#
-	cp install_win.pl $(DIST_DIR)
-	cp get_dependencies_from_cpan.pl $(DIST_DIR)
-	cp Makefile $(DIST_DIR)
-	cp internals.html $(DIST_DIR)
-	cp $(EXECUTABLE) $(DIST_DIR)
-	cp *.pl $(DIST_DIR)
-	cp *.pm $(DIST_DIR)
-	cp *.cgi $(DIST_DIR)
-	cp manpage.pod $(DIST_DIR)
-	cp opengrade_doc.tex $(DIST_DIR)
-	cp opengrade_doc.cls $(DIST_DIR)
-	cp *.sty $(DIST_DIR)
-	cp doc_window.png $(DIST_DIR)
-	cp sample.gb $(DIST_DIR)
-	cp perl_tk_patch $(DIST_DIR)
-	cp $(ICON_STEM).* $(DIST_DIR)
-	cp *.wav $(DIST_DIR)
-	#
-	tar -zcvf $(DIST_TARBALL) $(DIST_DIR)
-	#
-	rm $(DIST_DIR)/*
-	rmdir $(DIST_DIR)
-	#
-	# ...done.
+	git archive --format=tar --prefix=$(DIST_DIR)/ HEAD | gzip >$(DIST_TARBALL)
 
 test_sound:
 	echo "You should hear a beep, then a 'ch' sound, then a piano clash, then a voice saying 'ambiguous.'"

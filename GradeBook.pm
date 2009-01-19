@@ -674,6 +674,7 @@ sub clear_grades {
 sub clear_assignment_list {
   my $self = shift;
   $self->assignment_list("");
+  $self->assignments_private_method({});
 }
 
 sub clear_roster {
