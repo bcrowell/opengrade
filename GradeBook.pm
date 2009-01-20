@@ -24,8 +24,11 @@ A subset of this package's write methods is designated as the "user-write" API. 
 Should be user-initiated at least sometimes; should modify the gb; should modify it in a way that can be reflected with hashify();
 should be something the user does directly, not an indirect consequence; shouldn't be a private method; should be a method, i.e., invoked as $gb->method().
 The operations in the user API are the ones for which the GUI's "undo" feature can be applied,
-and these are also the ones that are exposed to the scripting interface. See global variable
+and these are also the ones that are exposed to the scripting interface via --modify. See global variable
 @user_write_api_functions and subs set_up_undo() and user_api().
+
+There is no "user-read" API. Instead, the scripting interface just allows us to index into the hash
+defined by hashify().
 
 To add new data to the GradeBook structure:
 
@@ -93,9 +96,11 @@ use Digest::SHA1;
 use MIME::Base64; # standard module
 use IPC::Open2; # standard module
 
-our @user_write_api_functions = qw(clear_grades clear_assignment_list clear_roster union preferences set_grades_on_assignment drop_student reinstate_student set_student_property 
+our @user_write_api_functions = qw(
+                          clear_grades clear_assignment_list clear_roster union preferences set_grades_on_assignment drop_student reinstate_student set_student_property 
                           category_properties add_assignment delete_category delete_assignment rekey_assignment assignment_properties add_student set_standards set_marking_periods
-                          dir assignment_array assignment_list set_all_category_properties add_category category_list class_data set_class_data types);
+                          dir assignment_array assignment_list set_all_category_properties add_category category_list class_data set_class_data types
+);
 
 # See the Words and MyWords modules for info on the following.
 our $words;                        # initialized in main_loop()

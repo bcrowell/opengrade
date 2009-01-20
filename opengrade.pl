@@ -44,6 +44,7 @@ catch_signals();
 our %options=(
   't'=>0,
   'help'=>0,
+  'query'=>undef,
   'copy'=>0,
   'output'=>'',
   'modify'=>'',
@@ -57,6 +58,7 @@ our %options=(
 our %command_line_options = (
   't'=>\$options{'t'},
   'help'=>\$options{'help'},
+  'query=s'=>\$options{'query'},
   'copy'=>\$options{'copy'},
   'output=s'=>\$options{'output'},
   'modify=s'=>\$options{'modify'},
@@ -85,6 +87,10 @@ if ($options{'help'}) {
 }
 if ($options{'version'}) {
   do_version();
+  exit;
+}
+if (defined $options{'query'}) {
+  do_query($command_line_file_argument,$options{'query'});
   exit;
 }
 if ($options{'copy'}) {
@@ -164,6 +170,32 @@ sub do_identical {
   else {
    exit 0;
   }
+}
+
+sub do_query {
+  my ($in,$query) = @_;
+  if (!$in) {die "no input file specified on command line for --copy"}
+  my $gb = GradeBook->read($in);
+  if (!ref $gb) {die $gb}
+  $gb->close();
+  my $h = $gb->hashify();
+  my $g = $h;
+  foreach my $index(split(/,/,$query)) {
+    die "in query $query, number of indices exceeds depth of data structure; at index $index, data structure's contents are the scalar $g" unless ref $g;
+    die "data structure contains a reference which is neither an array nor a hash, at index $index" unless (ref($g) eq 'ARRAY' or ref($g) eq 'HASH');
+    if (ref $g eq 'ARRAY') {
+      die "in query $query, index $index is not an integer, but the data structure has an array here" unless int($index) eq $index;
+      $g = $g->[$index];
+    }
+    if (ref $g eq 'HASH') {
+      $g = $g->{$index};
+    }
+    last if !defined $g;
+  }
+  my $json = (new JSON);
+  $json->canonical([1]);
+  $json->allow_nonref([1]);
+  print $json->encode(GradeBook::strings_to_numbers($g));
 }
 
 # If $out is logically false, write to stdout.

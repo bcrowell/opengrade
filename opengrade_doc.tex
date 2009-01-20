@@ -832,6 +832,27 @@ as part of the array \verb+@user_write_api_functions+ near the top of
 GradeBook.pm. The second part is a JSON-formatted string representing
 the arguments to be passed to that method.
 
+To extract data from a file, use \verb@--query@. For example, the following
+command will write
+Jim Joule's grade on exam 1 to stdout:
+
+\verb@opengrade --query="grades,e,joule_jim,1" a.gb@
+
+The argument is interpreted as a series of array and hash indices
+that drill down into the data structure corresponding to the gradebook
+file as represented in the JSON string in the file. Negative array indices
+are interpreted as in Perl arrays, i.e., as indices backward from the end
+of the array. The list of indices need not be long enough to produce a
+scalar result; the output can be a JSON representation of a data structure
+representing some part of the gradebook. If the result is a nonexistent member
+of an array or hash,
+the output is the string \verb@null@, but this is not treated as an error
+(i.e., the exit code is still zero). If the result is a valid JSON
+integer, it is output without quotes, but otherwise scalar results
+are output with double quotes surrounding them. An error occurs only if
+a non-integer value is used to index into an array, or if an attempt
+is made to index into a scalar, i.e., if too many indices are provided.
+
 \mysection{Future Improvements}\label{improve}
 \mysubsection{general}
 Features for elementary school teachers: class behavior, outside behavior,
