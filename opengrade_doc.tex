@@ -820,6 +820,18 @@ and propagate it to the output file.
 option.)
 Passwords can be added or changed by using \verb@--output_password=bar@.
 
+To modify a file, use \verb@--copy@ with \verb@--modify@. For example,
+the following command will delete the entire exam category ('e') from
+the file a.gb:
+
+\verb@opengrade --copy --modify='delete_category,["e"]' a.gb@
+
+The argument to \verb@--modify@ consists of two parts, separated by a comma.
+The first part is the name of a write method of the GradeBook class, defined
+as part of the array \verb+@user_write_api_functions+ near the top of
+GradeBook.pm. The second part is a JSON-formatted string representing
+the arguments to be passed to that method.
+
 \mysection{Future Improvements}\label{improve}
 \mysubsection{general}
 Features for elementary school teachers: class behavior, outside behavior,

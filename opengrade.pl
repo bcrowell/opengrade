@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #----------------------------------------------------------------
-# Copyright (c) 2002 Benjamin Crowell, all rights reserved.
+# Copyright (c) 2002-2009 Benjamin Crowell, all rights reserved.
 #
 # This software is available under version 2 of the GPL license.
 # The software is copyrighted, and you must agree to the
@@ -46,6 +46,7 @@ our %options=(
   'help'=>0,
   'copy'=>0,
   'output'=>'',
+  'modify'=>'',
   'output_format'=>'default',
   'input_password'=>'',
   'output_password'=>undef,
@@ -58,6 +59,7 @@ our %command_line_options = (
   'help'=>\$options{'help'},
   'copy'=>\$options{'copy'},
   'output=s'=>\$options{'output'},
+  'modify=s'=>\$options{'modify'},
   'output_format=s'=>\$options{'output_format'},
   'input_password=s'=>\$options{'input_password'},
   'output_password=s'=>\$options{'output_password'},
@@ -76,6 +78,7 @@ if (@ARGV) {$command_line_file_argument=$ARGV[0]} # something left over on comma
 # opengrade.pl --copy --output=bar.gb foo.gb ... parses foo.gb, writes back out to bar.gb
 # opengrade.pl --copy foo.gb                 ... similar, but to stdout
 # can also set --output_format=(old|json|default)
+# opengrade.pl --copy --modify='delete_category,["e"]' foo.gb ... deletes exam category ('e') from foo.gb
 if ($options{'help'}) {
   do_help();
   exit;
@@ -85,7 +88,8 @@ if ($options{'version'}) {
   exit;
 }
 if ($options{'copy'}) {
-  do_copy($command_line_file_argument,$options{'output'},$options{'output_format'},$options{'input_password'},$options{'output_password'},$options{'authenticate'});
+  do_copy($command_line_file_argument,$options{'output'},$options{'output_format'},$options{'input_password'},$options{'output_password'},$options{'authenticate'},
+                     $options{'modify'});
   exit;
 }
 if ($options{'identical'}) {
@@ -165,7 +169,7 @@ sub do_identical {
 # If $out is logically false, write to stdout.
 # Format can be old, json, or default, as defined in the comments at the top of GradeBook::write.
 sub do_copy {
-  my ($in,$out,$format,$in_pwd,$out_pwd,$auth) = @_;
+  my ($in,$out,$format,$in_pwd,$out_pwd,$auth,$modify) = @_;
   if (!$in) {die "no input file specified on command line for --copy"}
   my $to_stdout = 0;
   my $describe_out = $out;
@@ -179,6 +183,12 @@ sub do_copy {
   }
   if (!defined $out_pwd) {$out_pwd = $in_pwd}
   $gb->password($out_pwd);
+  if ($modify) {
+    $modify =~ /^(\w+),(.*)$/;
+    my ($method,$args_json) = ($1,$2);
+    my $err = $gb->user_write_api($method,$args_json);
+    die $err if $err;
+  }
   my $err = $gb->write_to_named_file($out,$format);
   die $err if $err;
   if ($to_stdout) {open(FILE,"<$out") or die "error, temp file $out doesn't exist"; my $data; my $x=sub {local $/; $data=<FILE>;};  &$x(); print $data; unlink $out}

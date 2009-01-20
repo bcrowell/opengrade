@@ -11,28 +11,23 @@
 =head2 GradeBook.pm
 
 This package defines the GradeBook class, which is essentially just
-some hashes that implement the gradebook file format in memory.
-In addition to these hashes, it has a few more data structures:
+some hashes and arrays that implement the gradebook file format in memory.
+Nearly all the data are in the hashes. The only thing the arrays are used
+for is to keep track of the order of some of the keys in the hashes.
 
-=over
+Internally, the structure of the hashes is maintained in a slightly different
+way than in the gradebook file. This is a hold-over from the old file format.
+Basically the internal structure is flatter than the file structure, and some
+things that are really hashes are maintained as strings of the form "key:value","key:value",...
 
-=item *
+A subset of this package's write methods is designated as the "user-write" API. Criteria for inclusion in the user-write API:
+Should be user-initiated at least sometimes; should modify the gb; should modify it in a way that can be reflected with hashify();
+should be something the user does directly, not an indirect consequence; shouldn't be a private method; should be a method, i.e., invoked as $gb->method().
+The operations in the user API are the ones for which the GUI's "undo" feature can be applied,
+and these are also the ones that are exposed to the scripting interface. See global variable
+@user_write_api_functions and subs set_up_undo() and user_api().
 
-An array of assignment categories, to keep track of the order in which
-     the categories are supposed to be displayed in reports.
-     Interface: category_list(), add_category(),...
-
-=item *
-
-An array of assignments. Interface: assignment_list(),...
-
-=back
-
-To make sure that these arrays stay in sync with the hashes, it's
-important not to use any of the class's private methods from outside
-the package!
-
-To add new data to the structure:
+To add new data to the GradeBook structure:
 
 =over
 
@@ -97,6 +92,10 @@ use Digest::SHA1;
 # Digest::Whirlpool is loaded on the fly below, if possible and if necessary.
 use MIME::Base64; # standard module
 use IPC::Open2; # standard module
+
+our @user_write_api_functions = qw(clear_grades clear_assignment_list clear_roster union preferences set_grades_on_assignment drop_student reinstate_student set_student_property 
+                          category_properties add_assignment delete_category delete_assignment rekey_assignment assignment_properties add_student set_standards set_marking_periods
+                          dir assignment_array assignment_list set_all_category_properties add_category category_list class_data set_class_data types);
 
 # See the Words and MyWords modules for info on the following.
 our $words;                        # initialized in main_loop()
@@ -1177,14 +1176,30 @@ sub undo {
   }
 }
 
+# returns undef normally, error message if there's an error
+sub user_write_api {
+  my $self = shift;
+  my $method = shift; # string; must be one of the ones in @user_api_functions
+  my $json_args = shift; # JSON representation of the arguments to the method as an array
+  my $valid_user_api_method = 0;
+  foreach my $m(@user_write_api_functions) {
+    $valid_user_api_method = 1 if $m eq $method;
+  }  
+  return "method $method is not in the list of valid user-write API methods for the GradeBook class, which consists of: ".join(' ',@user_write_api_functions)
+       unless $valid_user_api_method;
+  my $args = eval {JSON::from_json($json_args)};
+  return "arguments $json_args do not consititute a valid JSON string" unless defined $args;
+  return "arguments $json_args do not represent a JSON array, i.e., are not a list surrounded by []" unless ref($args) eq 'ARRAY';
+  my $method_ref = *{$method};
+  return "method $method is not in the symbol table of GradeBook" unless defined $method_ref;
+  &$method_ref($self,@$args);
+  return '';
+}
+
 {
   # Set up undo functionality.
   my $done = 0;
   sub set_up_undo {
-    # Criteria for inclusion: should be user-initiated at least sometimes; should modify the gb; should modify it in a way that can be reflected with hashify();
-    # should be something the user does directly, not an indirect consequence; shouldn't be a private method; should be a method, i.e., invoked as $gb->method().
-    # stack; set modified() and unset if undone, describe operations with strings; what if not user-initiated?
-    # if nested, take the outside one
     # We set $gb->{PREVENT_UNDO}=1 initially when we create a gb object, because any calls to write methods are just initializations, not user-initiated edits.
     # We only set $gb->{PREVENT_UNDO}=1 when the user clicks on a menu or types in a score, as detected by BrowserWindow::menu_bar() Roster::key_pressed_in_scores().
     if (!$done) {
@@ -1195,9 +1210,7 @@ sub undo {
         'preferences'=>1, 'category_properties'=>2, 'assignment_properties'=>2, 'dir'=>1, 'assignment_array'=>1, 'assignment_list'=>1, 'category_list'=>1,
         'class_data'=>2, 'types'=>1
       );
-      foreach my $name(qw(clear_grades clear_assignment_list clear_roster union preferences set_grades_on_assignment drop_student reinstate_student set_student_property 
-                          category_properties add_assignment delete_category delete_assignment rekey_assignment assignment_properties add_student set_standards set_marking_periods
-                          dir assignment_array assignment_list set_all_category_properties add_category category_list class_data set_class_data types)) {
+      foreach my $name(@user_write_api_functions) {
         my $c = *{$name}{CODE};
         defined $c or die "Undo functionality can't be set up for nonexistent method $name in GradeBook::set_up_undo().";
         *{$name} = sub{
