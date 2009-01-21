@@ -1,0 +1,71 @@
+ #,LineByLine.pm,161893,Whirlpool,2,1
+class #                                        Ol1/rd5YyiSneJPGqUTXVH+UvOPtx89DMRjVu9Gp54SSwM7sDyGZYYNntYTsBPVxlz5CC4QQsq+OyHOYO4yAtg==,88,1
+  .title "B. Crowell's physics class" #        IKF5HFzikXYD7sRZpkmrhYDAS8y/GM+GHCuvITZtA+kKblU7iOpKnJ1LByF0/NxwGQKiV7FJ89x0LhD+1AtB/g==,88,2
+  .staff "bcrowell" #                          4OzpkJPk9UTrzfWGSMfcpIUOO42LwV7o/Mwj7y4XW82PNnM/fT7y9DKYs/wVnBY+aaAYBallEStl/swfmfehFA==,88,3
+  .days  "MTWRF" #                             zjH7qg/JvOc3p81Lwjixxbt3lxxU3jbQf3doO5KMeDZkSNy7t1d0GdhvXqJ5QHYEqiRQOF1cN0lJkJAWtbgDsQ==,88,4
+  .time  "" #                                  lDchTVDL2ZjtFQnMeLLTrg3j7Ys/k2c3jsl3YPGTbJGrIu9norwiz4rCQLc67xaD1LaO2k8yLzrtq162kEgYjw==,88,5
+  .term  "2009-1" #                            l78esbMAymd38OOKESb+JLnf+ae0+3+EpgXXU84oW12uuPhkEQfH9whdgW0g8YJMX9ur05d3bPBFYOeUezjtiA==,88,6
+  .dir   "web_reports" #                       yIyybzLhxkZqvqLIdNAi6F9acpBGot4kKtUP4eFqMpkIFG66aZf2dmlLQrauVZYFwMYzrx+q26mW+cJTQ67Oog==,88,7
+  .standards   "A:90","B:80","C:70","D:60","F:0" # lb2ukycYt+PssxZn7Y9DTS+LCzoZMiVAxIabVxRo3p+opwEdnXwCG+K2w3RqbwYpzmuj7LFiimuhZSny+gg5Ng==,88,8
+ #                                             B5IRlrYgkCk33IIBUdlPcZV4bVh+Lllgki3OeAJ0c/NcwS1mX+0iwshz5bhvFPTMQyRtl1IbqXO90Upv14jzVQ==,88,9
+preferences #                                 zY/k6d/Jje3Ll1nxOOmyjWug16lPhaUMB4U2ylba7RSP4lMcCUcTURXCVBLvV9WsB4KDtyCmfZDic0qzUHkhJw==,88,10
+  .file "/home/bcrowell/.OpenGrade_prefs" #   uL1Tz0usa3bkxgAYrcIefs+qZ9vUlVRgxOUmdqIwQ9fGiJdbsE9jPARg7SRNFzmrhx8bjBLOmypPgSrnIvDs4A==,88,11
+ #                                            gSlIZe+W2dgyMymoY90CrCG/Pyb6HYw6+UnZlFbLA0C85DXQkrGO8TnM+OXTKp+w3q+3uem9gZ5+yTBkg86UYw==,88,12
+categories #                                  9LYlLTWvjxOkjaxnFbmWb06CLhQc7yjvMI2PK/GvYFYsNPuS6nLBSnysFMHxSefUpaAgle7Mim1n6kWb2yFTfw==,88,13
+  .e "catname:exam,exams" #                   3P0QYiG8dZG//UHBpPD7eK7IX9SfyRonNfcoxTblv6i7aFpv9iSJRbrMvec6fUCHTwijjkq+8lJdJ13N6Af8nA==,88,14
+  .hw "catname:homework,homework" #           EVNo8xmcuywr8S3b4GAle7oT6rIhg8yAfB8b+03BaHI92J8KrgxqkauaLL0HHV2yKCSG8vgJJV4hIOT2EmvMqQ==,88,15
+  .att "catname:attendance,attendance","type:attendance" # HGmlODuPsNoDCr9FcP5jeZZVekcXexy1yz8pu9MORDJtT8Hy3+iOJ87fcLjmng4bY6awr+ryjMp3Pa8KEBL3ew==,88,16
+ #                                            asVfseM9kjDTstuAueWssVZVI7jxXAHkK7LsiDV18/A8c9z9bGij5B4P8KrawOYxA1qLNUl4FJ7UwTAH456dEQ==,88,17
+roster #                                      PPwtaMsyEYYkSAyFL9WtKJj5fdYzgzEwZKp7DxzZQmdiWhUMYFIi+mtQqkFxNKxcKbGToP8xXBejJyt0ESPe1A==,88,18
+  .curie_marie  #                             FojahSpKoDUUswSghtkECf1WQr8g48xA1g4AuPrZQHdtMpftRf4x5WGeb2mPD1TYuGMrVYlS2DWtRZ8zCr6k5g==,88,19
+  .einstein_al  #                             2zQgGDBb3OUo/BYlQD5+ky9A1ifea5vwJM2ZuhVDC9bjosAZHY1xfQFHdjw0qj6WZJXojvY4Z/qLI/QFqG2tKg==,88,20
+  .fermi_ricky  #                             6nS+8alfpGUFLfHU7E9te6Ex2NrVosVPFfCUJcNMoRtfdqX9jrQvV58pAKn+TPSdza7si2ZVIi/s+ZsI1VyQAg==,88,21
+  .feynman_dick  #                            mGQDjvZNLgvAnAQKiOPy7yIkQc5wMuANmtOKfKZaw3OwSBAuFbxeuNaQjnMDW+jhMqq8P+rvleNdCj077hfsGw==,88,22
+  .goeppert-mayer_maria "dropped:true" #      alVZq+gSIB1cMT3td1YxHvzMliR5UWFdSaVmBZ4SJSh3taC9CUmV1sXDXmW5/QpN/CsUsAn9gqposfL3+1FT/w==,88,23
+  .hawking_steve  #                           BtnOHmN7xvhh39jq4IuSaFOQPqa9HHbvTaNVbcEN9CM/ZR/5VAQaYEtWEAt1Lg+Ws/8kkkXo1NDAO+ODPwt0ug==,88,24
+  .heisenberg_werner  #                       goS27tcuhkwbEIClbBdRoUW7nBuFxxW11Zz5mrJBSgox9jtl63SKQx/Mpul1CYpVNW8AhWr3GSvWo0pxb39eMw==,88,25
+  .hertz_heinie  #                            n+cx/86Xu9KeHO0oM91hpadnc7urPEqBxva1rmdisyJJaW8gsCyShf3hWIIUn3Vc0LLuheJhdroKLF6PpzIUyA==,88,26
+  .joule_jim  #                               kx+QNeRr/tHSZQu42QkUYrgDrPuDsMQADtLJQZMwkPhXeeJga98ObEqbr676v7cZ7ibunFyPEwRZ0CkJ81S6bg==,88,27
+  .millikan_bobby  #                          fmPXRj4yGxdunQmElt7xBwE8Z80fDPOuJVuhTpmLBgwcffq1k50h+pC7x1PbLQAzZAu+mAPP1X+YJJyu2ZG4jg==,88,28
+  .newton_ike  #                              Kzdumef16JqQSi7ZcdPBWJu004Ih6Y589nW2rOD8toz7Aa4kMmo+2JLWJG38fhPyMbrGAacddd/kXY4IfntciA==,88,29
+  .noether_emmy  #                            bHgxQd0SLE5ffSyB8sv8IGADA3SmL72eJYvmzBiFa0dGh/g+rmC6WUsUdrDfMnbdECnr1nIR7KTy0PiCiI45XQ==,88,30
+  .pauli_wolfgang  #                          lLQQ0fMJkyxeVH4l7km7ETmiHIjtswajPTldqZaeuY2LjlGVFfkfdFsjKcVyjZGgR0lrPse9V5vzUDdJmltQIg==,88,31
+  .rutherford_ernie  #                        yTR1NvbO8XGhwUUfykr1NAub2ClPSZjDsUwxxDCFlgHtEI+fSXJ75yOybm6wmi0dA7inKQRfznxUQEG9K7e82A==,88,32
+  .stotle_ari  #                              cMKnJtD28pYt9V2P/JDtlCGhyAQOrkzDK06zOdlTimooydz+jjvfJtyr7gS3rUIYGUR20y1u2DvcG+3mD6MGhg==,88,33
+ #                                            KxUiJVROZmJWS81CWgsHXW2LpuCLBlSmu5jACxf6FvF3sWfji9OfduiLUUxr/D3BfmAZjDElGLAd4NL4I1WfQw==,88,34
+assignments #                                 R75Ec7KTcMtiOsegCFH7d7Vr6iEZvd1wO7VflSvVZgwTQunRWYokezV/6Glu7Sh0kk2nWbnApMtFq9H/XbfyBQ==,88,35
+  .e.1 "max:100" #                            D746KMPcdEO0IKV2A4DOFeAqoednvJJaIQ1kF4oP15x8T7PFVKYOZ/AHWHL12uoybv2AGpnxuumKm/ri9Gpgtw==,88,36
+  .e.2 "max:100" #                            /nCT2t5Tl8hlfLxLoMhlP/KvbzCJRlZvbELgqF4CkVtfxnV0TXjbuXZZJqRqbA6Vi8q7toRNeTyRlNedjy2HXQ==,88,37
+  .att.first_meeting "max:1","name:first meeting" # jWbxuad/mjtls2tTtDcFAt+Qvtispxo3y/TNYWjDkjSKDLaYoNJZM8qDlKq0knkmRFEeX/To1qppW26KBIR7gQ==,88,38
+ #                                            lQeJUFWMJtKYUvip23mPzThGXxHr5z4831iwr+VFdSBy1azTKQDmRO7VkdM/SYvAiS2HvhsFAc8bNF4yFOdmOA==,88,39
+grades #                                      1c1qp6jUndtx9YjlU6YPJ3MJ9mh3nFKnT1gf6tW8EgUTrbY9ZmNL9vA2Vu2NLKapGZZP4FqrAZ7FvD94z+oxlw==,88,40
+  .curie_marie.att "first_meeting:p" #        vALA96aGtQX253oyW0Lkbq0tdNk0D5/K/bM0G/Ot+x25Ym4//2FYHtZG7r8iPeEZlgpsiJUjDsG5d7EkYb69Rg==,88,41
+  .einstein_al.att "first_meeting:t" #        z6TQ3HRKineE/n6cOBm3Ck77gCspmqnq2lpcor+VDbwjrQtL9CauP1swhEMTN+fFRUEgT3FzNyn4KxHd0xpDpw==,88,42
+  .fermi_ricky.att "first_meeting:p" #        DBfHhzIz+NOWV+LFU2jsEGFudK/ykJtnqRQ6uwVJG2Fn0XQQHIChjs53CpkutoKAOqjiU7nH86UvEOUPLCu1UA==,88,43
+  .feynman_dick.att "first_meeting:p" #       vhUdTjRgDpvqtXNoqRoeAzksdnheO8bEZAlX83V52MccFif5bx+FHTHtZX4XSFHUxBVpEB5wWgr7rdyKZaKBzQ==,88,44
+  .hawking_steve.att "first_meeting:a" #      CVsJnkNGjOoEykBw4bjJA545gys49qJNyTVYbtbskasIzXpsTKVDbgMhtMUpUqh8Iyx0WFF/XG//n9EjP2uV7g==,88,45
+  .heisenberg_werner.att "first_meeting:p" #  88ZpXaeyvV9nCyp91XVnjHxj7RT5Vmv8WiuyC1EP6sXs6TP1U313IeLkVOSMg40rDcVwafweSpMZvUpMQkujpg==,88,46
+  .hertz_heinie.att "first_meeting:p" #       vb4tSZLFEZuPZ5u3TZW6SeC+EyiK2KNowF0M243ylgFS83fJY0SgZjAYTZo1CJjmSjOo0HCU79NmFAQruDHy6w==,88,47
+  .joule_jim.att "first_meeting:p" #          J2123/pkIhXlFZjUk5skI5aE1wpe7cVXk4HUCwUBiKvyNOEMAhlRNil7PjX/Otg0tCpF52nMyx81t3QmoQH8Ag==,88,48
+  .millikan_bobby.att "first_meeting:e" #     9ksMSDyeLC9lPRgqS6rEqnCPV4r75UQxiiyeK03QgwAWTHtAJBl5Yv7qm38pBQlJuTdhJfQiaHV47vxEtKQkIA==,88,49
+  .newton_ike.att "first_meeting:p" #         kp6QEZ+BBcMJNaPHHX78LS4E+EK8gcR5JJwkrd24o22cefX1GMjM2jcODIJtBIco1wWhRjC/SQbnWjjIEDb/GQ==,88,50
+  .noether_emmy.att "first_meeting:p" #       vdZ2MP36VLvynF2GDnf8KA1QtjjS+OCHLYGMouVMW74wRFC8UchrNE+9ePQflXn1P32fGAmZXGc8e1NaMeS3nw==,88,51
+  .pauli_wolfgang.att "first_meeting:p" #     pzNwu0JJirvT9UdI/YLu4LMSSfk9JQr5YVA/DEJH3z+nZxeTVThpBFgWRSQU9FQRzM3kAvUiaV3DtQrHXkhPAw==,88,52
+  .rutherford_ernie.att "first_meeting:p" #   myLB36LWUkPoLXueqTgZOMBoJnrnK6k7czCDQSXPjk8XDTvkTV0UwaPuPTFQuYyRLMuJFd2FmpNQKPoyexb1jw==,88,53
+  .stotle_ari.att "first_meeting:p" #         1z5mKYWyg4KSu8cZjyrodwhTkenqTJWg+52bWpS5S3sOaJavrGyGUHZY4aC9+FDNvcNnhACqOwEy8C0DpKc8mA==,88,54
+  .curie_marie.e "1:97","2:99" #              9M04qq507yAfDf8Hv8IsPT97GZOwS3rpwhEWiYtWz356YIAAYqIPeJ3PahfPN76XFJkMXKRuf1aqfdRsdHDsDA==,88,55
+  .einstein_al.e "1:65","2:99" #              Il4W+Fgty+OEGmZSiWdymCEDpDnMQu2bXFSi3XNBuie5qBkm66eetGBwvSoUjgRrkZ/uN0YNA57jI0Ekh+t+6g==,88,56
+  .fermi_ricky.e "1:88","2:99" #              28V7Q1o/wUiW8533Iqe9p9bU9q42HNuZBwWlTP05gOxInSLeQsdoex4ajUN2FzPb/xUPepElxgpARIlwuOeRww==,88,57
+  .feynman_dick.e "1:94","2:99" #             0OBs88Jr1DI8WpoYpn1SVwKQB5ZaXcgnSXA5iEFKxts64U4xIIGWj2PzN6xMDBLmeSDWDmlVGcVBk1guzTj3rg==,88,58
+  .hawking_steve.e "1:92","2:99" #            p/5sY7alTj0K4lntJEIEQ4keEMRjDDNPyLFR03Hm1njdO7XNoTwOXVmPhQCk2ojdUG2Rn2xBK+zCGykhfPx1/w==,88,59
+  .heisenberg_werner.e "1:100","2:100" #      Urxj0ZRWhAT4mxLZ/PgGNlR4W/Kkidh87Zm7kDTmHHVOjar0F+2rmMtB3nzIcqvrLBKHmY1i4CSE84Y1CNnWyQ==,88,60
+  .hertz_heinie.e "1:99","2:99" #             mBKdSJxImj+bsFqr/Qq2GDRV4rZCmAc8n2s7Fie727sQczqpAj9sT2EfVH4J1DfFAO1MJQzZ/dcF9/97PghW3Q==,88,61
+  .joule_jim.e "1:87","2:99" #                q7864tqMm1b7ktoXL+Gj48dnRm07lVJZ+V6iweLe9bD9+F/qxB+4B+YtWeeIWi3oZPQVDt0gdz1WxLH6eJNhzQ==,88,62
+  .millikan_bobby.e "1:87","2:99" #           pOnuvxVzTwWHD+zrfR8FWqOLZ2JEbTNmggStPxycMVsAhAjv+NsDwNHXBnBamYuFkAfBYfXQIunuT/GOQbnOjw==,88,63
+  .newton_ike.e "1:77","2:99" #               /7A33vRVyO085VXUeIo6loQc7hz8a2aS4O4fDyTtJL0i0I5Gh3And4XPHRTvfq6rJK01iKaJZqbkPQzdMivb/Q==,88,64
+  .noether_emmy.e "1:98","2:99" #             88Gt87lml8xaN9VFcv3vS+1M7ooj+XG3sSpMNJxMc+cJLlSmHT96WzajVhvQMgs1Y4jEZE3ipuV1jlDy5gMHMg==,88,65
+  .pauli_wolfgang.e "1:96","2:99" #           2Ia5rA5mO7tJZcf83REBUzHhkFy0vokPPXgm8815n1QxxqIAhNAkT6qLTLwcMN0X2U+Zx61uZ9jTEi3gD3Yz3A==,88,66
+  .rutherford_ernie.e "1:87","2:99" #         /hn/P6iyjdnsbxZ7ZuZk58Ryg8aX2DZDjcQBsSpLTV+vp4W89lEk17vktong+zsvOifP+DptGEuX4pTYwvkq6w==,88,67
+  .stotle_ari.e "1:32","2:99" #               hzNDOqZIbeRHMUE53cFJfR7/SYta+FMm2x0FZHAmv5hRUAPvWi4oLVVGLdNXiJ+4lLTziQsLlko6UuKQ8OIfPA==,88,68
+ # end,count       =vCHoU91Xddys2CTroRNNOAuLP3HtO0XuHTGSjJNpWmaFCwFPf7YUhq73pghvzrrgINGRDjREu0uFQfFeQKMvYg==,end
+ # end,running hash=bg+nM6/fR+ZFGnXhdhLBsEQaYZa9+N3V1IInjEFUbQPf6SdfSVHyhZS7iGlzdMG0y/xByX6Jh/jhFI14ArRhCw==,end

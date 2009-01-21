@@ -1,0 +1,68 @@
+class
+  .title "B. Crowell's physics class"
+  .staff "bcrowell"
+  .days  "MTWRF"
+  .time  ""
+  .term  "2009-1"
+  .dir   "web_reports"
+  .standards   "A:90","B:80","C:70","D:60","F:0"
+
+preferences
+  .file "/home/bcrowell/.OpenGrade_prefs"
+
+categories
+  .e "catname:exam,exams"
+  .hw "catname:homework,homework"
+  .att "catname:attendance,attendance","type:attendance"
+
+roster
+  .curie_marie 
+  .einstein_al 
+  .fermi_ricky 
+  .feynman_dick 
+  .goeppert-mayer_maria "dropped:true"
+  .hawking_steve 
+  .heisenberg_werner 
+  .hertz_heinie 
+  .joule_jim 
+  .millikan_bobby 
+  .newton_ike 
+  .noether_emmy 
+  .pauli_wolfgang 
+  .rutherford_ernie 
+  .stotle_ari 
+
+assignments
+  .e.1 "max:100"
+  .e.2 "max:100"
+  .att.first_meeting "max:1","name:first meeting"
+
+grades
+  .curie_marie.att "first_meeting:p"
+  .einstein_al.att "first_meeting:t"
+  .fermi_ricky.att "first_meeting:p"
+  .feynman_dick.att "first_meeting:p"
+  .hawking_steve.att "first_meeting:a"
+  .heisenberg_werner.att "first_meeting:p"
+  .hertz_heinie.att "first_meeting:p"
+  .joule_jim.att "first_meeting:p"
+  .millikan_bobby.att "first_meeting:e"
+  .newton_ike.att "first_meeting:p"
+  .noether_emmy.att "first_meeting:p"
+  .pauli_wolfgang.att "first_meeting:p"
+  .rutherford_ernie.att "first_meeting:p"
+  .stotle_ari.att "first_meeting:p"
+  .curie_marie.e "1:97","2:99"
+  .einstein_al.e "1:65","2:99"
+  .fermi_ricky.e "1:88","2:99"
+  .feynman_dick.e "1:94","2:99"
+  .hawking_steve.e "1:92","2:99"
+  .heisenberg_werner.e "1:100","2:100"
+  .hertz_heinie.e "1:99","2:99"
+  .joule_jim.e "1:87","2:99"
+  .millikan_bobby.e "1:87","2:99"
+  .newton_ike.e "1:77","2:99"
+  .noether_emmy.e "1:98","2:99"
+  .pauli_wolfgang.e "1:96","2:99"
+  .rutherford_ernie.e "1:87","2:99"
+  .stotle_ari.e "1:32","2:99"

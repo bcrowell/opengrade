@@ -1,0 +1,83 @@
+  {
+    "class":    {
+      "days":"MTWRF",
+      "dir":"web_reports",
+      "online_grades":{"cltext":"","course_code":"","section_number":"","term":""},
+      "staff":"bcrowell",
+      "standards":{"A":90,"B":80,"C":70,"D":60,"F":0},
+      "term":"2009-1",
+      "time":"",
+      "title":"B. Crowell's physics class"
+    },
+    "types":    {
+      "data":{"attendance":{"description":"attendance","descriptions":{"a":"absent","e":"excused","p":"present","t":"tardy"},"order":["p","a","e","t"],"value":{"a":0,"e":1,"p":1,"t":1}},"numerical":{"description":"numerical"}},
+      "order":["numerical","attendance"]
+    },
+    "category_order":["e","hw","att"],
+    "categories":    {
+      "att":{"catname":"attendance,attendance","type":"attendance"},
+      "e":{"catname":"exam,exams"},
+      "hw":{"catname":"homework,homework"}
+    },
+    "roster":    {
+      "curie_marie":{},
+      "einstein_al":{},
+      "fermi_ricky":{},
+      "feynman_dick":{},
+      "goeppert-mayer_maria":{"dropped":"true"},
+      "hawking_steve":{},
+      "heisenberg_werner":{},
+      "hertz_heinie":{},
+      "joule_jim":{},
+      "millikan_bobby":{},
+      "newton_ike":{},
+      "noether_emmy":{},
+      "pauli_wolfgang":{},
+      "rutherford_ernie":{},
+      "stotle_ari":{}
+    },
+    "assignment_order":["e.1","e.2","att.first_meeting"],
+    "assignments":    {
+      "att":      {
+        "first_meeting":{"max":1,"name":"first meeting"}
+      },
+      "e":      {
+        "1":{"max":100},
+        "2":{"max":100}
+      }
+    },
+    "grades":    {
+      "att":      {
+        "curie_marie":{"first_meeting":"p"},
+        "einstein_al":{"first_meeting":"t"},
+        "fermi_ricky":{"first_meeting":"p"},
+        "feynman_dick":{"first_meeting":"p"},
+        "hawking_steve":{"first_meeting":"a"},
+        "heisenberg_werner":{"first_meeting":"p"},
+        "hertz_heinie":{"first_meeting":"p"},
+        "joule_jim":{"first_meeting":"p"},
+        "millikan_bobby":{"first_meeting":"e"},
+        "newton_ike":{"first_meeting":"p"},
+        "noether_emmy":{"first_meeting":"p"},
+        "pauli_wolfgang":{"first_meeting":"p"},
+        "rutherford_ernie":{"first_meeting":"p"},
+        "stotle_ari":{"first_meeting":"p"}
+      },
+      "e":      {
+        "curie_marie":{"1":97,"2":99},
+        "einstein_al":{"1":65,"2":99},
+        "fermi_ricky":{"1":88,"2":99},
+        "feynman_dick":{"1":94,"2":99},
+        "hawking_steve":{"1":92,"2":99},
+        "heisenberg_werner":{"1":100,"2":100},
+        "hertz_heinie":{"1":99,"2":99},
+        "joule_jim":{"1":87,"2":99},
+        "millikan_bobby":{"1":87,"2":99},
+        "newton_ike":{"1":77,"2":99},
+        "noether_emmy":{"1":98,"2":99},
+        "pauli_wolfgang":{"1":96,"2":99},
+        "rutherford_ernie":{"1":87,"2":99},
+        "stotle_ari":{"1":32,"2":99}
+      }
+    }
+  }
