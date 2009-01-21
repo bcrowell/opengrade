@@ -207,7 +207,7 @@ sub do_copy {
   my $describe_out = $out;
   if (!$out) {$out = POSIX::tmpnam(); $to_stdout = 1; $describe_out = 'stdout'}
   #print STDERR "copying from $in to $describe_out, output format=$format\n";
-  my $gb = GradeBook->read($in,$in_pwd);
+  my $gb = GradeBook->read($in,$in_pwd,{NO_AUTOSAVE=>1});
   if (!ref $gb) {die $gb}
   $gb->close();
   if ($auth && $gb->{AUTHENTICITY}) {

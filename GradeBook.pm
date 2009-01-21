@@ -116,6 +116,7 @@ sub w {
 
 sub auto_save_if_they_want_it {
     my $self = shift;
+    return if exists $self->{NO_AUTOSAVE};
     my $s = $self->when_last_autosaved();
     my $m = $self->when_last_modified();
     if ($self->want_auto_save() && (defined $m) && ((!(defined $s)) || ($s<=$m)) && time>$m) {
@@ -129,6 +130,7 @@ sub auto_save_if_they_want_it {
 
 sub auto_save {
     my $self = shift;
+    return if exists $self->{NO_AUTOSAVE};
     $self->write_to_named_file($self->autosave_filename());
     $self->mark_autosaved_now();
 }
@@ -869,13 +871,20 @@ sub lock {
 
 =head3 read()
 
-GradeBook->read("foo.gb",$password) creates a new GradeBook object by reading a file.
+GradeBook->read("foo.gb") creates a new GradeBook object by reading a file.
+Optional second argument is password (defaults to null string).
+Optional third argument is a hash ref containing options.
 In case of an error, returns a string containing an error message.
 Should call it like this: $gb=GradeBook->read(...); if (!ref $gb) {..error..}
 This also sets filehandle() and locks the file.
 Attempts to autodetect old format versus new json format, will read either one.
+
 Sets $self->{AUTHENTICITY} to null string if authentic.
 Sets $self->{HAS_WATERMARK}.
+
+By default, OpenGrade autosaves your file a few
+seconds after any modification. This is not the right behavior for, e.g., scripts
+or automated testing. To prevent autosaves, set NO_AUTOSAVE=>1 in the options hashref.
 
 =cut
 
@@ -884,21 +893,24 @@ sub read {
     my $file_name = shift;
     my $password = "";
     if (@_) {$password = shift}
+    my $options = {};
+    if (@_) {$options = shift}
     open(FILE,"<$file_name") or return "Cannot open $file_name";
     my $first_line = <FILE>;
     close FILE;
+    my $gb;
     if ($first_line =~ /^\s*[\{\[]/) { # If it starts with { or [, that's consistent with JSON, not with old format.
-      my $gb = GradeBook->read_json($file_name,$password);
+      $gb = GradeBook->read_json($file_name,$password);
       if (!ref $gb) {return $gb}
       $gb->{FORMAT} = 'json';
-      return $gb;
     }
     else {
-      my $gb = GradeBook->read_old($file_name,$password);
+      $gb = GradeBook->read_old($file_name,$password);
       if (!ref $gb) {return $gb}
       $gb->{FORMAT} = 'old';
-      return $gb;
     }
+    if (exists $options->{NO_AUTOSAVE}) {$gb->{NO_AUTOSAVE}=1}
+    return $gb;
 }
 
 =head3 read_json()

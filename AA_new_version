@@ -9,5 +9,6 @@ Change version number in:
   /home/bcrowell/Documents/web/source/ogr/ogr.source , and remake
   Makefile
   Version.pm
+make test
 make dist
 make post

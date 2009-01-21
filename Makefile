@@ -164,3 +164,6 @@ opengrade.1: manpage.pod Makefile
 	# dependency on Makefile is so it will detect new value of VERSION
 	pod2man --section=1 --center="OpenGrade $(VERSION)" --release="$(VERSION)" \
 	        --name=OPENGRADE <manpage.pod >opengrade.1
+
+test:
+	cd test_suite && perl test.pl
