@@ -19,6 +19,7 @@ Internally, the structure of the hashes is maintained in a slightly different
 way than in the gradebook file. This is a hold-over from the old file format.
 Basically the internal structure is flatter than the file structure, and some
 things that are really hashes are maintained as strings of the form "key:value","key:value",...
+See comments above hashify() for more details, and for thoughts on neatening this up.
 
 A subset of this package's write methods is designated as the "user-write" API. Criteria for inclusion in the user-write API:
 Should be user-initiated at least sometimes; should modify the gb; should modify it in a way that can be reflected with hashify();
@@ -180,7 +181,6 @@ modification is *complete*.
 
 sub mark_modified_now {
     my $self = shift;
-    #print "marking as modified now qwe\n";
     $self->when_last_modified(time);
 }
 
@@ -411,6 +411,46 @@ sub jsonify_readable {
 Turn the entire gradebook structure into a data structure made of nested hashes. This
 is what determines what gets written to disk when we write a file in the new json format.
 It also determines what gets digitally watermarked.
+
+Current internal representation:
+
+$gb->{CATEGORIES}->{$cat}->/property/  --- see categories_private_method
+
+$gb->{ASSIGNMENTS}->{"$cat.$ass"}->/property/ --- see assignments_private_method()
+
+$gb->{GRADES}->{"$who.cat"}->/ass/      --- see grades_private_method()
+
+In the above, ->/.../ means a situation where I mocked up a hash as a comma-separated list.
+
+Representation in output of hashify():
+
+->{categories}->{$cat}->{$property}
+
+->{assignments}->{$cat}->{$ass}->{$property}
+
+->{grades}->{$cat}->{$who}->{$ass}
+
+Thoughts on neatening this up:
+
+One reason it would be helpful to neaten this up would be that it would make hashify() a
+more efficient operation. We're currently spending a lot of time in hashify() because of
+undo functionality, and it's caused a noticeable degradation in performance when entering
+grades.
+
+I made an attempt to neaten in Jan '09, and it was disastrous. I think the problem was
+that calling code was being handed references to hashes, and then treating those hashes
+as scratch copies that could safely be modified. That's okay in the present implementation,
+but isn't okay in an implementation where the hash refs being returned are just references
+to the internally maintained data structures. Tie::SecureHash could be helpful here.
+It's not packaged for debian, but it's pure perl, so I could just include it with OpenGrade,
+or only use it on an interim basis for debugging. However, it will only protect against
+munging by other packages, and I could have the same issue with methods inside GradeBook.
+
+It's not as simple as just changing the internal representations of $gb->{GRADES}, etc.
+That would be trivial to do, but then every call to grades_private_method() would have
+to convert the new-style hash back into an old-style representation. This would probably
+be less efficient than the current setup, until I got around to rewriting the calling
+code.
 
 =cut
 
@@ -1218,7 +1258,7 @@ sub user_write_api {
   my $done = 0;
   sub set_up_undo {
     # We set $gb->{PREVENT_UNDO}=1 initially when we create a gb object, because any calls to write methods are just initializations, not user-initiated edits.
-    # We only set $gb->{PREVENT_UNDO}=1 when the user clicks on a menu or types in a score, as detected by BrowserWindow::menu_bar() Roster::key_pressed_in_scores().
+    # We only set $gb->{PREVENT_UNDO}=0 when the user clicks on a menu or types in a score, as detected by BrowserWindow::menu_bar() Roster::key_pressed_in_scores().
     if (!$done) {
       $done = 1;
       # The following is for efficiency. If it's a read-write method, and we're not calling it with enough args to be using it as a write method,

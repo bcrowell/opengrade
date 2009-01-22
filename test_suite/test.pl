@@ -18,6 +18,13 @@ header("delete a category");
 test_output(qq(opengrade --copy --modify='delete_category,["e"]' new_watermarked.gb >temp1.gb && opengrade --query="grades,e,newton_ike,1" temp1.gb),'null');
 test_output(qq(opengrade --query="grades,att,curie_marie,first_meeting" temp1.gb),qq("p")); # temp1.gb is left over from the previous test; make sure other data not deleted
 
+header("undo");
+test_no_failure(<<TEST
+  opengrade --copy --modify='delete_category,["e"]' --undo new_watermarked.gb >temp1.gb &&
+  opengrade --identical new_watermarked.gb temp1.gb
+TEST
+);
+
 unlink("temp1.gb");
 
 sub header {

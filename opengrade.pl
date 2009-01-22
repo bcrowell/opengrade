@@ -52,6 +52,7 @@ our %options=(
   'input_password'=>'',
   'output_password'=>undef,
   'authenticate'=>0,
+  'undo'=>0,
   'identical'=>0,
   'version'=>0,
 );
@@ -66,6 +67,7 @@ our %command_line_options = (
   'input_password=s'=>\$options{'input_password'},
   'output_password=s'=>\$options{'output_password'},
   'authenticate!'=>\$options{'authenticate'},
+  'undo!'=>\$options{'undo'},
   'identical'=>\$options{'identical'},
   'version'=>\$options{'version'},
 );
@@ -77,10 +79,6 @@ if (@ARGV) {$command_line_file_argument=$ARGV[0]} # something left over on comma
 # scripting:
 #----------------------------------------------------------------
 
-# opengrade.pl --copy --output=bar.gb foo.gb ... parses foo.gb, writes back out to bar.gb
-# opengrade.pl --copy foo.gb                 ... similar, but to stdout
-# can also set --output_format=(old|json|default)
-# opengrade.pl --copy --modify='delete_category,["e"]' foo.gb ... deletes exam category ('e') from foo.gb
 if ($options{'help'}) {
   do_help();
   exit;
@@ -95,7 +93,7 @@ if (defined $options{'query'}) {
 }
 if ($options{'copy'}) {
   do_copy($command_line_file_argument,$options{'output'},$options{'output_format'},$options{'input_password'},$options{'output_password'},$options{'authenticate'},
-                     $options{'modify'});
+                     $options{'modify'},$options{'undo'});
   exit;
 }
 if ($options{'identical'}) {
@@ -201,7 +199,7 @@ sub do_query {
 # If $out is logically false, write to stdout.
 # Format can be old, json, or default, as defined in the comments at the top of GradeBook::write.
 sub do_copy {
-  my ($in,$out,$format,$in_pwd,$out_pwd,$auth,$modify) = @_;
+  my ($in,$out,$format,$in_pwd,$out_pwd,$auth,$modify,$undo) = @_;
   if (!$in) {die "no input file specified on command line for --copy"}
   my $to_stdout = 0;
   my $describe_out = $out;
@@ -218,8 +216,12 @@ sub do_copy {
   if ($modify) {
     $modify =~ /^(\w+),(.*)$/;
     my ($method,$args_json) = ($1,$2);
+    $gb->{PREVENT_UNDO}=0;
     my $err = $gb->user_write_api($method,$args_json);
     die $err if $err;
+    if ($undo) {
+      $gb->undo();
+    }
   }
   my $err = $gb->write_to_named_file($out,$format);
   die $err if $err;
