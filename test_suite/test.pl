@@ -20,12 +20,24 @@ test_output(qq(opengrade --query="grades,att,curie_marie,first_meeting" temp1.gb
 
 header("undo");
 test_no_failure(<<TEST
-  opengrade --copy --modify='delete_category,["e"]' --undo new_watermarked.gb >temp1.gb &&
+  opengrade --copy --modify='delete_category,["e"]' --undo=1 new_watermarked.gb >temp1.gb &&
+  opengrade --identical new_watermarked.gb temp1.gb
+TEST
+);
+open(F,">commands_temp");
+print F <<COMMANDS;
+delete_category,["e"]
+delete_category,["att"]
+COMMANDS
+close F;
+test_no_failure(<<TEST
+  opengrade --copy --modify='<commands_temp' --undo=2 new_watermarked.gb >temp1.gb &&
   opengrade --identical new_watermarked.gb temp1.gb
 TEST
 );
 
 unlink("temp1.gb");
+unlink("commands_temp");
 
 sub header {
   my $message = shift;

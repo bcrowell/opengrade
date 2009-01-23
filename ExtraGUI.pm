@@ -111,6 +111,8 @@ sub choose_file {
   my $initialfile = $args{INITIALFILE};
   $path =~ s|/$||;
 
+  # man 3 Tk::getOpenFile
+
   my $file_name;
   if ($args{WHAT} eq 'input') {
     # choosing file to open:
@@ -386,6 +388,7 @@ Show some text, and give the user the option of saving it in a file.
     OPEN_WITH=>'',
     DESCRIBE_OPEN_WITH=>'',
     EXTRA_BUTTONS=>{}, # hash whose keys are text for buttons, and whose contents are subs to execute
+
 =cut
 
 sub show_text {
@@ -401,7 +404,7 @@ sub show_text {
     FILENAME=>'', # default filename for saving
     OPEN_WITH=>'',
     DESCRIBE_OPEN_WITH=>'',
-		EXTRA_BUTTONS=>{},
+    EXTRA_BUTTONS=>{},
     @_,
   );
   my $text = $args{TEXT};

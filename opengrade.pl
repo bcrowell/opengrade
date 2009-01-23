@@ -67,7 +67,7 @@ our %command_line_options = (
   'input_password=s'=>\$options{'input_password'},
   'output_password=s'=>\$options{'output_password'},
   'authenticate!'=>\$options{'authenticate'},
-  'undo!'=>\$options{'undo'},
+  'undo=i'=>\$options{'undo'},
   'identical'=>\$options{'identical'},
   'version'=>\$options{'version'},
 );
@@ -214,13 +214,25 @@ sub do_copy {
   if (!defined $out_pwd) {$out_pwd = $in_pwd}
   $gb->password($out_pwd);
   if ($modify) {
-    $modify =~ /^(\w+),(.*)$/;
-    my ($method,$args_json) = ($1,$2);
+    my @commands;
+    if ($modify=~/^<(.*)/) {
+      my $file = $1;
+      open(F,"<$file") or die "error opening input file $file for input, $!";
+      while (my $line=<F>) {chomp $line; push @commands,$line}
+      close F;
+    }
+    else {
+      push @commands,$modify;
+    }
     $gb->{PREVENT_UNDO}=0;
-    my $err = $gb->user_write_api($method,$args_json);
-    die $err if $err;
-    if ($undo) {
-      $gb->undo();
+    foreach my $modify(@commands) {
+      $modify =~ /^(\w+),(.*)$/ or die "syntax error in command '$modify'";
+      my ($method,$args_json) = ($1,$2);
+      my $err = $gb->user_write_api($method,$args_json);
+      die $err if $err;
+    }
+    if ($undo>0) {
+      foreach my $i(1..$undo) {$gb->undo()}
     }
   }
   my $err = $gb->write_to_named_file($out,$format);

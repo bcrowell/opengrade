@@ -830,7 +830,11 @@ The argument to \verb@--modify@ consists of two parts, separated by a comma.
 The first part is the name of a write method of the GradeBook class, defined
 as part of the array \verb+@user_write_api_functions+ near the top of
 GradeBook.pm. The second part is a JSON-formatted string representing
-the arguments to be passed to that method.
+the arguments to be passed to that method. If the argument begins with a \verb@<@,
+then the rest of it is interpreted as a file from which commands are to be read,
+one command per line. If the option \verb@--undo=n@ is also given, then after
+all modifications are complete, \verb@n@ of them will be undone; this is only
+likely to be useful for testing whether the undo function works.
 
 To extract data from a file, use \verb@--query@. For example, the following
 command will write

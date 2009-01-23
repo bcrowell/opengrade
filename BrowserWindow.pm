@@ -977,6 +977,25 @@ sub close_file {
   $self->check_for_files_to_delete();
 }
 
+sub properties {
+  my $self = shift;
+  local $Words::words_prefix = "b.properties";
+  my $gb = $self->{DATA}->{GB};
+  my $t = '';
+  my $w = $gb->weights_enabled(); #0 unweighted 1 weighted 2 no categories
+  if ($w==0) {$t = $t . w('weighting_mode') . ': ' . w('straight_points') . "\n"}
+  if ($w==1) {$t = $t . w('weighting_mode') . ': ' . w('weighted') . "\n"}
+  if ($w==2) {$t = $t . w('weighting_mode') . ': ' . w('no_cats') . "\n"}
+  my $r = $gb->marking_periods();
+  if (defined $r) {
+    $t = $t . w('marking_periods') . ': ' . join(',',$gb->marking_periods_in_order())  . "\n";
+  }
+  else {
+    $t = $t . w('marking_periods') . ': ' . w('none')  . "\n";
+  }
+  ExtraGUI::show_text(TEXT=>$t,TITLE=>w('properties'));
+}
+
 sub revert {
     my $self = shift;
     ExtraGUI::confirm(w("confirm_revert"),
@@ -2169,6 +2188,7 @@ sub menu_bar {
   &$add_item("FILE_MENUB",\@items,'-');
   &$add_item("FILE_MENUB",\@items,'about','',sub{$self->about()});
   &$add_item("FILE_MENUB",\@items,'-');
+  &$add_item("FILE_MENUB",\@items,'properties','',sub{$self->properties()});
   &$add_item("FILE_MENUB",\@items,'revert','',sub{$self->revert()});
   &$add_item("FILE_MENUB",\@items,'rekey','',sub{$self->rekey_file()});
   &$add_item("FILE_MENUB",\@items,'strip_watermark','',sub{$self->strip_watermark()});
@@ -2386,6 +2406,7 @@ sub enable_and_disable_menu_items {
     $file_menub->entryconfigure($dir->{'FILE_MENUB*reconcile'},-state=>'disabled');
     $file_menub->entryconfigure($dir->{'FILE_MENUB*clone'},-state=>'normal');
     $file_menub->entryconfigure($dir->{'FILE_MENUB*export'},-state=>'normal');
+    $file_menub->entryconfigure($dir->{'FILE_MENUB*properties'},-state=>'normal');
     $file_menub->entryconfigure($dir->{'EDIT_MENUB*standards'},-state=>'normal');
   }
   else { # no file open
@@ -2398,6 +2419,7 @@ sub enable_and_disable_menu_items {
     $file_menub->entryconfigure($dir->{'FILE_MENUB*reconcile'},-state=>'normal');
     $file_menub->entryconfigure($dir->{'FILE_MENUB*clone'},-state=>'disabled');
     $file_menub->entryconfigure($dir->{'FILE_MENUB*export'},-state=>'disabled');
+    $file_menub->entryconfigure($dir->{'FILE_MENUB*properties'},-state=>'disabled');
     $file_menub->entryconfigure($dir->{'EDIT_MENUB*standards'},-state=>'disabled');
   }
   $self->enable_or_disable_specific_menu_item('FILE','clear_recent');

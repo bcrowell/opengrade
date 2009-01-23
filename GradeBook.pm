@@ -1215,7 +1215,7 @@ sub revert {
 sub undo {
   my $self = shift;
   my $a = $self->{UNDO_STACK};
-  return if @$a<2;
+  return if @$a<2 || (@$a==2 && $self->{UNDO_STACK_OVERFLOWED});
   my $undone = pop @$a;
   my $stuff = $a->[-1];
   my $json = $stuff->{'state'};
@@ -1285,6 +1285,7 @@ sub user_write_api {
             my $json = jsonify_ugly($self->hashify());
             if (@$a==0 || $json ne $a->[-1]->{'state'}) {
               push @$a,{'state'=>$json,'sub'=>$name,'describe'=>$self->describe_operation($name,@_)}; # if changing hash, change it above in misc_initialization() as well
+              if (@$a>100) {splice @$a,1,1; $self->{UNDO_STACK_OVERFLOWED}=1} # prevent undo stack from growing arbitrarily large
               if (ref($self->undo_callback()) eq 'CODE') {my $c=$self->undo_callback(); &$c($self,$name,recommend_gui_stuff($name),'save')}
             }
             $self->{IN_UNDO} = 0;
