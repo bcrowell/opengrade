@@ -1218,14 +1218,23 @@ sub undo {
   return if @$a<2 || (@$a==2 && $self->{UNDO_STACK_OVERFLOWED});
   my $undone = pop @$a;
   my $stuff = $a->[-1];
-  my $json = $stuff->{'state'};
-  return unless $json;
-  my $h;
-  eval {$h = JSON::from_json($json)};
-  if (!defined $h) {print "bad json syntax in GradeBook::undo, didn't undo"; return}
-  $self->{PREVENT_UNDO} = 1;
-  $self->set_from_hash($h);
-  $self->{PREVENT_UNDO} = 0;
+  if (exists $stuff->{'set_grades_on_assignment_shortcut'}) {
+    my $shortcut = $undone->{'set_grades_on_assignment_shortcut'};
+    $self->{PREVENT_UNDO} = 1;
+    #print STDERR "doing shortcut for undo, $shortcut->{'cat'},$shortcut->{'ass'},$shortcut->{'student'},$shortcut->{'old'}\n";
+    $self->set_grades_on_assignment(CATEGORY=>$shortcut->{'cat'},ASS=>$shortcut->{'ass'},GRADES=>{$shortcut->{'student'}=>$shortcut->{'old'}});
+    $self->{PREVENT_UNDO} = 0;
+  }
+  else {
+    my $json = $stuff->{'state'};
+    return unless $json;
+    my $h;
+    eval {$h = JSON::from_json($json)};
+    if (!defined $h) {print "bad json syntax in GradeBook::undo, didn't undo"; return}
+    $self->{PREVENT_UNDO} = 1;
+    $self->set_from_hash($h);
+    $self->{PREVENT_UNDO} = 0;
+  }
   if (ref($self->undo_callback()) eq 'CODE') {
     my $sub = $undone->{'sub'};
     my $c=$self->undo_callback();
@@ -1280,11 +1289,42 @@ sub user_write_api {
           if ($could_save ) {
             $self->{IN_UNDO} = 1;
           }
+          # special-case set_grades_on_assignment for efficiency
+          my $shortcut = 0;
+          my %shortcut_data = ();
+          if ($could_save && $name eq 'set_grades_on_assignment') {
+            my @x = @_;
+            shift @x;
+            my %x = (@x,);
+            my $grades = $x{GRADES};
+            if (scalar(keys %$grades)==1) {
+              $shortcut = 1;
+              my @k = keys (%$grades);
+              $shortcut_data{'student'} = $k[0];
+              $shortcut_data{'cat'} = $x{CATEGORY};
+              $shortcut_data{'ass'} = $x{ASS};
+              $shortcut_data{'old'} = $self->get_current_grade($shortcut_data{'student'},$shortcut_data{'cat'},$shortcut_data{'ass'});
+              #print STDERR "student=",$shortcut_data{'student'},",cat=",$shortcut_data{'cat'},",ass=",$shortcut_data{'ass'},",old=",$shortcut_data{'old'},"\n";
+            }
+          }
           if (wantarray) {@result = &$c(@_)} else {$result = &$c(@_)}
           if ($could_save ) {
-            my $json = jsonify_ugly($self->hashify());
-            if (@$a==0 || $json ne $a->[-1]->{'state'}) {
-              push @$a,{'state'=>$json,'sub'=>$name,'describe'=>$self->describe_operation($name,@_)}; # if changing hash, change it above in misc_initialization() as well
+            my $changed;
+            my $json;
+            if ($shortcut) {
+              $changed = 1;
+            }
+            else {
+              $json = jsonify_ugly($self->hashify());
+              $changed = ($json ne $a->[-1]->{'state'}); # In the case where $a->[-1]->{'state'} is null, we decide it's changed, which is fine.
+            }
+            if (@$a==0 || $changed) {
+              # if changing the structure of the $undo hash below, change it above in misc_initialization() as well
+              my $undo = {'state'=>$json,'sub'=>$name,'describe'=>$self->describe_operation($name,@_)}; # $json may be undef if it's set_grades_on_assignment
+              if ($shortcut) {
+                $undo->{'set_grades_on_assignment_shortcut'} = \%shortcut_data;
+              }
+              push @$a,$undo; 
               if (@$a>100) {splice @$a,1,1; $self->{UNDO_STACK_OVERFLOWED}=1} # prevent undo stack from growing arbitrarily large
               if (ref($self->undo_callback()) eq 'CODE') {my $c=$self->undo_callback(); &$c($self,$name,recommend_gui_stuff($name),'save')}
             }
