@@ -30,7 +30,7 @@ use English;
 
 use Tk;
 use Tk ':variables';
-require Tk::ErrorDialog; # show errors in dialog boxes, rather than printing to console
+require Tk::ErrorDialog; # show errors in dialog boxes, rather than printing to console 
 use BrowserData;
 use BrowserWindow;
 use ExtraGUI;

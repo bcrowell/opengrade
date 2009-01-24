@@ -1404,6 +1404,7 @@ Add new grades. Any preexisting ones are retained.
       CATEGORY => "",
       ASS => "",
       GRADES => {}, 
+The hash reference in GRADES has student keys as its keys, scores as its values.
 
 =cut
 
@@ -1862,7 +1863,7 @@ sub category_name_singular {
     my $n = get_property($h->{$which},"catname");
     $n =~ m/([^\,]+),(.*)/;
     my ($sing,$pl) = ($1,$2);
-    return $sing;
+    return $sing || $which;
 }
 
 =head3 category_name_plural()
@@ -1879,7 +1880,7 @@ sub category_name_plural {
     my $n = get_property($h->{$which},"catname");
     $n =~ m/([^\,]+),(.*)/;
     my ($sing,$pl) = ($1,$2);
-    return $pl;
+    return $pl || $which;
 }
 
 =head3 category_exists()

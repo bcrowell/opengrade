@@ -1,0 +1,30 @@
+  {
+    "class":    {
+      "days":"",
+      "dir":"",
+      "online_grades":{"cltext":"","course_code":"","section_number":"","term":""},
+      "staff":"",
+      "standards":{},
+      "term":"2009-1",
+      "time":"",
+      "title":""
+    },
+    "types":    {
+      "data":{"attendance":{"description":"attendance","descriptions":{"a":"absent","e":"excused","p":"present","t":"tardy"},"order":["p","a","e","t"],"value":{"a":0,"e":1,"p":1,"t":1}},"numerical":{"description":"numerical"}},
+      "order":["numerical","attendance"]
+    },
+    "category_order":[],
+    "categories":    {
+
+    },
+    "roster":    {
+
+    },
+    "assignment_order":[],
+    "assignments":    {
+
+    },
+    "grades":    {
+
+    }
+  }

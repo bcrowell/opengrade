@@ -657,7 +657,7 @@ sub new_file {
     INPUTS=>[
       Input->new(KEY=>"title",PROMPT=>w("title"),TYPE=>'string',BLANK_ALLOWED=>0),
       Input->new(KEY=>"staff",PROMPT=>w("staff_gui"),
-                              DEFAULT=>UtilOG::guess_username(),TYPE=>'string',BLANK_ALLOWED=>0),
+                              DEFAULT=>UtilOG::guess_username(),TYPE=>'string',BLANK_ALLOWED=>1),
       Input->new(KEY=>"days_of_week",PROMPT=>w("days_of_week"),
                               DEFAULT=>"MTWRF",TYPE=>'string',BLANK_ALLOWED=>1),
       Input->new(KEY=>"time",PROMPT=>w("time"),

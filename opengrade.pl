@@ -55,6 +55,7 @@ our %options=(
   'undo'=>0,
   'identical'=>0,
   'version'=>0,
+  'verbose'=>0,
 );
 our %command_line_options = (
   't'=>\$options{'t'},
@@ -70,6 +71,7 @@ our %command_line_options = (
   'undo=i'=>\$options{'undo'},
   'identical'=>\$options{'identical'},
   'version'=>\$options{'version'},
+  'verbose!'=>\$options{'verbose'},
 );
 GetOptions(%command_line_options); # from Getopt::Long
 my ($command_line_file_argument,$gui);
@@ -79,6 +81,7 @@ if (@ARGV) {$command_line_file_argument=$ARGV[0]} # something left over on comma
 # scripting:
 #----------------------------------------------------------------
 
+if ($options{'verbose'}) {STDERR->autoflush(1)}
 if ($options{'help'}) {
   do_help();
   exit;
@@ -93,7 +96,7 @@ if (defined $options{'query'}) {
 }
 if ($options{'copy'}) {
   do_copy($command_line_file_argument,$options{'output'},$options{'output_format'},$options{'input_password'},$options{'output_password'},$options{'authenticate'},
-                     $options{'modify'},$options{'undo'});
+                     $options{'modify'},$options{'undo'},$options{'verbose'});
   exit;
 }
 if ($options{'identical'}) {
@@ -199,7 +202,7 @@ sub do_query {
 # If $out is logically false, write to stdout.
 # Format can be old, json, or default, as defined in the comments at the top of GradeBook::write.
 sub do_copy {
-  my ($in,$out,$format,$in_pwd,$out_pwd,$auth,$modify,$undo) = @_;
+  my ($in,$out,$format,$in_pwd,$out_pwd,$auth,$modify,$undo,$verbose) = @_;
   if (!$in) {die "no input file specified on command line for --copy"}
   my $to_stdout = 0;
   my $describe_out = $out;
@@ -224,11 +227,14 @@ sub do_copy {
     else {
       push @commands,$modify;
     }
-    $gb->{PREVENT_UNDO}=0;
+    if ($undo>0) { # If we're not going to need to undo, performance is better with undo turned off.
+      $gb->{PREVENT_UNDO}=0;
+    }
     foreach my $modify(@commands) {
       $modify =~ /^(\w+),(.*)$/ or die "syntax error in command '$modify'";
       my ($method,$args_json) = ($1,$2);
       my $err = $gb->user_write_api($method,$args_json);
+      print STDERR "$method,$args_json\n" if $verbose;
       die $err if $err;
     }
     if ($undo>0) {
