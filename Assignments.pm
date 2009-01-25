@@ -137,7 +137,6 @@ sub refresh_categories {
       }
           }
     else {
-      #print "no gradebook open in refresh_categories\n";
       $menu->configure(-state=>'disabled'); # doesn't seem to work
       $menu->configure(-options=>[]); # doesn't seem to work
     }
@@ -171,16 +170,24 @@ sub decode_cats_option_menu {
   }
 }
 
-# This is the same as the name of another routine in another package.
+
+=head4 refresh_assignments()
+
+This is the same as the name of another routine in another package.
+Optional argument is {'no_enable_and_disable_menu_items'=>1}, for efficiency.
+
+=cut 
+
 sub refresh_assignments {
   my $self = shift;
+  my $options = shift;
   my $data = $self->{DATA};
   my $gb = $data->{GB};
   my $ass_lb = $self->{ASSIGNMENTS_LISTBOX};
   my @names = ();
   my $active_cat = $self->get_active_category();
   #print "in refresh_assignments, =$active_cat=\n";
-  $self->clear_assignments();
+  $self->clear_assignments($options);
   if (ref $gb && $active_cat ne "") {
       my $aa = $gb->array_of_assignments_in_category($active_cat);
       my @assignments_in_cat = @$aa;
@@ -229,9 +236,10 @@ sub clear {
 
 sub clear_assignments {
   my $self = shift;
+  my $options = shift;
   $self->{ASS_KEYS} = [];
   $self->{NAMES} = [];
-  $self->selected($self->get_active_category());
+  $self->selected($self->get_active_category(),$options);
   my $ass_lb = $self->{ASSIGNMENTS_LISTBOX};
   $ass_lb->delete(0,'end'); # Delete all of them.
 }
@@ -257,6 +265,7 @@ sub get_active_category {
 =head4 selected()
 
 Get or set the key of the category or assignment that is currently selected.
+Optional second arg may be {'no_enable_and_disable_menu_items'=>1}, for efficiency.
 
 =cut
 
@@ -268,7 +277,7 @@ sub selected {
     if ($what eq '') {
       $what = $self->{CAT_INTENTIONALLY_SELECTED};
     }
-    $self->{STAGE}->assignments_has_set_assignment($self->{SELECTED});
+    $self->{STAGE}->assignments_has_set_assignment($self->{SELECTED},@_);
   }
   return $self->{SELECTED};
 }
@@ -308,8 +317,8 @@ Call selected() and refresh_assignments().
 sub clicked_on_category {
   my $self = shift;
   my $key = shift;
-  $self->selected($key);
-  $self->refresh_assignments();
+  $self->selected($key,{'no_enable_and_disable_menu_items'=>1}); # enable_and_disable_menu_items is called explicitly below, and it's slow, so don't call it repeatedly
+  $self->refresh_assignments({'no_enable_and_disable_menu_items'=>1}); # calls clear_assignments, which calls selected
   $self->{STAGE}->{BROWSER_WINDOW}->enable_and_disable_menu_items();
   $self->{CAT_INTENTIONALLY_SELECTED} = $key;
 

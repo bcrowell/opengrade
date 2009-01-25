@@ -93,15 +93,17 @@ sub roster_has_set_student {
 =head4 assignments_has_set_assignment()
 
 Enables and disables menu items, then calls set_assignment().
+Optional second arg may be {'no_enable_and_disable_menu_items'=>1}, for efficiency.
 
 =cut
 
 sub assignments_has_set_assignment {
   my $self = shift;
   my $k = shift; # key of assignment
+  my $options = shift;
   if (!$self->{DATA}->file_is_open()) {return}
   $self->{BROWSER_WINDOW}->grades_queue(); # flush
-  $self->{BROWSER_WINDOW}->enable_and_disable_menu_items();
+  $self->{BROWSER_WINDOW}->enable_and_disable_menu_items() unless exists $options->{'no_enable_and_disable_menu_items'};
   $self->{ROSTER}->set_assignment($k);
   $self->{ASSIGNMENT} = $k;
 }
