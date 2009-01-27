@@ -804,6 +804,13 @@ Testing whether files are identical:
 
 \verb@opengrade --identical a.gb b.gb >report || echo "not identical"@
 
+When \verb@--identical@ and \verb@--or_diff@ are combined, it acts as
+an extension to the Unix diff utility that is aware of OpenGrade files.
+If both filenames end in \verb@.gb@, then the output is like the output of
+\verb@--identical@, but otherwise the output is simply the result of
+\verb@diff -u@. This is useful when using OpenGrade with the Unison file
+synchronizer, which allows a \verb@diff@ command to be set.
+
 Copying files, with parsing, error checking, and possible change of format:
 
 \verb@opengrade --copy a.gb >/dev/null || echo "invalid file"@

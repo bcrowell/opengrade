@@ -54,6 +54,7 @@ our %options=(
   'authenticate'=>0,
   'undo'=>0,
   'identical'=>0,
+  'or_diff'=>0,
   'version'=>0,
   'verbose'=>0,
 );
@@ -70,6 +71,7 @@ our %command_line_options = (
   'authenticate!'=>\$options{'authenticate'},
   'undo=i'=>\$options{'undo'},
   'identical'=>\$options{'identical'},
+  'or_diff!'=>\$options{'or_diff'},
   'version'=>\$options{'version'},
   'verbose!'=>\$options{'verbose'},
 );
@@ -100,7 +102,7 @@ if ($options{'copy'}) {
   exit;
 }
 if ($options{'identical'}) {
-  do_identical($ARGV[0],$ARGV[1]);
+  do_identical($ARGV[0],$ARGV[1],$options{'or_diff'});
   exit;
 }
 
@@ -154,9 +156,26 @@ sub do_version {
 # The semantics are meant so, e.g.:
 #      opengrade --identical a.gb b.gb || echo "assertion of identicality failed"
 sub do_identical {
-  my ($file_a,$file_b) = @_; # two input files
+  my ($file_a,$file_b,$or_diff) = @_; # two input files
   #print STDERR "comparing files $file_a and $file_b\n";
   my @gb;
+  if (defined $or_diff) {
+    if (!($file_a=~/.gb$/) || !($file_b=~/.gb$/)) {
+      my $diff_command = "diff -u"; # unison uses diff -u by default: "Output NUM (default 3) lines of unified context."
+      my $temp = POSIX::tmpnam();
+      my $command = "$diff_command ".quotemeta($file_a).' '.quotemeta($file_b)." >$temp";
+      #print STDERR "a=$file_a=, b=$file_b=, or_diff=$or_diff=, command=$command=\n";
+      my $result = system($command);
+      if ($result==0) {exit 0} # identical
+      local $/;
+      open(F,"<$temp");
+      my $diff = <F>;
+      close F;
+      print $diff;
+      unlink $temp;
+      exit 1;
+    }
+  }
   foreach my $file($file_a,$file_b) {
     my $gb = GradeBook->read($file); # don't bother with password, since it's read-only
     if (!ref $gb) {die $gb}

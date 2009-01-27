@@ -41,6 +41,15 @@ Determines whether the two gradebook files are identical.
 
 =over 8
 
+=item --or_diff
+
+When used with --identical, allows opengrade to be used as an extension to the
+Unix diff program.
+
+=back
+
+=over 8
+
 =item --copy
 
 Copies one gradebook file to another.
