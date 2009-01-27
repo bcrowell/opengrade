@@ -202,7 +202,6 @@ sub total_one_cat {
       my $last_mod = $gb->when_last_modified(); # may be undef if never modified
       if (!defined $last_mod || $r->[1] > $last_mod) { # The last calculation was at least one second later than the last modification.
         if ($enable_memoization) {
-          #print "reusing memoized results, last mod=$last_mod, last calc=$r->[1] qwe\n";
           return $result;
         }
       }

@@ -727,7 +727,6 @@ sub adjust_after_undo {
   my $gui_stuff = shift; # hash ref like, e.g., {'roster_refresh'=>1}
   my $direction = shift; # save, undo, or revert
   $self->enable_and_disable_menu_items();
-  #print "gui stuff = ".join(',',(keys %$gui_stuff))."=, operation=$operation, direction=$direction qwe\n";
   if (exists $gui_stuff->{'roster_refresh'}) {$self->{STAGE}->{ROSTER}->refresh()}
   if (exists $gui_stuff->{'assignments_refresh'}) {$self->{STAGE}->{ASSIGNMENTS}->refresh()}
   if ($operation eq 'set_grades_on_assignment' && $direction eq 'undo') {$self->{STAGE}->{ROSTER}->refresh()}

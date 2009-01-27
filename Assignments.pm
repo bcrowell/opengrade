@@ -118,6 +118,7 @@ sub refresh_categories {
       $self->{LEAVE_CAT_SELECTION_ALONE} = ($save_intent ne '');
       $menu->configure(-options=>\@names,-command=>sub{decode_cats_option_menu($self,\@_,\@names,\@c)});
          # The arrays @names and @c are closure-ized at this point.
+         # This step is somewhat inefficient, takes about .14 seconds.
       $self->{CAT_INTENTIONALLY_SELECTED} = $save_intent;
       $self->{LEAVE_CAT_SELECTION_ALONE} = 0;
       if (@c) {
@@ -135,7 +136,7 @@ sub refresh_categories {
         }
         $menu->configure(-state=>'normal');
       }
-          }
+    }
     else {
       $menu->configure(-state=>'disabled'); # doesn't seem to work
       $menu->configure(-options=>[]); # doesn't seem to work

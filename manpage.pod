@@ -21,11 +21,93 @@ access to them.
 
 =head1 OPTIONS
 
+See the full PDF documentation for more detailed information on the options.
+
 =over 8
 
 =item -t
 
 Use the text-based interface rather than the graphical user interface.
+
+=back
+
+=over 8
+
+=item --identical
+
+Determines whether the two gradebook files are identical. 
+
+=back
+
+=over 8
+
+=item --copy
+
+Copies one gradebook file to another.
+
+=back
+
+=over 8
+
+=item --output_format
+
+Sets the output format for --copy.
+
+=back
+
+=over 8
+
+=item --output
+
+Sets the output file for --copy.
+
+=back
+
+=over 8
+
+=item --authenticate
+
+For --copy, check the digital watermark and propagate it.
+
+=back
+
+=over 8
+
+=item --input_password
+
+Set the input password for --copy.
+
+=back
+
+=over 8
+
+=item --output_password
+
+Set the output password for --copy.
+
+=back
+
+=over 8
+
+=item --modify
+
+For --copy, introduce some modifications rather than simply copying.
+
+=back
+
+=over 8
+
+=item --undo=n
+
+After doing the operations specified in --modify, perform n undo operations.
+
+=back
+
+=over 8
+
+=item --query
+
+Extract data from a gradbook file.
 
 =back
 

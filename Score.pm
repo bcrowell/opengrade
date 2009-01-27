@@ -71,7 +71,8 @@ sub new {
   my $gb = $roster->{DATA}->{GB};
   my $prefs = $gb->preferences();
   if (!defined $prefs) {$prefs = Preferences->new()}
-  my $justify = {0=>'left',1=>'right',''=>'right','left'=>'left','right'=>'right'}->{$prefs->get('justify')};
+  my $default_justification = 'right';
+  my $justify = {0=>'left',1=>'right',''=>$default_justification,'left'=>'left','right'=>'right'}->{$prefs->get('justify')};
   $self->{WIDGET} = $frame->Entry(
         -width=>9,
         -takefocus=>0,

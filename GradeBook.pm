@@ -78,18 +78,18 @@ package GradeBook;
 
 use POSIX;
 use File::Copy;
-use LineByLine;
+# use LineByLine; # loaded only if specifically needed
 use Preferences;
-use NetOG;
 use Words qw(w get_w);
 use MyWords;
 use Fcntl qw/:flock/; # brings in LOCK_EX, etc.
 use Version;
 use JSON 2.0;
-use Storable; # is distributed as part of the perl package on ubuntu
+use Storable; # is distributed as part of the perl package on ubuntu; we use Storable::dclone in jsonify_ugly
 use Clone;
 push @Gradebook::ISA, 'Clone';
 use Memoize;
+use Fun;
 memoize 'get_property2_slow'; # memoizing get_property2(), which calls get_property2_slow() on hard cases, actually seemed to hurt performance rather than helping
 
 use Digest::SHA1;
@@ -222,6 +222,7 @@ sub strip_watermark_from_file {
       }
       my $err;
       if ($gb->{FORMAT} eq 'old')  {
+        eval("require LineByLine;");
         my $mac = LineByLine->new();
         $err = $mac->strip(INFILE=>$file_name,OUTFILE=>$file_name);
         return $err;
@@ -573,6 +574,7 @@ sub write_to_named_file_json_format {
 sub write_to_named_file_native_format {
     my $self = shift;
     my $file_name = shift;
+    eval("require LineByLine;");
 
     open(OUTFILE,">$file_name") or return "Error opening $file_name file for output";
 
@@ -1109,6 +1111,7 @@ sub read_old {
     my $one_liner = ""; # Some modes are one-liners.
     my @names; # for use in roster mode
     my $children={};
+    eval("require LineByLine;");
     my $mac = LineByLine->new(KEY=>$password,INPUT=>$file_name);
     $self->{AUTHENTICITY} = $mac->authenticity(); # This line has to come before the open(), because otherwise we have the file open twice, and that makes
                                                   # it not work on Windows.
