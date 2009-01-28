@@ -749,21 +749,27 @@ sub differ {
   # jsonify() uses canonical option, so these won't differ trivially
   my $log = $a->union($b);
   if ($log) {return $log}
-  return "Files differ when serialized in json format, but not in terms of scores or students. Perhaps the standards or class data differ.";
+  return "The files differ when serialized in json format, but not in terms of categories,\nassignments, scores, or students. Perhaps the standards or class data differ.";
 }
 
 =head3 union()
 
 $a->union($b,$ask) adds scores and students from gradebook $b into gradebook $a. Nothing is done
-with the preferences or grading standards; these are left as they were (in $a). See differ() for
-a more thorough check that includes these things.
+with the preferences or grading standards; these are left as they were (in $a).
+
+Returns text describing everything that was done.
+
+Method differ() is meant for the case where you want to find out whether and how $a and $b
+differ, but don't necessarily want to reconcile them. Differ() calls union(), but only for
+the purpose of reading the textual summary of differences. Union() will not catch or try to
+reconcile all possible differences, but differ() will catch all differences, even if union()
+is unable to give a textual summary of some of them.
 
 When a student exists in both gradebooks, but the student's properties are different in $a and $b,
 an appropriate log message will be generated, but the properties will be left as they are in $a.
+A message will also be generated if the student exists in one gradebook but not the other.
 
-If category and assignment properties differ, nothing is done and no log message is generated.
-
-Returns text describing everything that was done.
+Category and assignment properties are handled the same way as student properties.
 
 When a grade is present in both gradebooks, and the grades
 are unequal, call the subroutine $ask to decide which to use. This subroutine can interact with the
@@ -783,31 +789,89 @@ sub union {
   if (@_) {$ask = shift}
   my $log = '';
 
+  # Compare category properties, but don't try to reconcile them:
+  my $ac = $a->categories_private_method(); # hash ref
+  my $bc = $b->categories_private_method(); # hash ref
+  my %combined_cats = (%$ac,%$bc);
+  my %deleted_or_added_cats;
+  foreach my $cat(sort keys %combined_cats) {
+    if (exists $ac->{$cat} xor exists $bc->{$cat}) {
+      $deleted_or_added_cats{$cat} = 1;
+      if (! exists $ac->{$cat} ) {
+        $log = $log . "Category $cat was added.\n";
+      }
+      else {
+        $log = $log . "Category $cat was deleted.\n";
+      }
+    }
+    else {
+      my $d = diff_comma_delimited($ac->{$cat},$bc->{$cat});
+      if (ref $d) {
+        my ($keys,$ah,$bh) = ($d->{'keys'},$d->{'a'},$d->{'b'});
+        foreach my $property(@$keys) {
+          my $name = $a->category_name_plural($cat);
+          $log = $log . "Category $name had property $property changed from '$ah->{$property}' to '$bh->{$property}'\n";
+        }
+      }
+    }
+  }
+  
+  # Compare assignment properties, but don't try to reconcile them:
+  my $aa = $a->assignments_private_method(); # hash ref
+  my $ba = $b->assignments_private_method(); # hash ref
+  my %combined_ass = (%$aa,%$ba);
+  foreach my $ass(sort keys %combined_ass) {
+    my ($cat,$foo) = $a->split_cat_dot_ass($ass);
+    next if exists $deleted_or_added_cats{$cat};
+    if (exists $aa->{$ass} xor exists $ba->{$ass}) {
+      if (! exists $aa->{$ass} ) {
+        $log = $log . "Assignment $ass was added.\n";
+      }
+      else {
+        $log = $log . "Assignment $ass was deleted.\n";
+      }
+    }
+    else {
+      my $d = diff_comma_delimited($aa->{$ass},$ba->{$ass});
+      if (ref $d) {
+        my ($keys,$ah,$bh) = ($d->{'keys'},$d->{'a'},$d->{'b'});
+        foreach my $property(@$keys) {
+          my $name = $a->assignment_name($ass);
+          $log = $log . "Assignment $name had property $property changed from '$ah->{$property}' to '$bh->{$property}'\n";
+        }
+      }
+    }
+  }
+  
   # Compare student properties, but don't try to reconcile them:
-  foreach my $student(sort ($b->student_keys('all'))) {
-    if (exists($a->roster_private_method->{$student})) {
-      my $ap = $a->roster_private_method->{$student};
-      my $bp = $b->roster_private_method->{$student};
-      if ($ap ne $bp) {
-        my %aph = comma_delimited_to_hash($ap);
-        my %bph = comma_delimited_to_hash($bp);
-        if (jsonify_ugly(\%aph) ne jsonify_ugly(\%bph)) {
+  my $ar = $a->roster_private_method(); # hash ref
+  my $br = $b->roster_private_method(); # hash ref
+  my %combined_roster = (%$ar,%$br);
+  foreach my $student(sort keys %combined_roster) {
+    if (exists $ar->{$student} xor exists $br->{$student}) {
+      if (! exists $ar->{student} ) {
+        $log = $log . "Student $student was added.\n";
+      }
+      else {
+        $log = $log . "Student $student was deleted (not just dropped).\n";
+      }
+    }
+    else {
+      my $d = diff_comma_delimited($ar->{$student},$br->{$student});
+      if (ref $d) {
+        my ($keys,$ah,$bh) = ($d->{'keys'},$d->{'a'},$d->{'b'});
+        foreach my $property(@$keys) {
           my ($first,$last) = $a->name($student);
-          my %combined = (%aph,%bph);
-          foreach my $property(keys %combined) {
-            if ($aph{$property} ne $bph{$property}) {
-              if ($property eq 'dropped') {
-                if ($aph{$property} eq 'true') {
-                  $log = $log . "Student $last, $first was reinstated.\n";
-                }
-                else {
-                  $log = $log . "Student $last, $first was dropped.\n";
-                }
-              }
-              else {
-                $log = $log . "Student $last, $first had property $property changed from '$aph{$property}' to '$bph{$property}'\n";
-              }
+          if ($property eq 'dropped') {
+            if ($ah->{$property} eq 'true') {
+              $log = $log . "Student $last, $first was reinstated.\n";
             }
+            else {
+              $log = $log . "Student $last, $first was dropped.\n";
+            }
+          }
+          else {
+            $log = $log . "Student $last, $first had property $property changed from '$ah->{$property}' to '$bh->{$property}'\n";
           }
         }
       }
@@ -822,7 +886,6 @@ sub union {
       $log = $log . "Added student $last, $first.\n";
     }
   }
-
 
   # Copy categories:
   my $b_cats = $b->category_array();
@@ -876,7 +939,8 @@ sub union {
       }
     }
   }
-  
+
+  $log =~ s/\n$//;  
   return $log;
 
 }
@@ -2580,6 +2644,40 @@ sub hash_to_comma_delimited {
     }
     $result =~ s/,$//;
     return $result;
+}
+
+=head3 diff_comma_delimited()
+
+Compares two comma-delimited strings representing hashes.
+If they're the same, returns 0. If they differ, returns
+an a hash ref in the following format:
+
+{'keys'=>[], 'a'=>{}, 'b'=>{}}
+
+where keys gives an array of the keys on which the hashes
+differ, and a and b give refs to the hash representations of
+the arguments.
+
+ giving the set of keys on which they differ.
+Values are judged to be the equal or unequal based on string
+comparison, not numerical comparison, except that if one is
+undef and the other isn't, they're considered to be unequal.
+
+=cut
+
+sub diff_comma_delimited {
+  my ($a,$b) = @_;
+  if (defined $a xor defined $b) {return 0}
+  if ($a eq $b) {return 0} # for efficiency; they could be identical after canonicalization, just not as raw strings
+  my %ah = comma_delimited_to_hash($a);
+  my %bh = comma_delimited_to_hash($b);
+  if (jsonify_ugly(\%ah) eq jsonify_ugly(\%bh)) {return 0}
+  my %combined = (%ah,%bh); # union of hashes
+  my @d;
+  foreach my $k(keys %combined) {
+    push @d,$k if $ah{$k} ne $bh{$k};
+  }
+  return {'keys'=>\@d,'a'=>\%ah,'b'=>\%bh};
 }
 
 # returns a hash (not a hash ref)

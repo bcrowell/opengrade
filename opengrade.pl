@@ -184,7 +184,8 @@ sub do_identical {
   }
   my $log = $gb[0]->differ($gb[1]);
   if ($log) {
-    print "The following is a list of the changes that would have to be made to reconcile the files.\nThe files are presently different.\n$log\n";
+    print "The following is a list of the changes that would have to be made to file\n  $file_a\nin order to reconcile it with file\n".
+          "  $file_b\nThe files are presently different.\n$log\n";
     exit 1;
   } 
   else {
