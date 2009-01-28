@@ -143,7 +143,7 @@ For documentation on how to use the graphical user interface, see the online doc
 PDF format at http://www.lightandmatter.com/ogr/ogr.html .
 
 For more detailed information on the command-line interface, see the Scripting section of the
-documentation.
+PDF documentation.
 HELP
 }
 
@@ -160,7 +160,7 @@ sub do_identical {
   #print STDERR "comparing files $file_a and $file_b\n";
   my @gb;
   if (defined $or_diff) {
-    if (!($file_a=~/.gb$/) || !($file_b=~/.gb$/)) {
+    if (!($file_a=~/.gb/) || !($file_b=~/.gb/)) {
       my $diff_command = "diff -u"; # unison uses diff -u by default: "Output NUM (default 3) lines of unified context."
       my $temp = POSIX::tmpnam();
       my $command = "$diff_command ".quotemeta($file_a).' '.quotemeta($file_b)." >$temp";
@@ -184,7 +184,7 @@ sub do_identical {
   }
   my $log = $gb[0]->differ($gb[1]);
   if ($log) {
-    print "The following is a list of the changes that would have to be made to reconcile the files.\nThe files have not actually been modified\n$log";
+    print "The following is a list of the changes that would have to be made to reconcile the files.\nThe files are presently different.\n$log\n";
     exit 1;
   } 
   else {

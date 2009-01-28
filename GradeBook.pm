@@ -757,8 +757,11 @@ sub differ {
 $a->union($b,$ask) adds scores and students from gradebook $b into gradebook $a. Nothing is done
 with the preferences or grading standards; these are left as they were (in $a). See differ() for
 a more thorough check that includes these things.
-When a student exists in both gradebooks, the student's properties are left as they were in $a, and likewise
-for category and assignment properties.
+
+When a student exists in both gradebooks, but the student's properties are different in $a and $b,
+an appropriate log message will be generated, but the properties will be left as they are in $a.
+
+If category and assignment properties differ, nothing is done and no log message is generated.
 
 Returns text describing everything that was done.
 
@@ -780,6 +783,37 @@ sub union {
   if (@_) {$ask = shift}
   my $log = '';
 
+  # Compare student properties, but don't try to reconcile them:
+  foreach my $student(sort ($b->student_keys('all'))) {
+    if (exists($a->roster_private_method->{$student})) {
+      my $ap = $a->roster_private_method->{$student};
+      my $bp = $b->roster_private_method->{$student};
+      if ($ap ne $bp) {
+        my %aph = comma_delimited_to_hash($ap);
+        my %bph = comma_delimited_to_hash($bp);
+        if (jsonify_ugly(\%aph) ne jsonify_ugly(\%bph)) {
+          my ($first,$last) = $a->name($student);
+          my %combined = (%aph,%bph);
+          foreach my $property(keys %combined) {
+            if ($aph{$property} ne $bph{$property}) {
+              if ($property eq 'dropped') {
+                if ($aph{$property} eq 'true') {
+                  $log = $log . "Student $last, $first was reinstated.\n";
+                }
+                else {
+                  $log = $log . "Student $last, $first was dropped.\n";
+                }
+              }
+              else {
+                $log = $log . "Student $last, $first had property $property changed from '$aph{$property}' to '$bph{$property}'\n";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
   # Copy students:
   foreach my $b_student(sort ($b->student_keys('all'))) {
     if (!(exists($a->roster_private_method->{$b_student}))) {
@@ -788,6 +822,7 @@ sub union {
       $log = $log . "Added student $last, $first.\n";
     }
   }
+
 
   # Copy categories:
   my $b_cats = $b->category_array();

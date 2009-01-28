@@ -806,7 +806,7 @@ Testing whether files are identical:
 
 When \verb@--identical@ and \verb@--or_diff@ are combined, it acts as
 an extension to the Unix diff utility that is aware of OpenGrade files.
-If both filenames end in \verb@.gb@, then the output is like the output of
+If both filenames contain \verb@.gb@, then the output is like the output of
 \verb@--identical@, but otherwise the output is simply the result of
 \verb@diff -u@. This is useful when using OpenGrade with the Unison file
 synchronizer, which allows a \verb@diff@ command to be set.
