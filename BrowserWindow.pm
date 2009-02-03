@@ -1903,6 +1903,8 @@ sub new_category {
   foreach my $type(@$type_order) {
     $type_map->{$type} = w($types->{'data'}->{$type}->{'description'});
   }
+  $type_map->{'numerical'} = 'numerical';
+  push @$type_order,'numerical';
   my @inputs = (
         Input->new(KEY=>'key',PROMPT=>w('enter_short_name'),TYPE=>'string',BLANK_ALLOWED=>0),
         Input->new(KEY=>'sing',PROMPT=>w('enter_singular_noun'),TYPE=>'string',BLANK_ALLOWED=>0),
