@@ -1,4 +1,3 @@
-use PPM;
 
 print <<INFO;
 OpenGrade installation for Windows
@@ -26,6 +25,7 @@ do_ppm("libnet");
 do_ppm("TermReadKey");
 do_ppm("Digest-SHA1");
 do_ppm("Tk");
+do_ppm("JSON");
 
 print <<DONE;
 
@@ -46,7 +46,7 @@ DONE
 
 sub do_ppm {
   my $what = shift;
-  print "Installing $what...\n";
-  PPM::InstallPackage("package"=>$what);
-  print "...installed.\n";
+  print "\nInstalling $what...\n";
+  system("ppm install $what");
+  print "$what installed.\n";
 }

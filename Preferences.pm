@@ -41,16 +41,12 @@ sub new {
   if (!exists $dir{$os}) {$os = 'traditional_unix'}
 
   my $dir = $dir{$os};
-  # On a Windows machine, the My Documents folder may be on C, or D, or God knows what. Try to find it:
+  # On a Windows machine, store prefs in %APPDATA%\opengrade
   if ($os eq 'windows') {
-    my $dir_for_my_documents;
-    my @drives = ('C','D','E'); # Avoid A and B, because then it makes the floppy drive grind. This should work for most users.
-    foreach my $drive(@drives) {
-      my $try = $dir;
-      $try =~ s/MY_DOCUMENTS_DRIVE/$drive/;
-      if (-e $try && -d $try) {$dir_for_my_documents = $try}
+    $dir = $ENV{'APPDATA'} . '/opengrade';
+    if (! -d $dir ) {
+      mkdir ($dir) or die "Could not create preferences directory $dir : $!";
     }
-    $dir = $dir_for_my_documents;
   }
 
   my ($err,$file) = Portable::do_glob_one($dir);

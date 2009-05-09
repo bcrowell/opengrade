@@ -29,6 +29,10 @@ use MyWords;
 use Input;
 use Preferences;
 
+if (Portable::os_type() eq 'windows') {
+  eval("require Win32::Sound;")
+}
+
 package ExtraGUI;
 
 use Words qw(w get_w);
@@ -719,9 +723,14 @@ sub audio_feedback {
   return if ! want_beeps();
   my $sound_file = {"ch"=>"ch.wav","ambiguous"=>"ambiguous.wav","duh"=>"chopsticks.wav"}->{$what};
   return if !defined $sound_file;
-  my $sound_dir = "/usr/share/apps/opengrade/sounds/";
-  my $cmd = "aplay $sound_dir$sound_file"; # aplay is part of alsa-utils; use instead of sox's play, which no longer works
-  system($cmd);
+  if (Portable::os_type() eq 'windows') {
+    my $sound_dir = ".";
+    Win32::Sound::Play("${sound_dir}\\${sound_file}");
+  } else {
+    my $sound_dir = "/usr/share/apps/opengrade/sounds/";
+    my $cmd = "aplay $sound_dir$sound_file"; # aplay is part of alsa-utils; use instead of sox's play, which no longer works
+    system($cmd);
+  }
 }
 
 1;
