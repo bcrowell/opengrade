@@ -217,6 +217,8 @@ sub total_one_cat_without_memoization {
     my @grades = ();
     my @maxes = ();
     my @a = @$aa;
+    my $cat_properties = $gb->category_properties($cat);
+    my $normalize_grades = ($cat_properties->{"normalize"} eq "true");
     foreach my $ass(@a) {
       my $a = "$cat.$ass";
       my $ass_properties = $gb->assignment_properties($a);
@@ -232,6 +234,10 @@ sub total_one_cat_without_memoization {
                   $extra_credit = $extra_credit + $grade;
                 } # end if extra credit
                 else {
+                  if ($normalize_grades){
+                  	$grade = $grade*100/$max;
+                  	$max = 100;
+                  }
                   push @grades,$grade;
             push @maxes,$max;
           } # end if not extra credit

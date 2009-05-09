@@ -3085,7 +3085,9 @@ Get or set the list of enumerated types using a hash reference.
 sub types {
     my $self = shift;
     if (@_) {$self->{TYPES} = shift}
-    return $self->{TYPES};
+    my $t = $self->{TYPES};
+    if (!ref $t) {return $t}
+    return Storable::dclone($t); # clone it, because otherwise when we make a new category, the code in Gradebook mungs it by adding "numerical" to type order, etc.
 }
 
 sub set_default_types {

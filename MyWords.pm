@@ -888,6 +888,11 @@ STRING
 Will this category will count toward the students' grades?
 STRING
 
+"en.edit_categories.b.normalize" => <<STRING,
+Should we normalize grades in this category (i.e., give all assignments equal weight, even if they
+are scored with different numbers of points)?
+STRING
+
 "en.edit_categories.b.is_it_ignored" => <<STRING,
 Will this category be ignored for purposes of computing grades?
 STRING

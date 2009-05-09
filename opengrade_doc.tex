@@ -778,8 +778,11 @@ Lines 15-24 define two types for grades: numerical and attendance.
 Lines 26-30 define the grading categories: attendance, exams, and homework.
 Each category has certain properties, including the mandatory \verb@catname@,
 which gives singular and plural names for the assignments in that category.
-The fact that none of the categories have a \verb@weight@ property implies
+The fact that none of the categories has a \verb@weight@ property implies
 that this file uses straight points rather than weighted grading.
+The optional property \verb@type@ is used for attendance, and the boolean \verb@normalize@
+to indicate that all assignments in the category should be given equal weight, even if
+they have different maximum numbers of points.
 
 Lines 31-36 list the students in the class. In most cases, the form of the name
 to be displayed is given implicitly by the database key, e.g., \verb@curie_marie@

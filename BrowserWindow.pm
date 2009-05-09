@@ -1904,7 +1904,7 @@ sub new_category {
     $type_map->{$type} = w($types->{'data'}->{$type}->{'description'});
   }
   $type_map->{'numerical'} = 'numerical';
-  push @$type_order,'numerical';
+  push @$type_order,'numerical' unless join(',',@$type_order) =~ /numerical/;
   my @inputs = (
         Input->new(KEY=>'key',PROMPT=>w('enter_short_name'),TYPE=>'string',BLANK_ALLOWED=>0),
         Input->new(KEY=>'sing',PROMPT=>w('enter_singular_noun'),TYPE=>'string',BLANK_ALLOWED=>0),
@@ -1916,6 +1916,8 @@ sub new_category {
                    WIDGET_TYPE=>'radio_buttons'),
         Input->new(KEY=>'max',PROMPT=>w('enter_max'),TYPE=>'numeric',MIN=>0),
         Input->new(KEY=>'type',PROMPT=>w('type'),TYPE=>'string',WIDGET_TYPE=>'menu',ITEM_KEYS=>$type_order,ITEM_MAP=>$type_map,DEFAULT=>'numerical'),
+        Input->new(KEY=>'normalize',PROMPT=>w('b.normalize'),DEFAULT=>0,TYPE=>'string',
+                   WIDGET_TYPE=>'radio_buttons'),
       );
     if ($gb->weights_enabled()!=0) {
       my $blank_allowed = 1;
@@ -1928,7 +1930,7 @@ sub new_category {
       INPUTS => \@inputs,
       COLUMNS=>1,
       TITLE=>w('add_title'),
-      MAX_HEIGHT=>40,
+      MAX_HEIGHT=>48,
       CALLBACK=>sub {
                        local $Words::words_prefix = "edit_categories"; # shared with TermUI
                        my $results = shift; # hash ref
@@ -1942,12 +1944,14 @@ sub new_category {
                        my $ignored =  !($results->{'count'});
                        my $single = $results->{'single'};
                        my $max =  $results->{'max'};
+                       my $normalize = $results->{'normalize'};
                        my $w =  $results->{'weight'};
                        my $type =  $type_map->{$results->{'type'}};
                        my $stuff = "\"catname:$sing,$pl\"";
                        if ($max) {$stuff = $stuff . ",\"max:$max\""}
                        if ($drop>=1) {$stuff = $stuff . ",\"drop:$drop\""}
                        if ($ignored) {$stuff = $stuff . ",\"ignore:true\""}
+                       if ($normalize) {$stuff = $stuff . ",\"normalize:true\""}
                        if ($single) {$stuff = $stuff . ",\"single:true\""}
                        if ($w ne "") {$stuff = $stuff . ",\"weight:$w\""}
                        if ($type ne "" && $type ne 'numerical') {$stuff = $stuff . ",\"type:$type\""}
@@ -1997,11 +2001,13 @@ sub edit_category {
     'max'=>$gb->category_property($cat,'max'),
     'ignore'=>$gb->category_property_boolean($cat,'ignore'),
     'single'=>$gb->category_property_boolean($cat,'single'),
+    'normalize'=>$gb->category_property_boolean($cat,'normalize'),
     'type'=>$gb->category_property2($cat,'type'), # guaranteed to return numerical rather than undef
   );
   if ($old{'drop'} eq '') {$old{'drop'} = 0}
   if ($old{'ignore'} eq '') {$old{'ignore'} = 0}
   if ($old{'single'} eq '') {$old{'single'} = 0}
+  if ($old{'normalize'} eq '') {$old{'normalize'} = 0}
 
   my $callback = sub {
     local $Words::words_prefix = "edit_categories"; # shared with TermUI
@@ -2022,6 +2028,7 @@ sub edit_category {
       my $drop =   $new->{'drop'};
       my $ignore =   $new->{'ignore'};
       my $max =  $new->{'max'};
+      my $normalize = $new->{'normalize'};
       my $type = $new->{'type'};
 
       my $single = $old{'single'};
@@ -2035,6 +2042,7 @@ sub edit_category {
       if ($drop>=1) {$stuff = $stuff . ",\"drop:$drop\""}
       if ($ignore) {$stuff = $stuff . ",\"ignore:true\""}
       if ($single) {$stuff = $stuff . ",\"single:true\""}
+      if ($normalize) {$stuff = $stuff . ",\"normalize:true\""}
       my $w = $gb->category_property($cat,'weight');
       if ($w ne "") {$stuff = $stuff . ",\"weight:$w\""}
       if ($type ne "numerical") {$stuff = $stuff . ",\"type:$type\""}
@@ -2062,7 +2070,7 @@ sub edit_category {
                       local $Words::words_prefix = "edit_categories"; # shared with TermUI
                       my $results = shift;
                       my $assignments = $gb->array_of_assignments_in_category($cat);
-                      my @things = ('ignore','max');
+                      my @things = ('ignore','max','normalize');
                       foreach my $ass(@$assignments) {
                         foreach my $thing(@things) {
                           if ($results->{$thing}) {
@@ -2097,6 +2105,8 @@ sub edit_category {
         Input->new(KEY=>'max',PROMPT=>w('enter_max'),DEFAULT=>$old{'max'},
                                            TYPE=>'numeric',MIN=>0,BLANK_ALLOWED=>1),
         Input->new(KEY=>'ignore',PROMPT=>w('b.is_it_ignored'),DEFAULT=>$old{'ignore'},
+                   TYPE=>'string',WIDGET_TYPE=>'radio_buttons'),
+        Input->new(KEY=>'normalize',PROMPT=>w('b.normalize'),DEFAULT=>$old{'normalize'},
                    TYPE=>'string',WIDGET_TYPE=>'radio_buttons'),
         Input->new(KEY=>'type',PROMPT=>w('type'),TYPE=>'string',WIDGET_TYPE=>'menu',ITEM_KEYS=>$type_order,ITEM_MAP=>$type_map,DEFAULT=>$old{'type'}),
       );
