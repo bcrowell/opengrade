@@ -1010,6 +1010,20 @@ sub lock {
   }
 }
 
+# When I use OpenGrade with howdy, /foo/bar.gb has a corresponding
+# directory /foo/bar.sets, which contains some csv files.
+# Since howdy isn't a publicly released program, this isn't relevant to anyone but me.
+
+sub sets_directory {
+  my $self = shift;
+  my $me = $self->file_name();
+  my $sets = $me;
+  return undef unless $sets =~ /\.gb$/;
+  $sets =~ s/\.gb$/\.sets/;
+  return undef unless -d $sets;
+  return $sets;
+}
+
 =head3 read()
 
 GradeBook->read("foo.gb") creates a new GradeBook object by reading a file.

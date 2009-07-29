@@ -344,18 +344,18 @@ if ($request->{VALID}) {
           }
         }
         foreach my $student(@roster) {
-            $response_data = $response_data . "$student=";
+          $response_data = $response_data . "$student=";
           my $s = $scores{$student};
           foreach my $whole(@wholes) {
-              $response_data = $response_data . $s->{$whole};
+            $response_data = $response_data . $s->{$whole};
           }
-            $response_data = $response_data . "\n";
-        }
-          $response_data = $response_data . "=key";
-        foreach my $whole(@wholes) {
-            $response_data = "$response_data,$whole";
-        }
           $response_data = $response_data . "\n";
+        }
+        $response_data = $response_data . "=key";
+        foreach my $whole(@wholes) {
+          $response_data = "$response_data,$whole";
+        }
+        $response_data = $response_data . "\n";
       }
       $request->be_server_responding(DATA=>$response_data);
       my $describe_class_data_response;

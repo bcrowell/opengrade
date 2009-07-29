@@ -692,6 +692,16 @@ To make the Online Grades menu appear, use the Preferences menu and restart Open
 STRING
 "en.b.server.ok" => 'OK',
 "en.b.server.cancel" => 'Cancel',
+"en.b.server.generic_error_help" => <<ERR,
+The web server gave an error.
+The file ServerOG.log on the server has more detailed information on the error, which is not revealed here for security reasons.
+If the error is incorrect_password_or_server_key, then either the server key or the password is wrong.
+For the server key, you can check against the file YOURNAME.instructor_info on the server and make sure that it is the
+same as the value set in the Spotter menu under Client/Server Settings.
+The password you used to open this gradebook file must also match the one in the .instructor_info file. (Actually the password itself
+is not stored in that file; only a hash of the password is stored there.)
+For documentation on this kind of thing, see the Spotter documentation, under "Interfacing."
+ERR
 "en.b.server.confirm_whole_class" => "Broadcast a message to the whole class -- are you sure?",
 "en.b.server.class_description" => "Class Description",
 "en.b.server.roster" => "Roster",

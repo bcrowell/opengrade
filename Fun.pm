@@ -24,6 +24,30 @@ package Fun;
 use MyWords;
 use DateOG;
 
+# turn a string like "a=6&b=4" to a hash ref like {a=>6,b=>4}
+sub html_query_to_hash {
+  my $x = shift;
+  my $y={};
+  foreach my $a(split(/\&/,$x)) {
+    if ($a=~/(.*)=(.*)/) {
+      $y->{$1}=$2;
+    }
+  }
+  return $y;
+}
+
+# turn a string like "book=6&chapter=4&problem=37" to a string like "6,4,37"
+sub html_query_to_bcp {
+  my $x = shift;
+  my $y={};
+  foreach my $a(split(/\&/,$x)) {
+    if ($a=~/(book|chapter|problem)=(.*)/) {
+      $y->{$1}=$2;
+    }
+  }
+  return "$y->{book},$y->{chapter},$y->{problem}";
+}
+
 sub hash_usable_in_filename {
   my $x = shift;
   my $hash = Digest::SHA1::sha1_base64($x);
@@ -163,8 +187,13 @@ sub server_list_work_massage_list_of_problems {
     return (\@list,\@raw_and_cooked,\@stuff);
 }
 
-sub server_list_work_construct_request {
-                 my ($roster_ref,$r,$gb) = @_;
+sub server_list_work_handle_response {
+                 my ($roster_ref,
+                     $r,         # server's response string
+                     $gb,
+                     $stuff,     # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
+                     $filter,    # See ServerDialogs::list_work() for comments explaining filter.
+                     ) = @_; 
                  my @roster = @$roster_ref;
                  my %scores;
                  my $t = '';
@@ -173,23 +202,28 @@ sub server_list_work_construct_request {
                  $t = $t . sprintf "%25s ",'';
                  my $count = 0;
                  foreach my $key(@key) {
-                   my $char = chr(ord('a')+$count);
+                   my $char = chr(ord('a')+$count); # These are labels for entire problems in plain-text table, not parts (a), (b), etc. of one problem.
                    $count++;
                    $t = "$t$char";
                  }
                  $t = "$t\n";
+                 my %possible = (); # check that everyone has the same number of points possible, even if it's individualized hw
                  foreach my $who(@roster) {
                    my ($first,$last) = $gb->name($who);
                    $t = $t . sprintf "%25s","$first $last";
                    if ($r =~ m/$who\=([^\n]*)/m) {
-                     my $scores = $1; # a list of binary bits
-                     $t = $t . " $1";
+                     #print "response:\n$r\n";
+                     my $scores = $1; # comes back in the server's response as a string of binary bits
+                     $possible{length $scores}++; # increment number of students who had this many points possible
+                     $scores = server_list_work_filter_bit_string($scores,$who,$filter,$stuff);
+                     $t = $t . " $scores";
                      my $total = $scores;
-                     $total =~ s/0//g;
+                     $total =~ s/[0 ]//g;
                      $scores{$who} = length $total;
                    }
                    $t = $t . "\n";
                  }
+                 if (length(keys %possible)>1) {ExtraGUI::error_message("Fun::server_list_work_handle_response: not all students had same number of possible pts")}
                  $t = $t . "\nkey:\n";
                  $count = 0;
                  foreach my $key(@key) {
@@ -199,6 +233,44 @@ sub server_list_work_construct_request {
                  }
                  return ($t,\%scores);
 }
+
+# for individualized hw
+# Takes a binary bit string and replaces any 0 or 1 characters with blanks if the problem wasn't assigned to this student.
+sub server_list_work_filter_bit_string {
+  my (
+    $scores,   # binary string
+    $who,      # student key
+    $filter,   # See ServerDialogs::list_work() for comments explaining filter.
+    $stuff,    # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
+  ) = @_;
+
+  # kludge: In WorkFile.pm, in spotter, used by SpotterOG, we sort all the raw html query keys in string sort order, with the find=.
+  # Therefore, we have to construct a similar list @order here, but with the find= eliminated.
+  my @x = sort @$stuff;
+  for (my $i=0; $i<@x; $i++) {$x[$i] =~ s/&find=\d+$//}
+  my %y = ();
+  my @order = ();
+  foreach my $x(@x) {
+    if (! exists $y{$x}) {
+      push @order,$x;
+      $y{$x} = 1;
+    }
+  }
+  if (scalar(@order)!=length($scores)) {ExtraGUI::error_message("in Fun::server_list_work_filter_bit_string, length mismatch between order and scores")}
+ 
+  my $filtered = '';
+  for (my $i=0; $i<length($scores); $i++) {
+    my $which = html_query_to_bcp($order[$i]); # "book,chapter,problem"
+    #print "i=$i, order=$order[$i], which=$which\n";
+    my $f = $filter->{$which}->{who};
+    my $counted = (! defined $f) || (&$f($who));
+    $filtered = $filtered . ($counted ? substr($scores,$i,1) : ' ');
+  }
+  #print "filtered $scores => $filtered for $who\n";
+  return $filtered;
+}
+
+
 
 # returns the local time zone in units of hours; result may be a non-integer;
 # west of Greenwich is negative
