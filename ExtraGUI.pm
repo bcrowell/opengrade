@@ -569,6 +569,7 @@ sub fill_in_form {
 
   my $ncols = $args{COLUMNS};
   my $t;
+  # ?????????? does the same for ncols==1 versus ncols==2???? bug???
   if ($ncols==2) {
     $t = $box->Scrolled("Text",
          -scrollbars=>'oe',

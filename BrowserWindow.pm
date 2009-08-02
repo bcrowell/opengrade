@@ -1634,6 +1634,66 @@ sub quit {
   if (ref Browser::main_window()) {Browser::main_window()->destroy}
 }
 
+=head4 edit_custom()
+
+Edit a custom property for the whole class. Takes no arguments.
+
+=cut
+
+sub edit_custom {
+  my $self = shift;
+  local $Words::words_prefix = "b.edit_custom";
+
+  my $data = $self->{DATA};
+  my $gb = $data->{GB};
+
+  my ($pa,$ph) = $gb->list_defined_student_properties({'last'=>1,'first'=>1,'dropped'=>1});
+    # Don't do first and last, which would require complicated special-casing.
+    # Don't do dropped, which is boolean, not string.
+    # Allow id, plus any other custom ones they've defined.
+  my @p = @$pa;
+  my @roster = $gb->student_keys();
+  my %old = ();
+  my $p;
+
+  my $callback2 = sub {
+    my $new = shift;
+    my $did_something = 0;
+    foreach my $who(@roster) {
+      if ($new->{$who} ne $old{$who}) {
+        $gb->set_student_property($who,$p,$new->{$who});
+        #print "set $who,$p,$new->{$who}\n";
+        $did_something = 1;
+      }
+    }
+    if ($did_something) {
+      $self->is_modified(1);
+      $self->{STAGE}->{ROSTER}->refresh();
+    };
+  };
+
+  my $callback = sub {
+    my $h = shift;
+    local $Words::words_prefix = "b.edit_custom";
+    $p =  $h->{'property'}; # property to edit
+    my @inputs2 = ();
+    foreach my $who(@roster) {
+      my ($first,$last) = $gb->name($who);
+      $old{$who} = $gb->get_student_property($who,$p);
+      push @inputs2,Input->new(KEY=>$who,PROMPT=>"$last, $first",TYPE=>'string',DEFAULT=>$old{$who});
+    }
+    ExtraGUI::fill_in_form(INPUTS=>\@inputs2,TITLE=>(sprintf(w('edit_properties'),$p)),CALLBACK=>$callback2,COLUMNS=>2);
+  };
+
+  my $m = {};
+  foreach my $p(@p) {$m->{$p}=$p}
+  my @inputs = (
+    Input->new(KEY=>'property',WIDGET_TYPE=>'menu',ITEM_KEYS=>$pa,ITEM_MAP=>$m,DEFAULT=>'id'),
+  );
+
+  ExtraGUI::fill_in_form(INPUTS=>\@inputs,TITLE=>w('property_to_edit'),CALLBACK=>$callback,COLUMNS=>1);
+}
+
 =head4 edit_student()
 
 Takes no arguments.
@@ -1655,20 +1715,43 @@ sub edit_student {
          # ...See comments on the similar test in add_or_drop().
 
   my ($first,$last) = $gb->name($student);
-  my %old = (
-    'last'=>$last,
-    'first'=>$first,
-    'id'=>$gb->get_student_property($student,'id'),
-  );
+  my %old = ('last'=>$last,'first'=>$first);
+
+  my ($pa,$ph) = $gb->list_defined_student_properties(); # all the standard ones, plus any special ones that have ever been defined for any student
+  my @p = @$pa;
+
+  my @inputs = ();
+  my $n = 1;
+  foreach my $p(@p) { # typically goes last, first, id
+    my $name = ucfirst($p);
+    if ($n++<=3) {$name = w($p)}
+    $old{$p} = $gb->get_student_property($student,$p) if $p ne 'last' && $p ne 'first';
+    push @inputs,Input->new(KEY=>$p,PROMPT=>$name,TYPE=>'string',DEFAULT=>$old{$p});
+  }
+  push @inputs,Input->new(KEY=>'_define_new',PROMPT=>w('define_new'),TYPE=>'string');
+  push @inputs,Input->new(KEY=>'_new_value', PROMPT=>w('new_value'),TYPE=>'string');
 
   my $callback = sub {
     my $new = shift;
     my $did_something = 0;
-    foreach my $what(keys %old) {
-      if (!(exists $old{$what} && $old{$what} eq $new->{$what})) {
-        $gb->set_student_property($student,$what,$new->{$what});
-        $did_something = 1;
+    my %create = ();
+    foreach my $what(keys %$new) {
+      if ($what eq '_define_new' || $what eq '_new_value') {
+        $create{$what} = $new->{$what};
       }
+      else {
+        if (!($old{$what} eq $new->{$what})) {
+          $gb->set_student_property($student,$what,$new->{$what});
+          $did_something = 1;
+        }
+      }
+    }
+    if (exists $create{'_new_value'} && ! exists $create{'_define_new'}) {
+      ExtraGUI::error_message(w('null_property'));
+    }
+    if (exists $create{'_define_new'}) {
+      $gb->set_student_property($student,$create{'_define_new'},$create{'_new_value'});
+      $did_something = 1;
     }
     if ($did_something) {
       $self->is_modified(1);
@@ -1680,11 +1763,7 @@ sub edit_student {
     TITLE=>(sprintf w("title"),$name),
     CALLBACK=>$callback,
     COLUMNS=>2,
-    INPUTS=>[
-          Input->new(KEY=>"last",PROMPT=>w("last"),TYPE=>'string',DEFAULT=>$old{'last'}),
-          Input->new(KEY=>"first",PROMPT=>w("first"),TYPE=>'string',DEFAULT=>$old{'first'}),
-          Input->new(KEY=>"id",PROMPT=>w("id"),TYPE=>'string',DEFAULT=>$old{'id'}),
-    ]
+    INPUTS=>\@inputs,
   );
 }
 
@@ -2295,6 +2374,7 @@ sub menu_bar {
   &$add_item("STUDENTS_MENUB",\@items,'reinstate','',sub{$self->add_or_drop('reinstate')});
   &$add_item("STUDENTS_MENUB",\@items,'edit',w('edit_disabled'),sub{$self->edit_student()});
   &$add_item("STUDENTS_MENUB",\@items,'drop',(sprintf w('drop'),''),sub{$self->add_or_drop('drop')});
+  &$add_item("STUDENTS_MENUB",\@items,'edit_custom','',sub{$self->edit_custom()});
   $self->{STUDENTS_MENUB}
    = $bar->Menubutton(-text=>w("students"),-menuitems=>\@items,-tearoff=>0)->pack(-side=>'left');
 

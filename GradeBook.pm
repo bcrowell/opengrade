@@ -1648,6 +1648,47 @@ sub get_student_property {
     return get_property($self->roster_private_method()->{$who},$prop);
 }
 
+=head3 list_defined_student_properties()
+
+Returns ($a,$h), where $a is a ref to an array containing
+all the student properties that have been defined so far,
+and $h is a hash whose keys are the elements of $a. As soon as a property has been defined for one student,
+it's considered to be defined in general.
+The optional argument is a hash ref whose keys are properties that should be not be returned;
+if defaults to {"dropped"=>1}.
+The order of @$a is guaranteed to be  "last","first","id", and "dropped,"
+followed by any others, in alphabetical order.
+The second optional argument, is passed to student_keys.
+
+=cut
+
+sub list_defined_student_properties {
+  my $self = shift;
+  my $ignored = {"dropped"=>1};
+  if (@_) {$ignored = shift}
+  my $criteria = ''; # defined in student_keys()
+  if (@_) {$criteria = shift}
+  my @standard = ('last','first','id','dropped');
+  my %found = ();
+  my @result;
+  foreach my $standard(@standard) {
+    $found{$standard} = 1;
+    push @result,$standard unless exists $ignored->{$standard};
+  }
+  my @students = $self->student_keys($criteria);
+  my $r = $self->roster_private_method();
+  foreach my $who(@students) {
+    my %k = comma_delimited_to_hash($r->{$who});
+    foreach my $k(keys %k) {
+      push @result,$k unless exists $ignored->{$k} || exists $found{$k};
+      $found{$k} = 1;
+    }
+  }
+  my %h = {};
+  foreach my $x(@result) {$h{$x}=1}
+  return (\@result,\%h);
+}
+
 =head3 get_property()
 
 Avoid using this routine, and use get_property2() instead.
