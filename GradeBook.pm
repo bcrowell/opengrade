@@ -1680,7 +1680,7 @@ sub list_defined_student_properties {
   foreach my $who(@students) {
     my %k = comma_delimited_to_hash($r->{$who});
     foreach my $k(keys %k) {
-      push @result,$k unless exists $ignored->{$k} || exists $found{$k};
+      push @result,$k unless exists $ignored->{$k} || exists $found{$k} || !$k; # final test on $!$k is because of possible bug in comma_delimited_to_hash
       $found{$k} = 1;
     }
   }
@@ -2736,6 +2736,7 @@ sub diff_comma_delimited {
 }
 
 # returns a hash (not a hash ref)
+# possible bug: if value is null, may return null for key??? noticed this when I set a student's class property to a null string; see workaround in list_defined_student_properties
 sub comma_delimited_to_hash {
     my @a = split_comma_delimited_values(shift);
     my %result = ();

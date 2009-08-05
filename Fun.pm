@@ -23,6 +23,7 @@ use Digest::SHA1;
 package Fun;
 use MyWords;
 use DateOG;
+use IPC::Open2;
 
 # turn a string like "a=6&b=4" to a hash ref like {a=>6,b=>4}
 sub html_query_to_hash {
