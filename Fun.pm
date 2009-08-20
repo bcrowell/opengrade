@@ -192,7 +192,7 @@ sub server_list_work_handle_response {
                  my ($roster_ref,
                      $r,         # server's response string
                      $gb,
-                     $stuff,     # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
+                     $stuff,     # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1 , including ones the use didn't select in GUI
                      $filter,    # See ServerDialogs::list_work() for comments explaining filter.
                      ) = @_; 
                  my @roster = @$roster_ref;
@@ -216,7 +216,7 @@ sub server_list_work_handle_response {
                      #print "response:\n$r\n";
                      my $scores = $1; # comes back in the server's response as a string of binary bits
                      $possible{length $scores}++; # increment number of students who had this many points possible
-                     $scores = server_list_work_filter_bit_string($scores,$who,$filter,$stuff);
+                     $scores = server_list_work_filter_bit_string($scores,$who,$filter,\@key); # pass key, not stuff; only want the ones that were actually assigned
                      $t = $t . " $scores";
                      my $total = $scores;
                      $total =~ s/[0 ]//g;
@@ -242,13 +242,13 @@ sub server_list_work_filter_bit_string {
     $scores,   # binary string
     $who,      # student key
     $filter,   # See ServerDialogs::list_work() for comments explaining filter.
-    $stuff,    # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
+    $stuff,    # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5
   ) = @_;
 
   # kludge: In WorkFile.pm, in spotter, used by SpotterOG, we sort all the raw html query keys in string sort order, with the find=.
   # Therefore, we have to construct a similar list @order here, but with the find= eliminated.
+  # Is this unnecessary? May actually be sorted already.
   my @x = sort @$stuff;
-  for (my $i=0; $i<@x; $i++) {$x[$i] =~ s/&find=\d+$//}
   my %y = ();
   my @order = ();
   foreach my $x(@x) {
@@ -257,7 +257,12 @@ sub server_list_work_filter_bit_string {
       $y{$x} = 1;
     }
   }
-  if (scalar(@order)!=length($scores)) {ExtraGUI::error_message("in Fun::server_list_work_filter_bit_string, length mismatch between order and scores")}
+  if (scalar(@order)!=length($scores)) {
+    print "in Fun::server_list_work_filter_bit_string, length mismatch between order, ".scalar(@order).", and scores, \"$scores\",".length($scores)."\n";
+    #foreach my $x(@order) {print "  $x\n"}
+    #ExtraGUI::error_message("in Fun::server_list_work_filter_bit_string, length mismatch between order, ".scalar(@order).", and scores, \"$scores\",".length($scores))
+
+}
  
   my $filtered = '';
   for (my $i=0; $i<length($scores); $i++) {
