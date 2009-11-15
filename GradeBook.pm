@@ -21,6 +21,8 @@ Basically the internal structure is flatter than the file structure, and some
 things that are really hashes are maintained as strings of the form "key:value","key:value",...
 See comments above hashify() for more details, and for thoughts on neatening this up.
 
+Undo:
+
 A subset of this package's write methods is designated as the "user-write" API. Criteria for inclusion in the user-write API:
 Should be user-initiated at least sometimes; should modify the gb; should modify it in a way that can be reflected with hashify();
 should be something the user does directly, not an indirect consequence; shouldn't be a private method; should be a method, i.e., invoked as $gb->method().
@@ -1334,14 +1336,23 @@ sub undo {
   return if @$a<2 || (@$a==2 && $self->{UNDO_STACK_OVERFLOWED});
   my $undone = pop @$a;
   my $stuff = $a->[-1];
+  my $completed = 0;
   if (exists $stuff->{'set_grades_on_assignment_shortcut'}) {
     my $shortcut = $undone->{'set_grades_on_assignment_shortcut'};
     $self->{PREVENT_UNDO} = 1;
-    #print STDERR "doing shortcut for undo, $shortcut->{'cat'},$shortcut->{'ass'},$shortcut->{'student'},$shortcut->{'old'}\n";
     $self->set_grades_on_assignment(CATEGORY=>$shortcut->{'cat'},ASS=>$shortcut->{'ass'},GRADES=>{$shortcut->{'student'}=>$shortcut->{'old'}});
     $self->{PREVENT_UNDO} = 0;
+    $completed = 1;
   }
-  else {
+  if (exists $stuff->{'add_assignment_shortcut'}) {
+    my $shortcut = $undone->{'add_assignment_shortcut'};
+    $self->{PREVENT_UNDO} = 1;
+    #print STDERR "doing shortcut for undo, $shortcut->{'cat'},$shortcut->{'ass'}\n";
+    $self->delete_assignment((CATEGORY=>$shortcut->{'cat'}).".".(ASS=>$shortcut->{'ass'}));
+    $self->{PREVENT_UNDO} = 0;
+    $completed = 1;
+  }
+  if (!$completed) { # not an undo of a method that has a shortcut
     my $json = $stuff->{'state'};
     return unless $json;
     my $h;
@@ -1381,6 +1392,7 @@ sub user_write_api {
 {
   # Set up undo functionality.
   my $done = 0;
+  my %has_shortcut = ('set_grades_on_assignment'=>1,'add_assignment'=>1);
   sub set_up_undo {
     # We set $gb->{PREVENT_UNDO}=1 initially when we create a gb object, because any calls to write methods are just initializations, not user-initiated edits.
     # We only set $gb->{PREVENT_UNDO}=0 when the user clicks on a menu or types in a score, as detected by BrowserWindow::menu_bar() Roster::key_pressed_in_scores().
@@ -1408,19 +1420,31 @@ sub user_write_api {
           # special-case set_grades_on_assignment for efficiency
           my $shortcut = 0;
           my %shortcut_data = ();
-          if ($could_save && $name eq 'set_grades_on_assignment') {
-            my @x = @_;
-            shift @x;
-            my %x = (@x,);
-            my $grades = $x{GRADES};
-            if (scalar(keys %$grades)==1) {
+          # Check whether it's a method on the list of those that we might be able to do a shortcut on. Even if is, that doesn't
+          # mean we will actually do the shortcut method. If we actually do, we set the $shortcut flag.
+          if ($could_save && exists $has_shortcut{$name}) {
+            if ($name eq 'set_grades_on_assignment') {
+              # Shortcut for setting exactly one grade (which is what happens when the use is using the GUI).
+              my @x = @_;    # $gb,%args
+              shift @x;      # gobble $gb
+              my %x = (@x,); # args
+              my $grades = $x{GRADES};
+              if (scalar(keys %$grades)==1) {
+                $shortcut = 1;
+                my @k = keys (%$grades);
+                $shortcut_data{'student'} = $k[0];
+                $shortcut_data{'cat'} = $x{CATEGORY};
+                $shortcut_data{'ass'} = $x{ASS};
+                $shortcut_data{'old'} = $self->get_current_grade($shortcut_data{'student'},$shortcut_data{'cat'},$shortcut_data{'ass'});
+              }
+            }
+            if ($name eq 'add_assignment') {
+              my @x = @_;     # $gb, %args
+              shift @x;       # gobble $gb
+              my %x = (@x,);  # args
               $shortcut = 1;
-              my @k = keys (%$grades);
-              $shortcut_data{'student'} = $k[0];
               $shortcut_data{'cat'} = $x{CATEGORY};
               $shortcut_data{'ass'} = $x{ASS};
-              $shortcut_data{'old'} = $self->get_current_grade($shortcut_data{'student'},$shortcut_data{'cat'},$shortcut_data{'ass'});
-              #print STDERR "student=",$shortcut_data{'student'},",cat=",$shortcut_data{'cat'},",ass=",$shortcut_data{'ass'},",old=",$shortcut_data{'old'},"\n";
             }
           }
           if (wantarray) {@result = &$c(@_)} else {$result = &$c(@_)}
@@ -1438,7 +1462,7 @@ sub user_write_api {
               # if changing the structure of the $undo hash below, change it above in misc_initialization() as well
               my $undo = {'state'=>$json,'sub'=>$name,'describe'=>$self->describe_operation($name,@_)}; # $json may be undef if it's set_grades_on_assignment
               if ($shortcut) {
-                $undo->{'set_grades_on_assignment_shortcut'} = \%shortcut_data;
+                $undo->{"${name}_shortcut"} = \%shortcut_data;
               }
               push @$a,$undo; 
               if (@$a>100) {splice @$a,1,1; $self->{UNDO_STACK_OVERFLOWED}=1} # prevent undo stack from growing arbitrarily large
@@ -1577,9 +1601,9 @@ sub set_grades_on_assignment {
     my $new_grades = $args{GRADES};
     my $grades = $self->grades_private_method();
     while (my ($student,$score) = each(%$new_grades)) {
-        #print "set_grades_on_assignment $ass,$student,$score\n";
         my $c = $student.".".$category;
         my $record = "\"$ass:$score\"";
+        $score=~s/x$//i; # get rid of trailing x that just means extra credit
         if (exists($grades->{$c})) {
             $grades->{$c} = set_property($grades->{$c},$ass,$score);
         }
@@ -1870,11 +1894,34 @@ sub use_defaults_for_assignments {
             if (first_part_of_label($a) eq $c) {
                 my $ap = $self->assignment_properties($a);
                 my %ap = %$ap;
+                my %old_ap = %ap;
                 %ap = (%cp,%ap); # merge the hashes
-                $self->assignment_properties($a,\%ap);
+                if (hashes_not_equal(\%old_ap,\%ap)) {
+                  # Without the test above, this was a huge pig in terms of performance, due to undo functionality.
+                  $self->assignment_properties($a,\%ap);
+                }
             }
         }
     }
+}
+
+# The follownig assumes that all values are scalars, dies if they're not.
+sub hashes_not_equal {
+  my $h1 = shift; # hash ref
+  my $h2 = shift; # hash ref
+  my @k1 = keys %$h1;
+  my @k2 = keys %$h2;
+  if (@k1 != @k2) {return 1} # test equality of number of keys first, since it's efficient
+  @k1 = sort @k1;
+  @k2 = sort @k2;
+  for (my $i=0; $i<@k1; $i++) {
+    if ($k1[$i] ne $k2[$i]) {return 1}
+    my $v1 = $h1->{$k1[$i]};
+    my $v2 = $h2->{$k2[$i]};
+    die "non-scalar value in hashes_not_equal" if ((ref $v1) || (ref $v2));
+    if ($v1 ne $v2) {return 1} # string comparison works for both numbers and strings
+  }
+  return 0;
 }
 
 =head3 strip_redundant_properties

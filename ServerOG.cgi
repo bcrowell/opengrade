@@ -196,7 +196,7 @@ if ($request->{VALID}) {
           else {
             $this_one_failed = 1;
             $this_one_succeeded = 0;
-            $err = "error for recipient $recipient: doesn't exist in roster, or unable to append to file $msgs/$recipient";
+            $err = " error for recipient $recipient: doesn't exist in roster, or unable to append to file $msgs/$recipient, or recipient's account is disabled";
           } # open to append; create if necessary
 
           #----- Email it as well:

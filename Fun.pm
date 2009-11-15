@@ -245,10 +245,12 @@ sub server_list_work_filter_bit_string {
     $stuff,    # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5
   ) = @_;
 
-  # kludge: In WorkFile.pm, in spotter, used by SpotterOG, we sort all the raw html query keys in string sort order, with the find=.
-  # Therefore, we have to construct a similar list @order here, but with the find= eliminated.
-  # Is this unnecessary? May actually be sorted already.
-  my @x = sort @$stuff;
+  # Construct a list of raw html query keys, eliminating duplications.
+  # I used to start this off with my @x = sort @$stuff;, because I thought WorkFile.pm used raw string sort order, so it was necessary to duplicate that.
+  # That definitely caused a bug, where, e.g., if problem 3 and problem 11 were both assigned, students got scored on the wrong problems
+  # because 11 came before 3 in string sort order. Eliminating the sort seems to have fixed the bug, but I'm still a little unsure of whether that
+  # could cause a bug somewhere else.
+  my @x = @$stuff;
   my %y = ();
   my @order = ();
   foreach my $x(@x) {
@@ -257,12 +259,7 @@ sub server_list_work_filter_bit_string {
       $y{$x} = 1;
     }
   }
-  if (scalar(@order)!=length($scores)) {
-    print "in Fun::server_list_work_filter_bit_string, length mismatch between order, ".scalar(@order).", and scores, \"$scores\",".length($scores)."\n";
-    #foreach my $x(@order) {print "  $x\n"}
-    #ExtraGUI::error_message("in Fun::server_list_work_filter_bit_string, length mismatch between order, ".scalar(@order).", and scores, \"$scores\",".length($scores))
-
-}
+  if (scalar(@order)!=length($scores)) {die "in Fun::server_list_work_filter_bit_string, length mismatch between order, ".scalar(@order).", and scores, \"$scores\",".length($scores)."\n"  }
  
   my $filtered = '';
   for (my $i=0; $i<length($scores); $i++) {

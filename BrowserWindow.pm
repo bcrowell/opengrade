@@ -316,7 +316,9 @@ BEGIN {
         # only whitespace, erroneous input with bogus characters in it. The following regex checks whether it contains
         # only digits and dots, contains no more than one dot, and contains at least one digit. Can also have the
         # optional x on the end for extra credit, but that's already been stripped off. A minus sign on the front is also OK.
+        #
         #                        at least 1 digit       sign, then only digits and dots       not more than one dot
+        #                        ----------------       -------------------------------       ---------------------
           my $old_was_numeric = ($gv    =~ m/[0-9]/) && ($gv    =~ m/^\-?[0-9\.]+$/)       && !($gv    =~ m/\..*\./);
           my $new_is_numeric  = ($grade =~ m/[0-9]/) && ($grade =~ m/^\-?[0-9\.]+$/)       && !($grade =~ m/\..*\./);
           # Nonnumeric input can be ok, but only in the special case of a blank grade or a nonnumeric type:

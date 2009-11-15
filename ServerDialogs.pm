@@ -64,6 +64,7 @@ sub server {
   local $Words::words_prefix = "b.server";
   my $gb = $self->{DATA}->{GB};
   my $prefs = $gb->preferences();
+     # ...this sometimes comes back as undef...why?
   my $recent_dir = $prefs->get('recent_directory');
   my $server_domain = $prefs->get('server_domain');
   my $server_user = $prefs->get('server_user');
@@ -380,13 +381,11 @@ sub list_work {
          # n_parts = number of parts on list
          # See TODO file for some more testing that I should do.
     my $individualized = 0;
+
+    # If using howdy and selected a particular assignment, then infer due date, and set up filter.
     if (-d $sets_dir) { # This only happens for me when I'm using howdy.
-      #print "sets_dir = $sets_dir\n";
-      #print "list=\n$list\n";
-      #print "inferring hw set =$set=, based on a=$a=, ass=$ass=\n";
-      if ($set=~/\d+/) {
+      if ($set=~/\d+/) { # selected a particular assignment
         foreach my $f(<$sets_dir/due*.csv>) { # can have more than one sets file associated with a gb, e.g., for 205 and 210 in same gb file
-          #print "opening file $f to find due date\n";
           open(F,"<$f") or ExtraGUI::error_message("error opening file $f for input");
           while (my $line=<F>) {
             if ($line=~/(\d+),(\d+\-\d+\-\d+)/ && $1==$set) {
@@ -397,9 +396,7 @@ sub list_work {
           }
           close F;
         }
-        #print "due date is $due\n";
         foreach my $f(<$sets_dir/sets*.csv>) { # can have more than one sets file associated with a gb, e.g., for 205 and 210 in same gb file
-          #print "opening file $f to find list of problems\n";
           open(F,"<$f") or ExtraGUI::error_message("error opening file $f for input");
           while (my $line=<F>) {
             if ($line=~/(\d+),(\d*),(\d+),(\d+),([a-z]*),([^,]*),([^,]*),([^,\n]*)/ && $1==$set) {
@@ -428,7 +425,7 @@ sub list_work {
           }
           close F;
         }
-      }
+      } # end if selected a particular assignment
     }
 
     $f1->Label(-text=>'due date')->pack(-side=>'left');
