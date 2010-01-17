@@ -1134,6 +1134,9 @@ STRING
 "en.view_a_report.one_student" =>
 "to view a report for one student",
 
+"en.view_a_report.one_assignment" =>
+"to view a report on one assignment for the whole class",
+
 "en.view_a_report.web" =>
 "to create web reports",
 

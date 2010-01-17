@@ -410,11 +410,18 @@ sub view_a_report {
     print w("menu_header\n");
     print "      c ".w("totals\n");
     print "      1 ".w("one_student\n");
+    print "      a ".w("one_assignment\n");
     print "      s ".w("stats\n");
     my $choice = lc(ask());
     if ($choice eq "c") {my $t= Report::class_totals($gb,"plain"); print $t->text()}
     if ($choice eq "1") {my $t= Report::student(GB=>$gb,STUDENT=>choose_student($gb),
                                                 FORMAT=>"plain"); print $t->text()}
+    if ($choice eq "a") {
+      my $cat = choose_category($gb);
+      my $ass = choose_assignment($gb,$cat);
+      my $t = Report::sort($gb,"plain*",undef,$cat,$ass);
+      print $t->text();
+    }
     if ($choice eq "s") {my $t= Report::stats(GB=>$gb,FORMAT=>"plain"); print $t->text()}
 }
 
@@ -562,7 +569,7 @@ sub grade_an_assignment {
     my $cat = choose_category($gb);
     if (!$gb->category_exists($cat)) {print w("no_such_cat\n"); return 1}
     my $ass = choose_assignment($gb,$cat);
-    $ass =~ s/ /_/g;
+    $ass =~ s/[ \.]/_/g;
     my $big_ass = $cat.".".$ass;
     my $max;
     if (!$gb->assignment_exists($big_ass)) {

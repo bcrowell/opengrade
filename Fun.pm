@@ -24,6 +24,7 @@ package Fun;
 use MyWords;
 use DateOG;
 use IPC::Open2;
+use MIME::Base64; # standard module
 
 # turn a string like "a=6&b=4" to a hash ref like {a=>6,b=>4}
 sub html_query_to_hash {
