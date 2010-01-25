@@ -1067,7 +1067,28 @@ sub read {
       $gb->{FORMAT} = 'old';
     }
     if (exists $options->{NO_AUTOSAVE}) {$gb->{NO_AUTOSAVE}=1}
+    $gb->repair_problems();
     return $gb;
+}
+
+sub repair_problems {
+  my $self = shift;
+  # Versions 3.1.6 and earlier would let you give an assignment a name containing uppercase characters, which would cause errors. Repair damage of
+  # this type. In this condition, the only place where the uppercase version appears is in the students' recorded grades.
+  # We don't want to do a normal renaming of the assignment, because in this condition, the name appears in inconsistent forms in different places.
+  my $grades = $self->grades_private_method(); # hash ref like {"Newton_Isaac.hw"=>"1:12",...}
+  my $repaired = 0;
+  while (my ($key,$val) = each(%$grades)) {
+    if ($val ne lc($val)) { # for efficiency, test this way first
+      $val =~ /(.*):(.*)/;
+      my $new = lc($1) . ":" . $2;
+      if ($new ne $val) {
+        $grades->{$key} = $new;
+        $repaired = 1;
+      }
+    }
+  }
+  if ($repaired) {$self->grades_private_method($grades); $self->mark_modified_now()}
 }
 
 =head3 read_json()
@@ -1597,7 +1618,7 @@ sub set_grades_on_assignment {
       @_,
     );
     my $category = $args{CATEGORY};
-    my $ass = $args{ASS};
+    my $ass = lc($args{ASS});
     my $new_grades = $args{GRADES};
     my $grades = $self->grades_private_method();
     while (my ($student,$score) = each(%$new_grades)) {
