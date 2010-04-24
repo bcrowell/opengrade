@@ -1445,7 +1445,12 @@ sub report {
   my $data = $self->{DATA};
   my $gb = $data->{GB};
   my $prefs = $gb->preferences();
-  my $recent_dir = $prefs->get('recent_directory');
+  if (0) { # qwe
+    open(F,">>debug");
+    print F $gb->jsonify(0);
+    close F;
+  }
+  my $recent_dir = $prefs->get('recent_directory'); # qwe Can't call method "get" on an undefined value at /usr/local/share/perl/5.10.0/OpenGrade/BrowserWindow.pm line 1448.
   my $filename = $gb->file_name();
   local $Words::words_prefix = "b.report";
   if ($what eq "stats_ass") {

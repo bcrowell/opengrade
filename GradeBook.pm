@@ -1171,6 +1171,7 @@ sub do_watermark_hash_function {
   die "unrecognized hash function $function in GradeBook::do_watermark_hash_function";
 }
 
+# After calling this, always do $gb->misc_initialization() or $gb->misc_initialization(1)
 sub set_from_hash {
   my $self = shift;
   my $h = shift;
@@ -1308,21 +1309,34 @@ sub read_old {
 
 # This gets called when we create an empty new GradeBook object from scratch, and also after we read
 # in a file. Returns a null string, or a string describing any error it found.
+# If the optional argument $minimal is set to true, then we only do a minimal amount
+# of initialization; this is used the user does an undo operation, and the gradebook is
+# reset to a value stored in a JSON string. Doing it with $minimal set to true is completely
+# harmless, won't set anything unless it was undefined.
 sub misc_initialization {
     my $self = shift;
-    $self->{WROTE_TILDE_FILE} = 0;
-    $self->preferences(Preferences->new(GB=>$self));
-    if (!defined $self->types()) {$self->set_default_types()}
+    my $minimal = 0;
+    if (@_) {$minimal = shift}
 
-    # check for self-consistency:
-    my $r = $self->category_array();
-    my @c1 = sort @$r;
-    my $r = $self->categories_private_method();
-    my @c2 = sort keys %$r;
-    if (join(',',@c1) ne join(',',@c2)) {return "category_order not consistent with keys of categories"}
-    set_up_undo();
-    $self->{UNDO_STACK} = [{'state'=>jsonify_ugly($self->hashify())}];
-    $self->{IN_UNDO} = 0;
+    if (!defined $self->preferences()) {$self->preferences(Preferences->new(GB=>$self))}
+    if (!defined $self->types()) {$self->set_default_types()}
+    if (!defined $self->{WROTE_TILDE_FILE}) {$self->{WROTE_TILDE_FILE}=0}
+
+    unless($minimal) {
+
+      # check for self-consistency:
+      my $r = $self->category_array();
+      my @c1 = sort @$r;
+      my $r = $self->categories_private_method();
+      my @c2 = sort keys %$r;
+      if (join(',',@c1) ne join(',',@c2)) {return "category_order not consistent with keys of categories"}
+
+      # Set up the undo stack:
+      set_up_undo();
+      $self->{UNDO_STACK} = [{'state'=>jsonify_ugly($self->hashify())}];
+      $self->{IN_UNDO} = 0;
+    }
+
     return '';
 }
 
@@ -1347,6 +1361,7 @@ sub revert {
   if (!defined $h) {print "bad json syntax in GradeBook::revert, didn't revert"; return}
   $self->{PREVENT_UNDO} = 1;
   $self->set_from_hash($h);
+  $self->misc_initialization(1);
   $self->{PREVENT_UNDO} = 0;
   if (ref($self->undo_callback()) eq 'CODE') {my $c=$self->undo_callback(); &$c($self,'',{},'revert')}
 }
@@ -1381,6 +1396,7 @@ sub undo {
     if (!defined $h) {print "bad json syntax in GradeBook::undo, didn't undo"; return}
     $self->{PREVENT_UNDO} = 1;
     $self->set_from_hash($h);
+    $self->misc_initialization(1);
     $self->{PREVENT_UNDO} = 0;
   }
   if (ref($self->undo_callback()) eq 'CODE') {
@@ -2367,6 +2383,7 @@ sub delete_category {
     my $h = $self->hashify();
     delete $h->{'grades'}->{$cat};
     $self->set_from_hash($h);
+    $self->misc_initialization(1);
 }
 
 =head3 delete_assignment()
