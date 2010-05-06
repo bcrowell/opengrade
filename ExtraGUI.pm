@@ -729,7 +729,7 @@ sub audio_feedback {
     Win32::Sound::Play("${sound_dir}\\${sound_file}");
   } else {
     my $sound_dir = "/usr/share/apps/opengrade/sounds/";
-    my $cmd = "aplay $sound_dir$sound_file"; # aplay is part of alsa-utils; use instead of sox's play, which no longer works
+    my $cmd = "aplay $sound_dir$sound_file &"; # aplay is part of alsa-utils; use instead of sox's play, which no longer works
     system($cmd);
   }
 }
