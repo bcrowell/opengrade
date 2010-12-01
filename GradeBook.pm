@@ -284,7 +284,7 @@ sub autosave_filename {
 sub hash_function {
   my $self = shift;
   my $prefs = $self->preferences();
-  if (defined $prefs && $prefs->get('hash_function')) {
+  if (defined $prefs && ref($prefs) eq 'Preferences' && $prefs->get('hash_function')) {
     return $prefs->get('hash_function');
   }
   else {
