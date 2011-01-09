@@ -13,10 +13,10 @@ make install
     make deinstall_online_grades_plugin
 ]
 make test
-make dist
-make post
 git tag x.y.z
 git commit -a -m "release x.y.z"
 git push
 git log --pretty="format:%ad %s"
   ... shows list of changes since last version
+make dist
+make post

@@ -1319,6 +1319,7 @@ sub misc_initialization {
     if (@_) {$minimal = shift}
 
     if (!defined $self->preferences()) {$self->preferences(Preferences->new(GB=>$self))}
+    unless (ref($self->preferences()) eq 'Preferences') {$self->preferences(Preferences->new())} # happens when parsing old format
     if (!defined $self->types()) {$self->set_default_types()}
     if (!defined $self->{WROTE_TILDE_FILE}) {$self->{WROTE_TILDE_FILE}=0}
 
@@ -1336,6 +1337,7 @@ sub misc_initialization {
       $self->{UNDO_STACK} = [{'state'=>jsonify_ugly($self->hashify())}];
       $self->{IN_UNDO} = 0;
     }
+
 
     return '';
 }
