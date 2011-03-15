@@ -706,7 +706,7 @@ sub prepare_list_of_recent_files_for_menu {
   my @rebuilt = (); # eliminate files that don't exist anymore
   if (@names) {
     my $n=0;
-    foreach my $recent_file(@names) {
+    foreach my $recent_file(sort @names) {
       if (-e Portable::do_glob_easy($recent_file)) {
         push @rebuilt,$recent_file;
         my $tail_of_filename = UtilOG::filename_with_path_stripped($recent_file);
@@ -1535,7 +1535,7 @@ sub report {
              my $message = $?;
              my $add_info = '';
              my $version = `inkscape --version`;
-             if ($version=~/Inkscape 0\.4[67]/) {$add_info = "This may be due to the following bug in Inkscape 0.46-47: https://bugs.launchpad.net/inkscape/+bug/511361\nAs a workaround, you can open the file $f in inkscape and print it by hand."}
+             if ($version=~/Inkscape 0\.4[678]/) {$add_info = "This may be due to the following bug in Inkscape 0.46-48: https://bugs.launchpad.net/inkscape/+bug/511361\nAs a workaround, you can open the file $f in inkscape and print it by hand"}
              my $callback = sub {my $x = shift; if ($x) {system "inkscape $f ; rm $f &"}};
              ExtraGUI::confirm("Error executing Unix shell command $c, $message\n$add_info. Do you want to open the file interactively in inkscape?",
                      $callback,"Open in Inkscape","Cancel");

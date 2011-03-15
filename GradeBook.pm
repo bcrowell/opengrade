@@ -1088,6 +1088,8 @@ sub repair_problems {
       }
     }
   }
+  my $list = $self->assignment_list();
+  if ($list ne lc($list)) {$self->assignment_list(lc($list)); $repaired=1}
   if ($repaired) {$self->grades_private_method($grades); $self->mark_modified_now()}
 }
 

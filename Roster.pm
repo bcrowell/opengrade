@@ -129,6 +129,16 @@ sub make_options_menu {
   # "Reverse order as a workaround..."
   # Jan 09: See more notes in Perl/Tk book, p. 275, and implementation of Optionmenu in ExtraGUI; possibly I could simplify this.
 
+  # Avoid annoying redrawing of window when an assignment with a very long name is picked.
+  # It's still easy to tell which one you actually have selected, because it's highlighted on the left.
+  my $max_len = 10;
+  for (my $i=0; $i<@options; $i++) {
+    my $o = $options[$i];
+    if (length($o)>$max_len+3) {
+      $options[$i] = substr($o,0,$max_len).'...';
+    }
+  }
+
   # This has to come /before/ the statement that creates the optionmenu, because the callback to make_scores gets triggered
   # when the optionmenu is first created.
   $self->{OPTIONS} = \@options; 

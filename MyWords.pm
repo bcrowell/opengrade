@@ -719,7 +719,7 @@ ERR
 "en.b.server.body" => "body",
 "en.b.server.set_server_key" => <<STRING,
 You must set the server key. This is done through Client/Server Settings in the
-Server menu.
+Spotter menu.
 STRING
 "en.b.server.error_connecting" => "There was an error connecting to the server.",
 

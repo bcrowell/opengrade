@@ -206,15 +206,15 @@ sub choices {
   local $Words::words_prefix = "b.dialog";
   my $box = Browser::empty_toplevel_window(w('confirm'));
   $box->geometry(preferred_location());
-  if (length($question)>90) {
-    my ($width,$height) = (100,int(length($question)/90)+1);
-    my $n_lines = 1;
-    while ($question=~m/\n/g) {++$n_lines}
-    $height = $n_lines if $n_lines>$height;
+  my $width = Fun::longest_line($question);
+  if ($width<50) {$width=50}
+  if ($width>100) {$width=100}
+  my $lines = Fun::count_lines($question,$width);
+  if ($lines>1) {
     my $t = $box->Scrolled("Text",
         -scrollbars=>'e',
         -width=>$width,
-        -height=>$height,
+        -height=>$lines,
     )->pack();
     my $text_without_newline_at_end = $question;
     $text_without_newline_at_end =~ s/\n$//; # newline at the end is shown as an extraneous blank line

@@ -30,6 +30,9 @@ sub stats {
     my $format = $args{FORMAT};
     my $t = Text->new($format);
 
+    my $n_enrolled = $gb->student_keys();
+    $t->put(TEXT=>"students enrolled: $n_enrolled\n");
+
     my $h = Crunch::class_stats($gb,"all");
     my $possible = Crunch::possible($gb,"all");
     my %h = %$h;

@@ -1,4 +1,4 @@
-VERSION = 3.1.11
+VERSION = 3.1.12
 # ... When changing this version number, make sure to change the one in Version.pm as well.
 
 prefix=/usr
@@ -144,9 +144,6 @@ clean:
 	# Misc:
 	rm -f a.a
 	# ... done.
-
-opengrade.exe: $(SOURCES)
-	pp -M JSON::PP -M JSON::PP58 -M Tie::Hash::NamedCapture -M Tk::Bitmap -o opengrade.exe opengrade.pl
 
 post: opengrade_doc.pdf opengrade.exe
 	cp $(DIST_TARBALL) $(HOME)/Lightandmatter/ogr

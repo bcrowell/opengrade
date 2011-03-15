@@ -342,6 +342,25 @@ sub cheesy_whirlpool {
   return $y;
 }
 
+sub longest_line {
+  my $text = shift;
+  my $longest = 0;
+  foreach my $line(split(/\n/,$text)) {
+    my $len = length($line);
+    $longest = $len if $len>$longest;
+  }
+  return $longest;
+}
+
+sub count_lines {
+  my $text = shift;
+  my $cols = shift;
+  my $count = 0;
+  foreach my $line(split(/\n/,$text)) {
+    $count += int((length($line)-1)/$cols)+1;
+  }
+  return $count;
+}
 
 #----------------------------------------------------------------
 
