@@ -1,4 +1,4 @@
-VERSION = 3.1.12
+VERSION = 3.1.13
 # ... When changing this version number, make sure to change the one in Version.pm as well.
 
 prefix=/usr
@@ -125,7 +125,6 @@ internals.html: Browser.pm BrowserData.pm BrowserWindow.pm ExtraGUI.pm GradeBook
 	rm -f internals.pl
 
 clean:
-	rm -f opengrade.exe
 	rm -f opengrade_doc.log
 	rm -f opengrade_doc.aux
 	# Get rid of some MacOS X cruft:
@@ -145,10 +144,9 @@ clean:
 	rm -f a.a
 	# ... done.
 
-post: opengrade_doc.pdf opengrade.exe
+post: opengrade_doc.pdf
 	cp $(DIST_TARBALL) $(HOME)/Lightandmatter/ogr
 	cp opengrade_doc.pdf $(HOME)/Lightandmatter/ogr
-	cp opengrade.exe $(HOME)/Lightandmatter/ogr
 
 dist: manpage.pod
 	git archive --format=tar --prefix=$(DIST_DIR)/ HEAD | gzip >$(DIST_TARBALL)

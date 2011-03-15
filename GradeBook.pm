@@ -1088,8 +1088,19 @@ sub repair_problems {
       }
     }
   }
+
   my $list = $self->assignment_list();
   if ($list ne lc($list)) {$self->assignment_list(lc($list)); $repaired=1}
+
+  my $properties = $self->assignments_private_method();
+  foreach my $k(keys %$properties) {
+    if ($k ne lc($k)) {
+      $properties->{lc($k)} = $properties->{$k};
+      delete $properties->{$k};
+      $repaired = 1;
+    }
+  }
+
   if ($repaired) {$self->grades_private_method($grades); $self->mark_modified_now()}
 }
 
@@ -2503,9 +2514,9 @@ sub rekey_assignment {
     my $self = shift;
     my $category = shift;
     my $old = shift;
-    my $new = shift;
+    my $new = lc(shift); # Don't allow uppercase, causes problems.
 
-    my $new_key = $category.".".$new;
+    my $new_key = $category.".".$new; 
     my $old_key = $category.".".$old;
     my $h = $self->assignments_private_method();
     if ($new_key ne $old_key && exists($h->{$new_key})) {return "Assignment $new already exists"}
@@ -3057,7 +3068,7 @@ sub assignment_list {
     my $self = shift;
     if (@_) {
         if ($#_ == 0) {
-          $self->{ASSIGNMENT_LIST} = shift;
+          $self->{ASSIGNMENT_LIST} = lc(shift);
         }
         else {
             $self->{ASSIGNMENT_LIST} = "";
@@ -3065,7 +3076,7 @@ sub assignment_list {
         }
         $self->{ASSIGNMENT_LIST} =~ s/^,//
     }
-    return $self->{ASSIGNMENT_LIST};
+    return lc($self->{ASSIGNMENT_LIST});
 }
 
 sub set_all_category_properties {
