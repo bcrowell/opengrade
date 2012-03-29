@@ -47,7 +47,10 @@ sub html_query_to_bcp {
       $y->{$1}=$2;
     }
   }
-  return "$y->{book},$y->{chapter},$y->{problem}";
+  my $book = "1";
+  $book = $y->{book} if exists  $y->{book};
+  #print "book=$book\n";
+  return "$book,$y->{chapter},$y->{problem}";
 }
 
 sub hash_usable_in_filename {
@@ -137,6 +140,9 @@ sub server_list_work_massage_list_of_problems {
     for (my $i=0; $i<@list; $i++) {
       $list[$i] =~ s/(class|username|correct)=[\w\d\/]+\&//g;
       $list[$i] =~ s/\&(class|username|correct)=[\w\d\/]+//g;
+      if (!($list[$i]=~/book\=/)) {
+        $list[$i] =~ s/(file=[^&]+)/$1&book=1/;
+      }
     }
     my %unique = ();
     foreach my $l(@list) {
@@ -193,9 +199,11 @@ sub server_list_work_handle_response {
                  my ($roster_ref,
                      $r,         # server's response string
                      $gb,
-                     $stuff,     # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1 , including ones the use didn't select in GUI
+                     $stuff,     # list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1 , including ones the user didn't select in GUI
                      $filter,    # See ServerDialogs::list_work() for comments explaining filter.
                      ) = @_; 
+                 my $debug = 0;
+                 print "server_list_work_handle_response: r=$r\n" if $debug;
                  my @roster = @$roster_ref;
                  my %scores;
                  my $t = '';

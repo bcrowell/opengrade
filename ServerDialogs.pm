@@ -350,6 +350,7 @@ sub list_work {
                'get_what'=>'list_work'}
         );
 
+    my $debug = 0;
     my ($c,$a,$ass,$ass_name,$set); # category and assignment currently selected; used both for saving scores into something and for guessing which line of howdy csv file to read
     if ($self->{ASSIGNMENTS}->specific_assignment_selected()) {
       $ass = $self->{ASSIGNMENTS}->selected();
@@ -397,12 +398,13 @@ sub list_work {
           close F;
         }
         foreach my $f(<$sets_dir/sets*.csv>) { # can have more than one sets file associated with a gb, e.g., for 205 and 210 in same gb file
+          print STDERR "Checking file $f\n" if $debug;
           open(F,"<$f") or ExtraGUI::error_message("error opening file $f for input");
           while (my $line=<F>) {
             if ($line=~/(\d+),(\d*),(\d+),(\d+),([a-z]*),([^,]*),([^,]*),([^,\n]*)/ && $1==$set) {
               my ($book,$ch,$num,$parts,$flags,$chunk,$student) = ($2,$3,$4,$5,$6,$7,$8);
-              #print "set=$set, book=$book, ch=$ch, num=$num, parts=$parts, flags=$flags, chunk=$chunk, student=$student\n";
               my $bcp = "$book,$ch,$num";
+              print "set=$set, book=$book, ch=$ch, num=$num, parts=$parts, flags=$flags, chunk=$chunk, student=$student, bcp=$bcp\n" if $debug;
               if (! defined $filter{$bcp}) {
                 $filter{$bcp} = {};
               }
@@ -433,7 +435,8 @@ sub list_work {
     $box->Frame->pack()->Label(-text=>"Today is ".DateOG::current_date("month").'-'.DateOG::current_date("day"))->pack(-side=>'left');
     my $s = $box->Scrolled("Canvas",-scrollbars=>'e',-height=>(($mw->screenheight)-150),-width=>400,)->pack();
     my @checked;
-    #print "calling, ".(join(' ',(keys %filter)))."\n";
+    print "calling, ".(join(' ',(keys %filter)))."\n" if $debug;
+    print "list=$list\n" if $debug;
     my ($n,$stuff) = list_work_populate_list_of_assignments($s,$list,\@checked,($individualized ? \%filter : undef));
        # ... $n=number of unique problems
        #     $stuff=list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
@@ -451,6 +454,7 @@ sub list_work {
                  for (my $i=0; $i<$n; $i++) {
                    if ($checked[$i]) {$which = $which . $stuff[$i]."\n"}
                  }
+                 $which =~ s/book=(\d+)&?//g;
                  $request->be_client(GB=>$gb,
                       HOST=>$server_domain,SERVER_KEY=>$server_key,
                       PARS=>{'account'=>$server_account,'user'=>$server_user,'class'=>$server_class,
@@ -514,7 +518,7 @@ sub list_work {
 
 # inputs:
 #   $list = lines in the format file=lm&book=1&chapter=0&problem=5&find=1, separated by newlines; not necessarily unique or sorted
-# outputs:
+
 #   return value = ($n,$stuff)
 #       $n = number of unique problems to be listed with checkboxes in gui
 #       $stuff=list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1

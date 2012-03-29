@@ -50,8 +50,11 @@ BEGIN {
   }
   sub font {
     my $style = shift;
-    if (!exists($fonts{$style})) {
-      $fonts{$style} = $widget->fontCreate(-size=>$size{$style},-family=>$family{$style},-weight=>$weight{$style},-slant=>$slant{$style});
+    if (!exists($fonts{$style})) { # should check whether font size has been changed
+      my $prefs = Preferences->new();
+      my $x = $prefs->get('font_size');
+      if ($x eq '') {$x=0}
+      $fonts{$style} = $widget->fontCreate(-size=>($size{$style}+$x),-family=>$family{$style},-weight=>$weight{$style},-slant=>$slant{$style});
     }
     return $fonts{$style};
   }

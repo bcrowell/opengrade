@@ -219,6 +219,7 @@ STRING
 "en.b.menus.preferences" =>"Preferences",
 "en.b.menus.beep" =>"Beeping",
 "en.b.menus.justify" =>"Left or Right Justification of Grades",
+"en.b.menus.font_size" =>"Font Size",
 "en.b.menus.editor_command" =>"Command Used to Open an External Text Editor",
 "en.b.menus.print_command" =>"Command Used to Print a Text File",
 "en.b.menus.spreadsheet_command" =>"Command Used to Open a Spreadsheet",
@@ -659,7 +660,8 @@ STRING
 "en.b.report.stats_ass.title" => "Report: Statistics For an Assignment",
 "en.b.report.sort_by_score" => "Sort by score",
 "en.b.report.sort_by_name" => "Sort by name",
-"en.b.report.graphical_roster" => "Print Graphical Version Using Inkscape",
+"en.b.report.graphical_roster" => "Print Graphical Version",
+"en.b.report.roster_to_pdf" => "Save Graphical Version as PDF",
 "en.b.properties.properties" => "Properties",
 "en.b.properties.weighting_mode" => "Weighting mode",
 "en.b.properties.straight_points" => "straight points",
@@ -779,6 +781,10 @@ STRING
 "en.b.options.online_grades.server_period" => "Period (optional)",
 "en.b.options.online_grades.server_phone" => "Phone number (optional)",
 
+
+"en.b.options.preferences.font_size" => <<STRING,
+Enter a constant to add onto all font sizes. For example, if you enter 2, all font sizes will be increased by 2.
+STRING
 
 "en.b.options.preferences.beep" => <<STRING,
 Do you want OpenGrade to beep at you?

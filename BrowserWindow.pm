@@ -1217,7 +1217,7 @@ sub options {
   if ($what eq 'justify') {
     $self->set_a_preference_item($what,'left'); # default to left because at one time right caused problem with Perl/Tk bug
   }
-  if ($what eq 'editor_command' || $what eq 'spreadsheet_command' || $what eq 'print_command') {
+  if ($what eq 'editor_command' || $what eq 'spreadsheet_command' || $what eq 'print_command' || $what eq 'font_size') {
     $self->set_a_preference_item($what,'');
   }
   if ($what eq 'hash_function') {
@@ -1423,6 +1423,7 @@ sub set_a_preference_item {
   &$do_pref(
     {
       'beep'    =>['beep'    ,'string','radio_buttons',{},sub{}],
+      'font_size' => ['font_size','string','entry',{},sub{}],
       'justify' =>['justify' ,'string','radio_buttons',{ITEM_MAP=>$button_map,ITEM_KEYS=>[0,1]},sub{$self->refresh_roster()}],
       'editor_command' => ['editor_command','string','entry',{},sub{}],
       'spreadsheet_command' => ['spreadsheet_command','string','entry',{},sub{}],
@@ -1526,20 +1527,25 @@ sub report {
     if (Portable::os_has_unix_shell()) {
       $extra_buttons = {
         w('graphical_roster')=>sub {
-           my $f = POSIX::tmpnam().".svg"; # without the SVG, inkscape prints a warning to the console
-           unless (open(F,">$f")) {ExtraGUI::error_message("Error opening file $f for output, $!"); exit}
+           my $file_stem = POSIX::tmpnam();
+           my $svg = $file_stem.".svg"; # without the SVG, inkscape prints a warning to the console
+           my $pdf = $file_stem.".pdf";
+           unless (open(F,">$svg")) {ExtraGUI::error_message("Error opening file $svg for output, $!"); exit}
            print F Report::roster_to_svg(\@r,$gb->title());
            close F;
-           my $c = "inkscape --print=\"| lpr\" $f && rm $f"; 
-           unless (system($c)==0) {
-             my $message = $?;
-             my $add_info = '';
-             my $version = `inkscape --version`;
-             if ($version=~/Inkscape 0\.4[678]/) {$add_info = "This may be due to the following bug in Inkscape 0.46-48: https://bugs.launchpad.net/inkscape/+bug/511361\nAs a workaround, you can open the file $f in inkscape and print it by hand"}
-             my $callback = sub {my $x = shift; if ($x) {system "inkscape $f ; rm $f &"}};
-             ExtraGUI::confirm("Error executing Unix shell command $c, $message\n$add_info. Do you want to open the file interactively in inkscape?",
-                     $callback,"Open in Inkscape","Cancel");
-           }
+           my $c = "inkscape --export-pdf=\"$pdf\" $svg && lpr $pdf && rm -f $svg $pdf"; 
+           unless (system($c)==0) { ExtraGUI::error_message("Error executing Unix shell command $c, $?\n"); }
+         },
+        w('roster_to_pdf')=>sub {
+           my $svg = POSIX::tmpnam().".svg";
+           my $pdf = $gb->file_name();
+           $pdf =~ s/(.*\/)([^\/]+)\.gb/$1roster_$2\.pdf/;
+           unless (open(F,">$svg")) {ExtraGUI::error_message("Error opening file $svg for output, $!"); exit}
+           print F Report::roster_to_svg(\@r,$gb->title());
+           close F;
+           my $c = "inkscape --export-pdf=\"$pdf\" $svg && rm -f $svg"; 
+           print "$c\n"; #qwe
+           if (system($c)==0) {ExtraGUI::message("Saved as $pdf")} else { ExtraGUI::error_message("Error executing Unix shell command $c, $?\n"); }
          }
       }
     }
@@ -2345,6 +2351,7 @@ sub menu_bar {
 
   @items = ();
   &$add_item("PREFERENCES_MENUB",\@items,'beep','',sub{$self->options('beep')});
+  &$add_item("PREFERENCES_MENUB",\@items,'font_size','',sub{$self->options('font_size')});
   &$add_item("PREFERENCES_MENUB",\@items,'justify','',sub{$self->options('justify')});
   if (Portable::os_has_unix_shell()) {
     &$add_item("PREFERENCES_MENUB",\@items,'editor_command','',sub{$self->options('editor_command')});
