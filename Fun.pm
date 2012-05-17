@@ -18,7 +18,7 @@
 #  - may get current date, etc.
 
 use strict;
-use Digest::SHA1;
+use Digest::SHA;
 
 package Fun;
 use MyWords;
@@ -55,7 +55,7 @@ sub html_query_to_bcp {
 
 sub hash_usable_in_filename {
   my $x = shift;
-  my $hash = Digest::SHA1::sha1_base64($x);
+  my $hash = Digest::SHA::sha1_base64($x);
   $hash =~ m/^(....)/; # get 1st 4 chars
   $hash = $1;
   $hash =~ s@/@_@g; # Unix filenames shouldn't have slashes in them.

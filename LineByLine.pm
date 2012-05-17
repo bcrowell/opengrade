@@ -5,7 +5,7 @@
 
 =head1 NAME
 
-Digest::SHA1::LineByLine - Line-by-line message authentication for a plain text file.
+Digest::SHA::LineByLine - Line-by-line message authentication for a plain text file.
 
 =head1 SYNOPSIS
 
@@ -175,7 +175,7 @@ right, out of the way.
 
 =head1 SEE ALSO
 
-L<Digest::HMAC>, L<Digest::SHA1>
+L<Digest::HMAC>, L<Digest::SHA>
 
 =head1 COPYRIGHT
 
@@ -196,7 +196,7 @@ use strict;
 
 package LineByLine;
 
-use Digest::SHA1;
+use Digest::SHA;
 # use Digest::Whirlpool; # loaded on the fly below, if possible
 use MIME::Base64; # standard module
 use IPC::Open2; # standard module
@@ -260,9 +260,9 @@ sub get_named_hash_function {
             my $iterations = shift;
             my $x = $data;
             for (my $i=1; $i<=$iterations-1; $i++) {
-              $x = Digest::SHA1::sha1($key,$x);
+              $x = Digest::SHA::sha1($key,$x);
             }
-            return Digest::SHA1::sha1_base64($key,$x);
+            return Digest::SHA::sha1_base64($key,$x);
           }
     }
     if ($name eq "Whirlpool") {

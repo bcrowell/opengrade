@@ -24,7 +24,7 @@ use DateOG;
 use Input;
 use NetOG;
 use Fun;
-use Digest::SHA1;
+use Digest::SHA;
 use Version;
 use POSIX qw(tmpnam);
 use Stage;

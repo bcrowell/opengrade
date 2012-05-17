@@ -11,7 +11,7 @@
 package Version;
 
 sub version {
-  return "3.1.14";
+  return "3.1.15";
 }
 
 sub default_hash_function {

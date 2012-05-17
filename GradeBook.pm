@@ -94,7 +94,7 @@ use Memoize;
 use Fun;
 memoize 'get_property2_slow'; # memoizing get_property2(), which calls get_property2_slow() on hard cases, actually seemed to hurt performance rather than helping
 
-use Digest::SHA1;
+use Digest::SHA;
 # Digest::Whirlpool is loaded on the fly below, if possible and if necessary.
 use MIME::Base64; # standard module
 use IPC::Open2; # standard module
@@ -1167,7 +1167,7 @@ sub do_watermark_hash_function {
   my $function = $self->hash_function();
   if (@_) {$function = shift}
   if ($function eq 'SHA1') {
-    return Digest::SHA1::sha1_base64($data);
+    return Digest::SHA::sha1_base64($data);
   }
   # The following code is duplicated in LineByLine.pm, for legacy support of old format.
   # Returns undef if they requested Whirlpool, but don't have either Digest::Whirlpool or whirlpooldeep installed.

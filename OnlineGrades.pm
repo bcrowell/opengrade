@@ -11,7 +11,7 @@
 # This package is for all the dialog boxes that are under the Server menu.
 
 use strict;
-use Digest::SHA1;
+use Digest::SHA;
 
 package OnlineGrades;
 
@@ -24,7 +24,7 @@ use DateOG;
 use Input;
 use NetOG;
 use Fun;
-use Digest::SHA1;
+use Digest::SHA;
 use Version;
 use MyWords;
 use DateOG;

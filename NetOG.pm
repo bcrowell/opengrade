@@ -12,7 +12,7 @@
 
 #use strict;
 
-use Digest::SHA1;
+use Digest::SHA;
 
 package NetOG;
 
@@ -221,7 +221,7 @@ sub request_par {
 }
 
 sub hash {
-  return Digest::SHA1::sha1_base64(@_);
+  return Digest::SHA::sha1_base64(@_);
 }
 
 # Automatically adds one to month, so Jan=1, and, if year is less than
