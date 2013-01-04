@@ -540,6 +540,28 @@ sub new_assignment {
   my $insert_before = ""; # This should be set by the menu item they select.
   my $assignment_exists_message = w('assignment_exists');
 
+  # The following is for use with howdy. Not relevant to anyone but me, because howdy isn't a publicly released program.
+  my $max_points;
+  if ((! defined ($gb->category_max($cat))) && $cat eq 'hw') {
+    my $sets_dir = $gb->sets_directory();
+    if (-d $sets_dir) { # This only happens for me when I'm using howdy.
+      my $f = "$sets_dir/points_possible.csv";
+      if (-e $f) {
+        # set,pts,ec
+        # 1,p,1,0
+        # 1,o,1,0
+        open(F,"<$f") or ExtraGUI::error_message("error opening file $f for input");
+        <F>; # get past first line with column headers
+        while (my $line=<F>) {
+          if ($line=~/(.*),(.*),(.*),(.*)/) {
+            $max_points->{"$1$2"} = $3;
+          }
+        }
+        close F;
+      }
+    }
+  }
+
   my $callback = sub {
     my $results = shift; # a hash ref
     my $name;
@@ -554,6 +576,18 @@ sub new_assignment {
     $name =~ s/\"/\'/g; # can't quote it if it contains quotes
     my $raw_name = $name;
     $name =~ s/[^\w]/_/g; # make a valid database key
+
+    # The following only happens for me, when I use howdy:
+    if (defined $max_points && exists $max_points->{$name}) {
+      if ($max eq '') {
+        $max = $max_points->{$name};
+        ExtraGUI::message("The maximum number of points was automatically set to $max.");
+      }
+      else {
+        ExtraGUI::message("You manually set the maximum number of points to $max. If you had left it blank, it would have been set to ".($max_points->{$name}).".");
+      }
+    }
+
     if ($due ne "") {$due = DateOG::disambiguate_year($due,$gb->term())}
     my $props = "\"max:$max\"";
     if ($due ne "") {$props = $props .",\"due:$due\""}
@@ -586,6 +620,9 @@ sub new_assignment {
     push @inputs,Input->new(KEY=>"name",PROMPT=>w("name"),TYPE=>'string',BLANK_ALLOWED=>0);
   }
   my $max = $gb->category_max($cat);
+
+
+
   push @inputs,Input->new(KEY=>"max",PROMPT=>w("max_score"),TYPE=>'numeric',MIN=>0,DEFAULT=>$max);
   push @inputs,(Input->new(KEY=>"due",PROMPT=>w("due"),TYPE=>'date',WIDGET_TYPE=>'date',TERM=>$gb->term(),BLANK_ALLOWED=>1));
   if ($gb->marking_periods()) {

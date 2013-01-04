@@ -494,14 +494,16 @@ sub list_work {
                    if ($checked[$i]) {$which = $which . $stuff[$i]."\n"} 
                  }
                  if ($which eq '') {ExtraGUI::error_message('no assignments specified')}
-                 #print "n=$n, which=$which\n";
+                 # print "n=$n, which=$which\n";
                  $request->be_client(GB=>$gb,
                       HOST=>$server_domain,SERVER_KEY=>$server_key,
                       PARS=>{'account'=>$server_account,'user'=>$server_user,'class'=>$server_class,
                              'what'=>'get_class_data','get_what'=>'answers','which'=>$which,
                              }
                  );
+                 # on server side, executes WorkFile::report_answers_on_one_problem
                  my $r = $request->{RESPONSE_DATA};
+                 # print "r=$r=\n";
                  ExtraGUI::show_text(TITLE=>$which,TEXT=>$r,WIDTH=>100,PATH=>$recent_dir);
                }
     )->pack(-side=>'left');

@@ -90,41 +90,13 @@ reports of whether the latest version works properly on Windows, and
 if any Windows incompatibilities have crept in, I would welcome
 patches from Windows users with the necessary programming skills.
 
-To run Opengrade on Windows, you have to
-install a free version of Perl, called ActivePerl.
+Opengrade 3.1.16 is reported to work with Strawberry Perl 5.8.8.4, after using CPAN to install the necessary
+modules.
 Opengrade 3.1.2 is reported to work with ActivePerl 5.8.8 on Windows
-XP. 
+XP.
+There seems to be a consensus among Windows users that Strawberry Perl is better in general than ActivePerl.
 
-First you need to download Perl from \verb@http://www.activestate.com/@.
-Starting from their homepage, follow the links for downloading ActivePerl.
-They ask you for some registration information, which is optional, and then you download
-ActivePerl. I've gotten reports that ActivePerl 5.8 breaks the installer
-script for OpenGrade, so you should probably download and install 5.6
-instead.\footnote{I found it confusing navigating their web site. Although
-they change the site from time to time, here's what I had to do the last time
-I went through the process. From the ActiveState home page, click on ActivePerl
-under DOWNLOADS on the right side of the screen. Next, click on the red rectangle
-that says Download. Click through the registration step using the Next button. Click
-on MSI to download the Windows version of ActivePerl 5.6.}
-
-Once you have ActivePerl installed, download
-OpenGrade, and unpack the archive using WinZip or similar
-software --- double-clicking on the file will probably work.
-Reboot, make sure you have an active internet connection, and
-then double-click on the file \verb@install_win.pl@.\footnote{If you don't
-have privileges for administering your computer, you may find that installing
-ActivePerl didn't correctly associate the .pl extension with ActivePerl. If this
-is the case, then you'll have to run the installer by dragging it onto the file
-C:$\backslash$Perl$\backslash$bin$\backslash$perl.exe, and the same drag-and-drop method will be required
-in order to run OpenGrade later.} This file
-will download and install a bunch of open-source software that's
-required in order for OpenGrade to work; the last piece of software
-it downloads, Tk, is large, and will take a long time to download over
-a modem connection.
-Wait until it's done, and reboot again.
-
- To run OpenGrade, double-click
-on the file \verb@opengrade.pl@.
+To run OpenGrade, double-click on the file \verb@opengrade.pl@.
 
 Starting with version 2.7.0, OpenGrade no longer has full support for sound on Windows.
 
