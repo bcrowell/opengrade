@@ -30,6 +30,7 @@ use Time::Local;
 # Initialization
 #----------------------------------------------------------------
 
+my $data_subdir = "data"; # relative to spotter3
 
 open(LOG_FILE,">>ServerOG.log");
 my $request = NetOG->new();
@@ -39,8 +40,8 @@ my $user = $request->request_par('user');
 print LOG_FILE "Got request, user=$user, account=$account, date=".(scalar localtime)."\n";
 $account =~ s/[^\w]//g;
 $user =~ s/[^\w]//g;
-my $instructor_info_file = "spotter/$account/$user.instructor_info";
-my $sessions_file = "spotter/$account/$user.sessions";
+my $instructor_info_file = "$data_subdir/$account/$user.instructor_info";
+my $sessions_file = "$data_subdir/$account/$user.sessions";
 if (! -e $instructor_info_file) {print LOG_FILE "  instructor info file $instructor_info_file not found\n"}
 if (! -r $instructor_info_file) {print LOG_FILE "  instructor info file $instructor_info_file not readable\n"}
 if (-e $instructor_info_file && ! -e $sessions_file) {open(MAKE_IT,">$sessions_file"); close(MAKE_IT)}

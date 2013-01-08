@@ -24,7 +24,6 @@ use DateOG;
 use Input;
 use NetOG;
 use Fun;
-use Digest::SHA;
 use Version;
 use MyWords;
 use DateOG;

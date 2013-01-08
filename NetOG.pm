@@ -20,7 +20,7 @@ package NetOG;
 sub new {
   my $class = shift;
   my %args = (
-                DATA_DIR=>'spotter/',
+                DATA_DIR=>'data/', # relative to spotter3, where the code is
                 @_
                 );
   my $self = {};
@@ -84,7 +84,7 @@ sub be_client {
 sub build_post_request {
   my %args = (
     CGI_BIN=>'/cgi-bin',
-    SCRIPT=>'/ServerOG.cgi',
+    SCRIPT=>'/spotter3/ServerOG.cgi',
     MESSAGE=>'',
     @_,
   );
@@ -134,6 +134,10 @@ sub be_server_validating {
   $user =~ s/[^\w]//g;
   my $instructor_info_file = $self->{DATA_DIR}."$account/$user.instructor_info";
   my $sessions_file = $self->{DATA_DIR}."$account/$user.sessions";
+  unless (-e $sessions_file) {
+    open(F,">$sessions_file") or return 'unable_to_create_sessions_file';
+    close F;
+  }
   open F, ("<$instructor_info_file") or return 'unable_to_open_instructor_info_file';
   my $password_hash = '';
   my $server_key = '';

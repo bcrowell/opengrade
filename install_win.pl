@@ -23,7 +23,7 @@ do_ppm("Clone");
 do_ppm("Date-Calc");
 do_ppm("libnet");
 do_ppm("TermReadKey");
-do_ppm("Digest-SHA1");
+do_ppm("Digest-SHA");
 do_ppm("Tk");
 do_ppm("JSON");
 
