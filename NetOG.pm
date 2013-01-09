@@ -20,7 +20,7 @@ package NetOG;
 sub new {
   my $class = shift;
   my %args = (
-                DATA_DIR=>'data/', # relative to spotter3, where the code is
+                DATA_DIR=>find_data_dir(), # relative to where the code is
                 @_
                 );
   my $self = {};
@@ -84,7 +84,7 @@ sub be_client {
 sub build_post_request {
   my %args = (
     CGI_BIN=>'/cgi-bin',
-    SCRIPT=>'/spotter3/ServerOG.cgi',
+    SCRIPT=>find_server_og_script(),
     MESSAGE=>'',
     @_,
   );
@@ -287,9 +287,21 @@ sub open_TCP
   select($old_fh);
   1;
 }
-1;
 
+sub detect_spotter_version {
+  return 3 if -d 'data'; # spotter 3.x
+  return 2; # spotter 2.x
+}
 
+# Locate spotter's data directory, relative to where the cgi code lives.
+# Depending on whether they're using spotter 2.x or 3.x, this could  be in two different plaes.
+sub find_data_dir {
+  if (detect_spotter_version()==3) { return 'data/';} else { return 'spotter/'; }
+}
 
+# relative to cgi-bin
+sub find_server_og_script {
+  if (detect_spotter_version()==3) { return '/spotter3/ServerOG.cgi';} else { return '/ServerOG.cgi'; }
+}
 
 1;

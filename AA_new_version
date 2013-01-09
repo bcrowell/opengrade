@@ -1,7 +1,7 @@
 Change version number in:
-  /home/bcrowell/Documents/web/source/ogr/ogr.source , and remake
-  Makefile
   Version.pm
+If changing the version number considered stable, change that in:
+  /home/bcrowell/Documents/web/source/ogr/ogr.source , and remake
 make install
 [
   Make sure it still runs with all possible combinations of plugins installed and not installed.
@@ -16,6 +16,7 @@ make test
 git commit -a -m "release x.y.z"
 git tag x.y.z
 git push
+git push --tags
 git log --pretty="format:%ad %s"
   ... shows list of changes since last version
 make dist

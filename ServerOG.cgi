@@ -31,6 +31,7 @@ use Time::Local;
 #----------------------------------------------------------------
 
 my $data_subdir = "data"; # relative to spotter3
+if (! -d $data_subdir) {$data_subdir = "spotter"} # fall back to spotter 2.x
 
 open(LOG_FILE,">>ServerOG.log");
 my $request = NetOG->new();

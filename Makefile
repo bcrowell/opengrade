@@ -1,6 +1,3 @@
-VERSION = 3.1.16
-# ... When changing this version number, make sure to change the one in Version.pm as well.
-
 prefix=/usr
 exec_prefix=$(prefix)
 bindir=$(exec_prefix)/bin
@@ -28,9 +25,6 @@ REQUIRED_SOURCES = Browser.pm BrowserData.pm BrowserWindow.pm Crunch.pm DateOG.p
 # ... This is the list that's installed by default; doesn't include plugins.
 PLUGINS = ServerDialogs.pm OnlineGrades.pm
 SOURCES = $(REQUIRED_SOURCES) $(PLUGINS)
-# ... This is the list that's distributed with the tarball; includes plugins.
-DIST_DIR = opengrade-$(VERSION)
-DIST_TARBALL = opengrade-$(VERSION).tar.gz
 
 INSTALL_PROGRAM = install
 # The FreeBSD style seems to be this:
@@ -40,6 +34,8 @@ INSTALL_PROGRAM = install
 SOURCE_DIR = `perl -e 'use Config; print $$Config{sitelib}'`/OpenGrade
 #... e.g., /usr/local/lib/perl5/site_perl/5.8.0/OpenGrade
 PLUGIN_DIR = $(SOURCE_DIR)/plugins
+VERSION = `perl -e 'use Version; print Version::version()'` # for man page
+
 
 all:
 	@echo "No compilation is required. Documentation on how to install the software can be downloaded from"
@@ -145,11 +141,7 @@ clean:
 	# ... done.
 
 post: opengrade_doc.pdf
-	cp $(DIST_TARBALL) $(HOME)/Lightandmatter/ogr
 	cp opengrade_doc.pdf $(HOME)/Lightandmatter/ogr
-
-dist: manpage.pod
-	git archive --format=tar --prefix=$(DIST_DIR)/ HEAD | gzip >$(DIST_TARBALL)
 
 test_sound:
 	echo "You should hear a beep, then a 'ch' sound, then a piano clash, then a voice saying 'ambiguous.'"
@@ -161,8 +153,8 @@ test_sound:
 	sleep 1
 	aplay /usr/share/apps/opengrade/sounds/ambiguous.wav
 
-opengrade.1: manpage.pod Makefile
-	# dependency on Makefile is so it will detect new value of VERSION
+opengrade.1: manpage.pod Version.pm
+	echo "building man page for version $(VERSION)"
 	pod2man --section=1 --center="OpenGrade $(VERSION)" --release="$(VERSION)" \
 	        --name=OPENGRADE <manpage.pod >opengrade.1
 
