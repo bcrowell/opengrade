@@ -1,11 +1,5 @@
 #----------------------------------------------------------------
-# Copyright (c) 2002 Benjamin Crowell, all rights reserved.
-#
-# This software is available under version 2 of the GPL license.
-# The software is copyrighted, and you must agree to the
-# license in order to have permission to copy it. The full
-# text of the license is given in the file titled Copying.
-#
+# Copyright (c) 2002 Benjamin Crowell, GPL v2 license.
 #----------------------------------------------------------------
 
 package Version;

@@ -1581,7 +1581,6 @@ sub report {
            print F Report::roster_to_svg(\@r,$gb->title());
            close F;
            my $c = "inkscape --export-pdf=\"$pdf\" $svg && rm -f $svg"; 
-           print "$c\n"; #qwe
            if (system($c)==0) {ExtraGUI::message("Saved as $pdf")} else { ExtraGUI::error_message("Error executing Unix shell command $c, $?\n"); }
          }
       }

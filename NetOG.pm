@@ -32,6 +32,26 @@ sub new {
 
 sub be_client {
   my $self = shift;
+  my %args = @_;
+
+  remember_i_am_client();
+
+  my $err = '';
+  if (detect_spotter_version()!=2) {
+    set_spotter_version(3);
+    $err = $self->be_client_given_spotter_version(3,%args);
+    if ($err eq '') {
+      return $err;
+    }
+  }
+  set_spotter_version(2);
+  $err = $self->be_client_given_spotter_version(2,%args);
+  return $err;
+}
+
+sub be_client_given_spotter_version {
+  my $self = shift;
+  my $spotter_version = shift;
   my %args = (
                 GB=>'',
                 SERVER_KEY=>'', # needn't supply this if it's coming from preferences file associated with the GB
@@ -78,6 +98,7 @@ sub be_client {
     $self->{RESPONSE_DATA} = $self->{RESPONSE_DATA} . $line;
   }
   close(F);
+  if ($self->{RESPONSE_DATA} =~ /404/) {$err = 'not_found'}
   return $err;
 }
 
@@ -288,9 +309,31 @@ sub open_TCP
   1;
 }
 
-sub detect_spotter_version {
-  return 3 if -d 'data'; # spotter 3.x
-  return 2; # spotter 2.x
+BEGIN {
+
+  my $spotter_version_detected = -1;
+  my $i_am_client = 0;
+
+  sub remember_i_am_client {
+    $i_am_client = 1;
+  }
+
+  sub set_spotter_version {
+    $spotter_version_detected = shift;
+  }
+
+  sub detect_spotter_version {
+    return $spotter_version_detected if $spotter_version_detected>0;
+    if ($i_am_client) {
+      return -1; # can't tell without trial and error
+    }
+    else {
+      # I'm running on the server side.
+      return 3 if -d 'data'; # spotter 3.x
+      return 2; # spotter 2.x
+    }
+  }
+
 }
 
 # Locate spotter's data directory, relative to where the cgi code lives.
