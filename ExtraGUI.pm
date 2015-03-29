@@ -405,7 +405,7 @@ sub show_text {
     TEXT=>"",
     WIDTH=>60,
     MIN_HEIGHT=>3,
-    MAX_HEIGHT=>40,
+    MAX_HEIGHT=>20,
     BGCOLOR=>"white",
     PATH=>'.', # default directory for saving
     FILENAME=>'', # default filename for saving
@@ -719,7 +719,8 @@ sub beep_if_allowed {
 }
 
 sub want_beeps {
-  return Preferences->new()->get('beep');
+  #print Preferences->new()->get('beep');
+  return Preferences->new()->get('beep') ne '0';
 }
 
 sub audio_feedback {

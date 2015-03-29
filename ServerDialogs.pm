@@ -400,8 +400,10 @@ sub list_work {
           print STDERR "Checking file $f\n" if $debug;
           open(F,"<$f") or ExtraGUI::error_message("error opening file $f for input");
           while (my $line=<F>) {
-            if ($line=~/(\d+),(\d*),(\d+),(\d+),([a-z]*),([^,]*),([^,]*),([^,\n]*)/ && $1==$set) {
-              my ($book,$ch,$num,$parts,$flags,$chunk,$student) = ($2,$3,$4,$5,$6,$7,$8);
+            print "checking line $line\n" if $debug;
+            # checking line 24,1,8,e7,,o,,zuniga_alberto
+            if ($line=~/(\d+),(\d*),(\d+),([a-zA-Z0-9]+),([a-z]*),([^,]*),([^,]*),([^,\n]*)/ && $1==$set) {
+              my ($same_set,$book,$ch,$num,$parts,$flags,$chunk,$student) = ($1,$2,$3,$4,$5,$6,$7,$8);
               my $bcp = "$book,$ch,$num";
               print "set=$set, book=$book, ch=$ch, num=$num, parts=$parts, flags=$flags, chunk=$chunk, student=$student, bcp=$bcp\n" if $debug;
               if (! defined $filter{$bcp}) {
@@ -423,6 +425,9 @@ sub list_work {
                 $filter{$bcp}->{n_parts} = length($parts);
               }
             }
+            else {
+	      print "  didn't match regex\n" if $debug;
+            }
           }
           close F;
         }
@@ -435,7 +440,7 @@ sub list_work {
     my $s = $box->Scrolled("Canvas",-scrollbars=>'e',-height=>(($mw->screenheight)-150),-width=>400,)->pack();
     my @checked;
     print "calling, ".(join(' ',(keys %filter)))."\n" if $debug;
-    print "list=$list\n" if $debug;
+    print "individualized=$individualized\n" if $debug;
     my ($n,$stuff) = list_work_populate_list_of_assignments($s,$list,\@checked,($individualized ? \%filter : undef));
        # ... $n=number of unique problems
        #     $stuff=list of raw problems, in this format: file=lm&book=1&chapter=0&problem=5&find=1
@@ -463,6 +468,7 @@ sub list_work {
                  );
                  my $r = $request->{RESPONSE_DATA};
                  @roster = $gb->student_keys();
+                 print "calling server_list_work_handle_response\n" if $debug;
                  my ($t,$s) = Fun::server_list_work_handle_response(\@roster,$r,$gb,$stuff,\%filter);
                  my %scores = %$s;
                  if ($do_what eq 'show') {
@@ -532,6 +538,7 @@ sub list_work_populate_list_of_assignments {
     my $filter; # optional 4th arg is filter function if we're using howdy with individualized hw
                 # Filter isn't completely applied here; just used to exclude problems that aren't assigned to anybody at all.
     if (@_) {$filter = shift}
+    my $debug = 0;
     #print "inside, keys are ".(join(' ',(keys %$filter)))."\n";
     my ($a,$b,$foo) = Fun::server_list_work_massage_list_of_problems($list);
         # ... $a = sorted list of unique lines from $list, with some extraneous data removed from each line
@@ -545,13 +552,16 @@ sub list_work_populate_list_of_assignments {
     my @stuff;
     my $c = $s->Subwidget("canvas");
     my $n = 0;
+    print "in list_work_populate_list_of_assignments...\n" if $debug;
     foreach my $rc(@raw_and_cooked) {
       #print "would have checked raw=$rc->{raw} against filter\n";
       my $raw = $rc->{'raw'};
       my $cooked = $rc->{'cooked'};
+      print "  raw=$raw, cooked=$cooked\n" if $debug;
       my $h = Fun::html_query_to_hash($raw);
       my $bcp = $h->{book}.','.$h->{chapter}.','.$h->{problem};
       if ((!defined $filter) || (exists $filter->{$bcp})) {
+        print "  inside, defined filter=".(defined $filter)."\n" if $debug;
         my $b = $s->Checkbutton(-text=>$cooked,-variable=>\($checked_ref->[$n]));
         $checked_ref->[$n] = ((defined $filter) ? 1 : 0);
         $s->createWindow(0,25*($n+1),-window=>$b,-anchor=>'w');
@@ -559,6 +569,7 @@ sub list_work_populate_list_of_assignments {
         $n++;
       }
     }
+    print "...done\n" if $debug;
     return ($n,\@stuff);  
 }
 

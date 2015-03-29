@@ -16,6 +16,7 @@ use Digest::SHA;
 
 package NetOG;
 
+use Cwd;
 
 sub new {
   my $class = shift;
@@ -98,7 +99,7 @@ sub be_client_given_spotter_version {
     $self->{RESPONSE_DATA} = $self->{RESPONSE_DATA} . $line;
   }
   close(F);
-  if ($self->{RESPONSE_DATA} =~ /404/) {$err = 'not_found'}
+  if ($self->{RESPONSE_DATA} =~ m@^<title>404 Not Found</title>@) {$err = 'not_found'}
   return $err;
 }
 
@@ -311,6 +312,8 @@ sub open_TCP
 
 BEGIN {
 
+  debugging_output("in begin block, cwd=".getcwd());
+
   my $spotter_version_detected = -1;
   my $i_am_client = 0;
 
@@ -323,6 +326,7 @@ BEGIN {
   }
 
   sub detect_spotter_version {
+    return 3; ########### autodetection was unreliable, caused problems on multiple occasions
     return $spotter_version_detected if $spotter_version_detected>0;
     if ($i_am_client) {
       return -1; # can't tell without trial and error
@@ -334,6 +338,14 @@ BEGIN {
     }
   }
 
+  sub debugging_output {
+    my $x = shift;
+    if (open(my $FILE, ">>/usr/lib/cgi-bin/spotter3/data/log/debug_netog.log")) {
+      print $FILE "$x\n";
+      close($FILE);
+    }
+  }
+
 }
 
 # Locate spotter's data directory, relative to where the cgi code lives.
@@ -342,9 +354,16 @@ sub find_data_dir {
   if (detect_spotter_version()==3) { return 'data/';} else { return 'spotter/'; }
 }
 
-# relative to cgi-bin
 sub find_server_og_script {
+  my $x = xyz_find_server_og_script();
+  debugging_output($x);
+  return $x;
+}
+
+# relative to cgi-bin (which is probably not the cwd of this script)
+sub xyz_find_server_og_script {
   if (detect_spotter_version()==3) { return '/spotter3/ServerOG.cgi';} else { return '/ServerOG.cgi'; }
 }
+
 
 1;

@@ -131,6 +131,7 @@ sub server_list_work_add_time_slop {
 
 sub server_list_work_massage_list_of_problems {
     my $list = shift;
+    my $debug = 0;
     my @list = ();
     my @stuff = ();
     while ($list=~m/^([^\n]+)$/mg) {
@@ -149,12 +150,16 @@ sub server_list_work_massage_list_of_problems {
       $unique{$l} = 1;
     }
     @list = keys %unique;
+    if ($debug) {print "in server_list_work_massage_list_of_problems, list=".(join(",",@list))."\n"}
     # sort them:
     @list = sort {
       my $aa = $a . '&';
       my $bb = $b . '&';
       $aa =~ s/\=(\d{1,3})\&/'='.(sprintf '%04d',$1).'&'/ge;
       $bb =~ s/\=(\d{1,3})\&/'='.(sprintf '%04d',$1).'&'/ge;
+      # handle problems with names like k7
+      $aa =~ s/problem\=([a-z])(\d{1,3})\&/'problem='.$1.(sprintf '%04d',$2).'&'/ge;
+      $bb =~ s/problem\=([a-z])(\d{1,3})\&/'problem='.$1.(sprintf '%04d',$2).'&'/ge;
       $aa cmp $bb;
     } @list;
     my @raw_and_cooked = ();

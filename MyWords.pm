@@ -983,7 +983,7 @@ STRING
  "to add students",
 
 "en.edit_students.drop" =>
- "to drop a students",
+ "to drop a student",
 
 "en.edit_students.reinstate" =>
  "to reinstate a student whom you previously dropped",

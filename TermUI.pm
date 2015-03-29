@@ -606,6 +606,7 @@ sub grade_an_assignment {
         printf w("max_is\n"),$max;
     }
     my @students = $gb->student_keys();
+    @students = sort {$gb->compare_names($a,$b)} @students;
     my %grades = ();
     if ($mode eq "a") {
         print w("how_to_enter_scores\n");
@@ -613,6 +614,7 @@ sub grade_an_assignment {
         # The only thing funky about the following loop is the handling of the
         # arrow keys. If they hit down arrow, it's just a synonym for return, and
         # that's handled inside enter_one_grade(). If they hit up arrow, we handle it.
+        # Down arrow doesn't seem to work...?
         STUDENT_LOOP: for (my $j=0; $j<=$#students; ) {
           my $student = $students[$j];
           $result = enter_one_grade($gb,$student,$cat,$ass,$max,\%grades,

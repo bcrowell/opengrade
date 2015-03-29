@@ -44,7 +44,6 @@ all:
 	@echo "and then 'make install'."
 
 ubuntu:
-	@perl -e '`lsb_release -d`=~/(\d+\.\d+)/; if ($$1<8.10) {print "Error: Opengrade 2.9+ requires Ubuntu Intrepid Ibex or later.\n"; exit -1}'
 	apt-get install perl-tk libdate-calc-perl libclone-perl libterm-readkey-perl md5deep build-essential alsa-utils libjson-perl
 	perl -e '`lsb_release -d`=~/(\d+\.\d+)/; if ($$1>=9.10) {system("apt-get install libdigest-whirlpool-perl")}'
 

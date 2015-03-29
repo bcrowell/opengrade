@@ -19,6 +19,7 @@ use FileTree;
 use Query;
 use WorkFile;
 use Email;
+use Cwd;
 
 use utf8;
 use NetOG;
@@ -30,10 +31,16 @@ use Time::Local;
 # Initialization
 #----------------------------------------------------------------
 
+my @misconfiguration; # report these directly in response in case, e.g., we're misconfigured so we can't write to log file
+if (!-r 'data') {push @misconfiguration,"ServerOG.cgi is running in the ".getcwd().", whose subdir data is not readable"}
+if (!-w 'data/log') {push @misconfiguration,"ServerOG.cgi is running in the ".getcwd().", whose subdir data/log is not writeable"}
+
 my $data_subdir = "data"; # relative to spotter3
 if (! -d $data_subdir) {$data_subdir = "spotter"} # fall back to spotter 2.x
 
-open(LOG_FILE,">>ServerOG.log");
+my $log_file = "data/log/ServerOG.log";
+if (-e $log_file && !-w $log_file) {push @misconfiguration,"file $log_file exists but is not writeable"}
+open(LOG_FILE,">>$log_file") or (push @misconfiguration,"error opening $log_file to append, $!");
 my $request = NetOG->new();
 $request->be_server_accepting();
 my $account = $request->request_par('account');
@@ -62,6 +69,10 @@ if ($request->{VALID}) {
   my $tree;
   my $what = $request->request_par('what');
   print LOG_FILE "  Type of request=$what\n";
+  if (@misconfiguration>0) {
+    $request->be_server_responding(PARS=>{'err'=>1},DATA=>join(' ; ',@misconfiguration));
+    exit (-1);
+  }
   my $response_data = '';
   my $response_pars = {};
   if ($request->request_par('class')) {
