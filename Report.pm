@@ -460,15 +460,23 @@ sub student {
       my $single_assignment_category = $gb->category_property_boolean($c,'single');
       my $category_total = format_percent_letter_and_fraction($gb,$totals->{$c});
       my $show_category_total;
-      my @a = split(",",$gb->assignment_list());
-      if (   !empty_array_ref($gb->array_of_assignments_in_category($c)) # There really are one or more assignments in it, not zero.
+      my @a = split(",",$gb->assignment_list()); # for all categories
+      #my @a = $gb->array_of_assignments_in_category($c);
+      if (   !empty_array_ref($gb->array_of_assignments_in_category($c)) # There really are one or more assignments in
+                                                                         # it, not zero.
           && $gb->assignment_properties($c.'.'.(($gb->array_of_assignments_in_category($c))->[0]))->{'ignore'} eq 'true'
          ) {
-        # This is a category that's ignored for purposes of computing students' grades. This requires special handling. Normally
-        # for an ignored category, we'd just put 0/0 for the category total, and the report would show the individual (ignored) grades on the assignments
-        # below the category heading. But we have to do something different for the case of a single-assignment category, because then it would
-        # always show 0/0, and you could never tell from the report what the (ignored) score was. We do this in categories that aren't single-assignment as well,
-        # just to avoid confusion.
+
+        # This is a category that's ignored for purposes of computing students'
+        # grades. This requires special handling. Normally for an ignored
+        # category, we'd just put 0/0 for the category total, and the report
+        # would show the individual (ignored) grades on the assignments below
+        # the category heading. But we have to do something different for the
+        # case of a single-assignment category, because then it would always
+        # show 0/0, and you could never tell from the report what the (ignored)
+        # score was. We do this in categories that aren't single-assignment as
+        # well, just to avoid confusion. 
+
         if ($single_assignment_category) {
           my $a = (($gb->array_of_assignments_in_category($c))->[0]);
           my $grade = $gb->get_current_grade($student,$c,$a);
@@ -481,17 +489,18 @@ sub student {
           $show_category_total = "($ignored_cat_total, not counted in computing grades)"; 
           # $category_total is just 0/0, so no point in showing it -- it just confuses them
         }
-      }
-      else {
-        # not an ignored category
+      } # end if ignored category
+      else { # not an ignored category
         $show_category_total = $category_total; # if not during this mp, this will be 0/0
         # Check the special case where it's a single-assignment category, and the assignment isn't due yet:
+        my $a = $gb->array_of_assignments_in_category($c);
         if ($single_assignment_category && @a) {
-          my $ass =  GradeBook::second_part_of_label($a[0]);
+          my $ass =  $a->[0];
           my $due_date = $gb->assignment_properties("$c.$ass")->{"due"};
           my $due = ($due_date eq "") || (DateOG::is_past(DateOG::disambiguate_year($due_date,$gb->term())));
           if (!$due && (!$mp ||  $gb->assignment_properties("$c.$ass")->{'mp'} eq $mp)) {
-            $show_category_total = $show_category_total . " (not counted because it isn't due yet)";
+            my $g = report_one_grade($c,$ass,$gb,$student,0);
+            $show_category_total = "$g (not counted because it isn't due until $due_date)";
           }          
         }
       }
@@ -501,30 +510,47 @@ sub student {
         foreach my $a(@a) {
           my ($cat,$ass) = (GradeBook::first_part_of_label($a),
                             GradeBook::second_part_of_label($a));
-          if ($cat eq $c) {
-            my $a = "$cat.$ass";
-            my $type = $gb->category_property2($cat,'type');
-            my $ass_properties = $gb->assignment_properties($a);
-            my $due_date = $ass_properties->{"due"};
-            my $ignore = ($ass_properties->{"ignore"} eq "true");
-            my $due = ($due_date eq "") || (DateOG::is_past(DateOG::disambiguate_year($due_date,$gb->term())));
-            my $grade = $gb->get_current_grade($student,$cat,$ass);
-            if ($grade eq "") {$grade="--"}
-            my $max = $gb->assignment_property($a,"max");
-            my $ass_name = $gb->assignment_name($cat,$ass);
-            my $explain_whether_due = '';
-            $explain_whether_due=" (not counted for computing grades, because it isn't due until $due_date)" if !$due; # $due_date guaranteed not null, because then $due is true
-            my $fraction = "$grade/$max";
-            if ($type ne 'numerical') {$fraction = $gb->types()->{'data'}->{$type}->{'descriptions'}->{$grade}}
-            $fraction = $grade if ($ignore && $max==0);
-            $fraction = "$grade (extra credit)" if (!$ignore && $max==0 && $grade>=0);
-            $t->put(TEXT=>"$ass_name: $fraction$explain_whether_due",INDENTATION=>1,BR=>1) if (!$mp || $ass_properties->{'mp'} eq $mp);
-          }
+          if ($cat eq $c) {report_one_assignment($t,$cat,$ass,$gb,$student,$mp)}
         } # end foreach assignment
       } # end if not single-assignment cat
     } # end loop over cats
   } # end loop over marking periods
   return $t;
+}
+
+sub report_one_assignment {
+            my ($t,$cat,$ass,$gb,$student,$mp) = @_;
+            my $a = "$cat.$ass";
+            my $ass_properties = $gb->assignment_properties($a);
+            my $due_date = $ass_properties->{"due"};
+            my $ignore = ($ass_properties->{"ignore"} eq "true");
+            my $fraction = report_one_grade($cat,$ass,$gb,$student,$ignore);
+            my $due = ($due_date eq "") || (DateOG::is_past(DateOG::disambiguate_year($due_date,$gb->term())));
+            my $ass_name = $gb->assignment_name($cat,$ass);
+            my $explain_whether_due = '';
+            $explain_whether_due=" (not counted for computing grades, because it isn't due until $due_date)" if !$due; # $due_date guaranteed not null, because then $due is true
+            my $result = '';
+            $result = "$ass_name: $fraction$explain_whether_due" if (!$mp || $ass_properties->{'mp'} eq $mp);
+            $t->put(TEXT=>$result,INDENTATION=>1,BR=>1) if ref $t;
+            return $result;
+}
+
+sub report_one_grade {
+            my ($cat,$ass,$gb,$student,$ignore) = @_;
+            my $type = $gb->category_property2($cat,'type');
+            my $grade = $gb->get_current_grade($student,$cat,$ass);
+            if ($grade eq "") {$grade="--"}
+            my $max = $gb->assignment_property("$cat.$ass","max");
+            my $fraction = "$grade/$max";
+            if ($type ne 'numerical') {$fraction = $gb->types()->{'data'}->{$type}->{'descriptions'}->{$grade}}
+            $fraction = $grade if ($ignore && $max==0);
+            $fraction = "$grade (extra credit)" if (!$ignore && $max==0 && $grade>=0);
+            return $fraction;
+}
+
+sub dbg {
+  my $mess = shift;
+  print STDERR "$mess\n";
 }
 
 sub empty_array_ref {
