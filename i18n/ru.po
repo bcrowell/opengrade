@@ -1,0 +1,2091 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# AlexL <loginov.alex.valer@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: opengrade\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-25 17:36+0300\n"
+"PO-Revision-Date: 2015-11-13 08:06+0000\n"
+"Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/Magic/opengrade/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: MyWords_.pm:33
+msgid "A blank value is not allowed."
+msgstr "Пустое значение не допускается."
+
+#: MyWords_.pm:34
+#, perl-format
+msgid "The minimum value is %s."
+msgstr "Минимальное значение %s."
+
+#: MyWords_.pm:35
+#, perl-format
+msgid "The maximum value is %s."
+msgstr "Максимальное значение %s."
+
+#: MyWords_.pm:36
+msgid "Times must be in the format h:mm or hh:mm."
+msgstr "Времена должны быть в формате ч:мм или чч:мм."
+
+#: MyWords_.pm:37
+#, perl-format
+msgid ""
+"Illegal date format: %s. Dates must be in the format month-day or year-"
+"month-day. Years, if supplied, must be four digits."
+msgstr "Недопустимый формат даты: %s. Даты должны быть в формате месяц-день или год-месяц-день. Годы, если имеются, должны иметь четыре цифры."
+
+#: MyWords_.pm:38
+msgid "Illegal hour or minute."
+msgstr "Недопустимый час или минута."
+
+#: MyWords_.pm:39
+#, perl-format
+msgid ""
+"Illegal month or day: %s.  Dates must be in the format month-day or year-"
+"month-day. Years, if supplied, must be four digits."
+msgstr "Недопустимый месяц или день: %s. Даты должны быть в формате месяц-день или год-месяц-день. Годы, если имеются, должны иметь четыре цифры."
+
+#: MyWords_.pm:43 MyWords_.pm:671
+msgid "none"
+msgstr "пусто"
+
+#: MyWords_.pm:44
+msgid "Jan"
+msgstr "Янв"
+
+#: MyWords_.pm:45
+msgid "Feb"
+msgstr "Фев"
+
+#: MyWords_.pm:46
+msgid "Mar"
+msgstr "Мар"
+
+#: MyWords_.pm:47
+msgid "Apr"
+msgstr "Апр"
+
+#: MyWords_.pm:48
+msgid "May"
+msgstr "Май"
+
+#: MyWords_.pm:49
+msgid "Jun"
+msgstr "Июн"
+
+#: MyWords_.pm:50
+msgid "Jul"
+msgstr "Июл"
+
+#: MyWords_.pm:51
+msgid "Aug"
+msgstr "Авг"
+
+#: MyWords_.pm:52
+msgid "Sep"
+msgstr "Сен"
+
+#: MyWords_.pm:53
+msgid "Oct"
+msgstr "Окт"
+
+#: MyWords_.pm:54
+msgid "Nov"
+msgstr "Ноя"
+
+#: MyWords_.pm:55
+msgid "Dec"
+msgstr "Дек"
+
+#: MyWords_.pm:56
+#, perl-format
+msgid "Invalid key pressed while entering a grade: %s"
+msgstr "Нажата неверная клавиша во время ввода оценки: %s"
+
+#: MyWords_.pm:57
+msgid "Num lock appears to be turned off."
+msgstr "Num Lock, кажется, был отключен."
+
+#: MyWords_.pm:58
+msgid "Hit tab to change to the grade column."
+msgstr "Нажмите клавишу Tab чтобы изменить колонку оценки."
+
+#: MyWords_.pm:59
+msgid "There is no file open, or the roster is empty."
+msgstr "Нет открытого файла или реестр пуст."
+
+#: MyWords_.pm:60
+msgid "There is nothing in the keyboard selection left to delete."
+msgstr "В выделении клавиатурой не осталось ничего для удаления."
+
+#: MyWords_.pm:61
+#, perl-format
+msgid "Key not recognized: %s"
+msgstr "Клавиша не опознана: %s"
+
+#: MyWords_.pm:62
+#, perl-format
+msgid "No student's name begins with %s"
+msgstr "Нет имени студента, начинающегося с %s"
+
+#: MyWords_.pm:67
+msgid ""
+"The digital watermark is not consistent with this password. This is probably because you\n"
+"typed the password incorrectly. If you're certain you typed the password correctly, then\n"
+"the file has been altered by someone (perhaps you, perhaps someone else) who did not\n"
+"authenticate the alterations using your password; in this situation, you should click\n"
+"on the View Report button and see what lines were changed. See the documentation for\n"
+"suggestions on how to handle a case of apparent tampering.\n"
+msgstr "Цифровой водяной знак не согласуется с этим паролем. Это, вероятно, потому что вы\nввели неправильный пароль. Если вы уверены, что ввели правильный пароль, то\nфайл был изменён кем-то (возможно вами, возможно кем-то ещё), кто не\nавторизовался для изменений, используя свой пароль; в этой ситуации, вы должны щёлкнуть на\nкнопку Просмотра отчёта и посмотреть какие строки были изменены. Смотрите документацию для\nрекомендаций о том, как вести дело с явным взломом.\n"
+
+#: MyWords_.pm:74 MyWords_.pm:100 MyWords_.pm:133 MyWords_.pm:146
+#: MyWords_.pm:701 MyWords_.pm:731
+msgid "OK"
+msgstr "ОК"
+
+#: MyWords_.pm:75
+msgid "View Report"
+msgstr "Просмотр отчёта"
+
+#: MyWords_.pm:77
+#, perl-format
+msgid ""
+"An autosave file, %s,\n"
+"exists. This may happen, for instance, if your computer crashes\n"
+"while OpenGrade has a file open. You should probably hit Cancel, get out of OpenGrade, and\n"
+"see if the autosave file really has different data in it than the original file.\n"
+"If you click on OK to open the file, your autosave file will be deleted.\n"
+msgstr "Существует автосохранённый файл %s.\nЭто может произойти, например, если ваш компьютер завис,\nв то время как в OpenGrade был открыт файл. Вам, вероятно, следует нажать на Отмену, выйти из OpenGrade и\nпосмотреть, действительно ли в автосохранённом файле имеются отличные от оригинального файла данные.\nЕсли вы нажмёте на кнопку ОК для открытия файла, то ваш автосохранённый файл будет удалён.\n"
+
+#: MyWords_.pm:83
+msgid "grade"
+msgstr "оценка"
+
+#: MyWords_.pm:84
+msgid "overall"
+msgstr "в целом"
+
+#: MyWords_.pm:85
+msgid "Revert all changes, are you sure?"
+msgstr "Вернуть все изменения, вы уверены?"
+
+#: MyWords_.pm:87
+msgid "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/ogr/ogr.html"
+msgstr "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/ogr/ogr.html"
+
+#: MyWords_.pm:89
+msgid "OpenGrade"
+msgstr "OpenGrade"
+
+#: MyWords_.pm:91
+msgid "no file open"
+msgstr "нет открытого файла"
+
+#: MyWords_.pm:92
+msgid "modified, and not saved yet"
+msgstr "изменён, но ещё не сохранён"
+
+#: MyWords_.pm:93
+msgid "saved"
+msgstr "сохранён"
+
+#: MyWords_.pm:94
+#, perl-format
+msgid "The file %s has been saved."
+msgstr "Файл %s был сохранён."
+
+#: MyWords_.pm:95 MyWords_.pm:96 MyWords_.pm:673
+msgid "Save As"
+msgstr "Сохранить как"
+
+#: MyWords_.pm:97
+#, perl-format
+msgid "There was an error opening the file %s for output."
+msgstr "Случилась ошибка при открытии файла %s для вывода."
+
+#: MyWords_.pm:98
+msgid "Can't save on top of a gradebook file."
+msgstr "Не удалось сохранить в верх файла журнала успеваемости."
+
+#: MyWords_.pm:99 MyWords_.pm:154
+msgid "Save"
+msgstr "Сохранить"
+
+#: MyWords_.pm:101
+msgid "Open in an Editor"
+msgstr "Открыть в редакторе"
+
+#: MyWords_.pm:102
+msgid "Print"
+msgstr "Печать"
+
+#: MyWords_.pm:103
+msgid ""
+"You have not specified a unix shell command to use for opening a file in an "
+"editor. See the Preferences menu."
+msgstr "Вы не указали команду оболочки unix, которую использовать для открытия файла в редакторе. Смотрите меню Настроек."
+
+#: MyWords_.pm:104
+msgid ""
+"You have not specified a unix shell command to use for printing a file. See "
+"the Preferences menu."
+msgstr "Вы не указали команду оболочки unix, которую использовать для печати файла. Смотрите меню Настроек."
+
+#: MyWords_.pm:105 MyWords_.pm:134 MyWords_.pm:702 MyWords_.pm:732
+msgid "Cancel"
+msgstr "Отмена"
+
+#: MyWords_.pm:106
+msgid "Confirm"
+msgstr "Подтверждение"
+
+#: MyWords_.pm:107 MyWords_.pm:1118
+#, perl-format
+msgid "The file %s already exists. Overwrite it?"
+msgstr "Файл %s уже существует.  Перезаписать его?"
+
+#: MyWords_.pm:108
+msgid "Property to Edit"
+msgstr "Свойство для редактирования"
+
+#: MyWords_.pm:109
+#, perl-format
+msgid "Editing %s"
+msgstr "Редактирование %s"
+
+#: MyWords_.pm:110 MyWords_.pm:119 MyWords_.pm:165 MyWords_.pm:176
+#: MyWords_.pm:178
+#, perl-format
+msgid "Edit Information for %s"
+msgstr "Редактировать информацию для %s"
+
+#: MyWords_.pm:111 MyWords_.pm:1004
+msgid "Student ID"
+msgstr "ID студента"
+
+#: MyWords_.pm:112 MyWords_.pm:604 MyWords_.pm:605 MyWords_.pm:609
+#: MyWords_.pm:656 MyWords_.pm:1007
+msgid "Password"
+msgstr "Пароль"
+
+#: MyWords_.pm:113
+msgid "First Name"
+msgstr "Имя"
+
+#: MyWords_.pm:114
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: MyWords_.pm:115
+msgid "New Student Property to Define"
+msgstr "Новое свойство студента для определения"
+
+#: MyWords_.pm:116
+msgid "Value of Newly Defined Property for This Student"
+msgstr "Значение свежеопределённого свойства для этого студента"
+
+#: MyWords_.pm:117
+msgid "You must define a name for the new student property you're defining."
+msgstr "Вы должны определить имя для нового свойства студента, которое вы определяете."
+
+#: MyWords_.pm:118
+#, perl-format
+msgid "Delete %s?"
+msgstr "Удалить %s?"
+
+#: MyWords_.pm:120
+msgid "Due Date"
+msgstr "Срок"
+
+#: MyWords_.pm:121
+msgid "Long Name"
+msgstr "Длинное имя"
+
+#: MyWords_.pm:122
+msgid "Short Name"
+msgstr "Короткое имя"
+
+#: MyWords_.pm:123
+msgid "Maximum Score"
+msgstr "Максимальный балл"
+
+#: MyWords_.pm:124
+msgid "Ignored"
+msgstr "Проигнорировано"
+
+#: MyWords_.pm:125 MyWords_.pm:639
+msgid "Marking Period"
+msgstr "Маркировка периода"
+
+#: MyWords_.pm:126
+#, perl-format
+msgid "Drop %s?"
+msgstr "Вычеркнуть %s?"
+
+#: MyWords_.pm:127
+msgid "last name"
+msgstr "фамилия"
+
+#: MyWords_.pm:128
+msgid "first name"
+msgstr "имя"
+
+#: MyWords_.pm:129
+msgid "id (optional)"
+msgstr "id (опционально)"
+
+#: MyWords_.pm:130
+msgid "password (optional, defaults to id)"
+msgstr "пароль (опционально, дефолтно для id)"
+
+#: MyWords_.pm:131
+msgid "Add Students"
+msgstr "Добавить студентов"
+
+#: MyWords_.pm:132
+msgid "Reinstate Student"
+msgstr "Восстановить студента"
+
+#: MyWords_.pm:135 MyWords_.pm:162
+msgid "Add"
+msgstr "Добавить"
+
+#: MyWords_.pm:136
+msgid "Done"
+msgstr "Завершить"
+
+#: MyWords_.pm:137
+#, perl-format
+msgid ""
+"%s already exists. You may have dropped this student, in which case you can "
+"reinstate her/him."
+msgstr "%s уже существует. Вы, возможно, уже вычеркнули этого студента, в этом случае вы можете восстановить его/её."
+
+#: MyWords_.pm:139
+msgid ""
+"You can add as many students as you like, filling out the form and\n"
+"clicking on Add each time.\n"
+"You'll be alerted if the student already exists, or needs to be\n"
+"reinstated rather than added.\n"
+"After adding the last student, click on\n"
+"Add, and then when the blank form reappears, click on Done.\n"
+msgstr "Вы можете добавить так много студентов, как вам нравится, заполняя форму и\nкаждый раз нажимая на Добавить.\nВы будете предупреждены, если студент уже существует, или нужно его\nвосстановить, а не добавить.\nПосле добавления последнего студента, нажмите на\nДобавить, а затем, когда появится пустая форма, нажмите на Завершить.\n"
+
+#: MyWords_.pm:147 MyWords_.pm:717
+msgid "Error"
+msgstr "Ошибка"
+
+#: MyWords_.pm:148
+msgid "File"
+msgstr "Файл"
+
+#: MyWords_.pm:149
+msgid "Edit"
+msgstr "Редактирование"
+
+#: MyWords_.pm:150
+msgid "New"
+msgstr "Новый"
+
+#: MyWords_.pm:151
+msgid "Open..."
+msgstr "Открыть..."
+
+#: MyWords_.pm:152
+msgid "Close"
+msgstr "Закрыть"
+
+#: MyWords_.pm:153 MyWords_.pm:614
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: MyWords_.pm:155
+msgid "Clear List of Recent Files"
+msgstr "Очистить список недавних файлов"
+
+#: MyWords_.pm:156
+msgid "Prevent Changes to this List"
+msgstr "Предотвратить изменения в этом списке"
+
+#: MyWords_.pm:157
+msgid "Quit"
+msgstr "Выход"
+
+#: MyWords_.pm:158
+msgid "Undo"
+msgstr "Отменить"
+
+#: MyWords_.pm:159
+#, perl-format
+msgid "Undo %s"
+msgstr "Отменить %s"
+
+#: MyWords_.pm:160
+msgid "Revert"
+msgstr "Вернуть"
+
+#: MyWords_.pm:161
+msgid "Students"
+msgstr "Студенты"
+
+#: MyWords_.pm:163
+msgid "Reinstate"
+msgstr "Восстановить"
+
+#: MyWords_.pm:164
+#, perl-format
+msgid "Drop %s"
+msgstr "Вычеркнуть %s"
+
+#: MyWords_.pm:166
+msgid "Edit Property for Whole Class"
+msgstr "Редактировать свойство для целого класса"
+
+#: MyWords_.pm:167
+msgid "Edit Information"
+msgstr "Редактировать информацию"
+
+#: MyWords_.pm:168
+msgid "Assignments"
+msgstr "Задания"
+
+#: MyWords_.pm:169
+msgid "New Assignment"
+msgstr "Новое задание"
+
+#: MyWords_.pm:170 MyWords_.pm:635
+#, perl-format
+msgid "New %s"
+msgstr "Новое %s"
+
+#: MyWords_.pm:171
+msgid "Edit Category Weights"
+msgstr "Редактировать веса категорий"
+
+#: MyWords_.pm:172
+msgid "Delete Category"
+msgstr "Удалить категорию"
+
+#: MyWords_.pm:173
+#, perl-format
+msgid "Delete Category %s"
+msgstr "Удалить категорию %s"
+
+#: MyWords_.pm:174 MyWords_.pm:967
+msgid "New Category"
+msgstr "Новая категория"
+
+#: MyWords_.pm:175
+msgid "Edit Category Information"
+msgstr "Редактировать информацию категории"
+
+#: MyWords_.pm:177
+msgid "Edit Assignment Information"
+msgstr "Редактировать информацию задания"
+
+#: MyWords_.pm:179
+msgid "Delete Assignment"
+msgstr "Удалить задание"
+
+#: MyWords_.pm:180
+#, perl-format
+msgid "Delete %s"
+msgstr "Удалить %s"
+
+#: MyWords_.pm:181
+msgid "Reports"
+msgstr "Отчёты"
+
+#: MyWords_.pm:182
+msgid "Overall Grade"
+msgstr "Оценка в целом"
+
+#: MyWords_.pm:183
+#, perl-format
+msgid "Average in %s"
+msgstr "Среднее в %s"
+
+#: MyWords_.pm:184
+msgid "Average in Category"
+msgstr "Среднее в категории"
+
+#: MyWords_.pm:185
+#, perl-format
+msgid "Score on %s"
+msgstr "Баллы за %s"
+
+#: MyWords_.pm:186
+msgid "Score on Assignment"
+msgstr "Баллы за задание"
+
+#: MyWords_.pm:187
+msgid "Spreadsheet"
+msgstr "Электронная таблица"
+
+#: MyWords_.pm:188
+#, perl-format
+msgid "Statistics for %s"
+msgstr "Статистика для %s"
+
+#: MyWords_.pm:189
+msgid "Statistics for an Assignment"
+msgstr "Статистика для задания"
+
+#: MyWords_.pm:190
+msgid "Table"
+msgstr "Таблица"
+
+#: MyWords_.pm:191 MyWords_.pm:197 MyWords_.pm:715
+msgid "Roster"
+msgstr "Реестр"
+
+#: MyWords_.pm:192
+msgid "General Statistics"
+msgstr "Общая статистика"
+
+#: MyWords_.pm:193
+msgid "Post Grades"
+msgstr "Разместить оценки"
+
+#: MyWords_.pm:194
+msgid "Spotter"
+msgstr "Spotter"
+
+#: MyWords_.pm:195 MyWords_.pm:744
+msgid "Client/Server Settings"
+msgstr "Настройки клиента/сервера"
+
+#: MyWords_.pm:196 MyWords_.pm:714
+msgid "Class Description"
+msgstr "Описание класса"
+
+#: MyWords_.pm:198
+msgid "Disable Account of Dropped Student"
+msgstr "Отключить аккаунт вычеркнутого студента"
+
+#: MyWords_.pm:199
+msgid "List Work"
+msgstr "Список работ"
+
+#: MyWords_.pm:200
+msgid "E-Mail List"
+msgstr "Список почты"
+
+#: MyWords_.pm:201
+msgid "E-Mail for One Student"
+msgstr "Почта для одного студента"
+
+#: MyWords_.pm:202
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+#: MyWords_.pm:203
+msgid "Send Message to One Student"
+msgstr "Отправить сообщение одному студенту"
+
+#: MyWords_.pm:204
+msgid "View Messages Sent to One Student"
+msgstr "Просмотр сообщений, отправленных одному студенту"
+
+#: MyWords_.pm:205
+#, perl-format
+msgid "E-Mail for %s"
+msgstr "Почта для %s"
+
+#: MyWords_.pm:206
+#, perl-format
+msgid "Send Message to %s"
+msgstr "Отправить сообщение для %s"
+
+#: MyWords_.pm:207
+#, perl-format
+msgid "View Messages Sent to %s"
+msgstr "Просмотр сообщений, отправленных для %s"
+
+#: MyWords_.pm:208
+msgid "Online Grades"
+msgstr "Оценки онлайн"
+
+#: MyWords_.pm:209
+msgid "Export Grades to Online Grades Format for Uploading"
+msgstr "Экспортировать оценки в формат онлайн оценок для выгрузки"
+
+#: MyWords_.pm:210
+msgid "Settings"
+msgstr "Настройки"
+
+#: MyWords_.pm:211
+msgid "Grading Standards"
+msgstr "Стандарты оценивания"
+
+#: MyWords_.pm:212
+msgid "Marking Periods"
+msgstr "Маркировка периодов"
+
+#: MyWords_.pm:213 MyWords_.pm:665
+msgid "Properties"
+msgstr "Свойства"
+
+#: MyWords_.pm:214
+msgid "Clone"
+msgstr "Клонировать"
+
+#: MyWords_.pm:215
+msgid "Export..."
+msgstr "Экспортировать..."
+
+#: MyWords_.pm:216 MyWords_.pm:606
+msgid "Remove Watermark"
+msgstr "Удалить водяной знак"
+
+#: MyWords_.pm:217
+msgid "Reconcile"
+msgstr "Согласовать"
+
+#: MyWords_.pm:218
+msgid "Student"
+msgstr "Студент"
+
+#: MyWords_.pm:219
+msgid "Preferences"
+msgstr "Параметры"
+
+#: MyWords_.pm:220
+msgid "Beeping"
+msgstr "Звуковой сигнал"
+
+#: MyWords_.pm:221
+msgid "Left or Right Justification of Grades"
+msgstr "Левое или правое выравнивание оценок"
+
+#: MyWords_.pm:222
+msgid "Font Size"
+msgstr "Размер шрифта"
+
+#: MyWords_.pm:223
+msgid "Command Used to Open an External Text Editor"
+msgstr "Команда, используемая для открытия внешнего текстового редактора"
+
+#: MyWords_.pm:224
+msgid "Command Used to Print a Text File"
+msgstr "Команда, используемая для печати текстового файла"
+
+#: MyWords_.pm:225
+msgid "Command Used to Open a Spreadsheet"
+msgstr "Команда, используемая для открытия электронной таблицы"
+
+#: MyWords_.pm:226
+msgid "Type of Digital Watermark"
+msgstr "Тип цифрового водяного знака"
+
+#: MyWords_.pm:227
+msgid "Show Online Grades Menu"
+msgstr "Показать меню онлайн оценок"
+
+#: MyWords_.pm:228
+msgid "Show Server Menu for Spotter"
+msgstr "Показать меню сервера для Spotter"
+
+#: MyWords_.pm:229
+msgid ""
+"The change you've made to the menu bar will show up the next time you start "
+"OpenGrade."
+msgstr "Изменение, которые вы сделали в меню, появятся в следующий раз, когда вы запустите OpenGrade."
+
+#: MyWords_.pm:230
+msgid "Help"
+msgstr "Справка"
+
+#: MyWords_.pm:231 MyWords_.pm:599
+msgid "About OpenGrade"
+msgstr "Об OpenGrade"
+
+#: MyWords_.pm:233
+#, perl-format
+msgid ""
+"--literal--\n"
+"OpenGrade %s (Perl/Tk version %s, perl version %s, GTK2 version %s)\n"
+"(c) 2002-2009 Benjamin Crowell\n"
+"\n"
+"OpenGrade is free software that helps teachers keep track of their students' grades.\n"
+"On OpenGrade's web page,\n"
+"  http://www.lightandmatter.com/ogr/ogr.html   ,\n"
+"you can find documentation, and information about how to contact me.\n"
+"\n"
+"I'll be especially grateful if you can help me to improve OpenGrade by reporting bugs.\n"
+"However, before reporting a bug, please make sure that you're running the most current\n"
+"version of OpenGrade, and that your bug isn't already noted in the documentation. If\n"
+"you e-mail me to report a bug, please tell me what operating system you're using and\n"
+"what version of OpenGrade, and also, if possible, attach a copy of your gradebook file\n"
+"(I realize that there are privacy concerns).\n"
+"\n"
+"OpenGrade is listed on the Freshmeat web site,\n"
+"  http://freshmeat.net   ,\n"
+"where you can look at the history of releases, subscribe to e-mail announcements about\n"
+"new releases, and make public comments about the software.\n"
+"\n"
+"---------------------------------------------------------------------------------------------\n"
+"\n"
+"The following is the licensing agreement under which OpenGrade is distributed.\n"
+"\n"
+"            GNU GENERAL PUBLIC LICENSE\n"
+"               Version 2, June 1991\n"
+"\n"
+" Copyright (C) 1989, 1991 Free Software Foundation, Inc.\n"
+"                       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n"
+" Everyone is permitted to copy and distribute verbatim copies\n"
+" of this license document, but changing it is not allowed.\n"
+"\n"
+"            Preamble\n"
+"\n"
+"  The licenses for most software are designed to take away your\n"
+"freedom to share and change it.  By contrast, the GNU General Public\n"
+"License is intended to guarantee your freedom to share and change free\n"
+"software--to make sure the software is free for all its users.  This\n"
+"General Public License applies to most of the Free Software\n"
+"Foundation's software and to any other program whose authors commit to\n"
+"using it.  (Some other Free Software Foundation software is covered by\n"
+"the GNU Library General Public License instead.)  You can apply it to\n"
+"your programs, too.\n"
+"\n"
+"  When we speak of free software, we are referring to freedom, not\n"
+"price.  Our General Public Licenses are designed to make sure that you\n"
+"have the freedom to distribute copies of free software (and charge for\n"
+"this service if you wish), that you receive source code or can get it\n"
+"if you want it, that you can change the software or use pieces of it\n"
+"in new free programs; and that you know you can do these things.\n"
+"\n"
+"  To protect your rights, we need to make restrictions that forbid\n"
+"anyone to deny you these rights or to ask you to surrender the rights.\n"
+"These restrictions translate to certain responsibilities for you if you\n"
+"distribute copies of the software, or if you modify it.\n"
+"\n"
+"  For example, if you distribute copies of such a program, whether\n"
+"gratis or for a fee, you must give the recipients all the rights that\n"
+"you have.  You must make sure that they, too, receive or can get the\n"
+"source code.  And you must show them these terms so they know their\n"
+"rights.\n"
+"\n"
+"  We protect your rights with two steps: (1) copyright the software, and\n"
+"(2) offer you this license which gives you legal permission to copy,\n"
+"distribute and/or modify the software.\n"
+"\n"
+"  Also, for each author's protection and ours, we want to make certain\n"
+"that everyone understands that there is no warranty for this free\n"
+"software.  If the software is modified by someone else and passed on, we\n"
+"want its recipients to know that what they have is not the original, so\n"
+"that any problems introduced by others will not reflect on the original\n"
+"authors' reputations.\n"
+"\n"
+"  Finally, any free program is threatened constantly by software\n"
+"patents.  We wish to avoid the danger that redistributors of a free\n"
+"program will individually obtain patent licenses, in effect making the\n"
+"program proprietary.  To prevent this, we have made it clear that any\n"
+"patent must be licensed for everyone's free use or not licensed at all.\n"
+"\n"
+"  The precise terms and conditions for copying, distribution and\n"
+"modification follow.\n"
+"\n"
+"    GNU GENERAL PUBLIC LICENSE\n"
+"   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n"
+"\n"
+"  0. This License applies to any program or other work which contains\n"
+"a notice placed by the copyright holder saying it may be distributed\n"
+"under the terms of this General Public License.  The \"Program\", below,\n"
+"refers to any such program or work, and a \"work based on the Program\"\n"
+"means either the Program or any derivative work under copyright law:\n"
+"that is to say, a work containing the Program or a portion of it,\n"
+"either verbatim or with modifications and/or translated into another\n"
+"language.  (Hereinafter, translation is included without limitation in\n"
+"the term \"modification\".)  Each licensee is addressed as \"you\".\n"
+"\n"
+"Activities other than copying, distribution and modification are not\n"
+"covered by this License; they are outside its scope.  The act of\n"
+"running the Program is not restricted, and the output from the Program\n"
+"is covered only if its contents constitute a work based on the\n"
+"Program (independent of having been made by running the Program).\n"
+"Whether that is true depends on what the Program does.\n"
+"\n"
+"  1. You may copy and distribute verbatim copies of the Program's\n"
+"source code as you receive it, in any medium, provided that you\n"
+"conspicuously and appropriately publish on each copy an appropriate\n"
+"        copyright notice and disclaimer of warranty; keep intact all the\n"
+"        notices that refer to this License and to the absence of any warranty;\n"
+"and give any other recipients of the Program a copy of this License\n"
+"along with the Program.\n"
+"\n"
+"You may charge a fee for the physical act of transferring a copy, and\n"
+"you may at your option offer warranty protection in exchange for a fee.\n"
+"\n"
+"  2. You may modify your copy or copies of the Program or any portion\n"
+"of it, thus forming a work based on the Program, and copy and\n"
+"distribute such modifications or work under the terms of Section 1\n"
+"above, provided that you also meet all of these conditions:\n"
+"\n"
+"    a) You must cause the modified files to carry prominent notices\n"
+"    stating that you changed the files and the date of any change.\n"
+"\n"
+"    b) You must cause any work that you distribute or publish, that in\n"
+"    whole or in part contains or is derived from the Program or any\n"
+"    part thereof, to be licensed as a whole at no charge to all third\n"
+"    parties under the terms of this License.\n"
+"\n"
+"    c) If the modified program normally reads commands interactively\n"
+"    when run, you must cause it, when started running for such\n"
+"    interactive use in the most ordinary way, to print or display an\n"
+"    announcement including an appropriate copyright notice and a\n"
+"    notice that there is no warranty (or else, saying that you provide\n"
+"    a warranty) and that users may redistribute the program under\n"
+"    these conditions, and telling the user how to view a copy of this\n"
+"    License.  (Exception: if the Program itself is interactive but\n"
+"    does not normally print such an announcement, your work based on\n"
+"    the Program is not required to print an announcement.)\n"
+"\n"
+"These requirements apply to the modified work as a whole.  If\n"
+"identifiable sections of that work are not derived from the Program,\n"
+"and can be reasonably considered independent and separate works in\n"
+"themselves, then this License, and its terms, do not apply to those\n"
+"sections when you distribute them as separate works.  But when you\n"
+"distribute the same sections as part of a whole which is a work based\n"
+"on the Program, the distribution of the whole must be on the terms of\n"
+"this License, whose permissions for other licensees extend to the\n"
+"entire whole, and thus to each and every part regardless of who wrote it.\n"
+"\n"
+"Thus, it is not the intent of this section to claim rights or contest\n"
+"        your rights to work written entirely by you; rather, the intent is to\n"
+"exercise the right to control the distribution of derivative or\n"
+"collective works based on the Program.\n"
+"\n"
+"In addition, mere aggregation of another work not based on the Program\n"
+"with the Program (or with a work based on the Program) on a volume of\n"
+"a storage or distribution medium does not bring the other work under\n"
+"the scope of this License.\n"
+"\n"
+"  3. You may copy and distribute the Program (or a work based on it,\n"
+"under Section 2) in object code or executable form under the terms of\n"
+"Sections 1 and 2 above provided that you also do one of the following:\n"
+"\n"
+"    a) Accompany it with the complete corresponding machine-readable\n"
+"    source code, which must be distributed under the terms of Sections\n"
+"        1 and 2 above on a medium customarily used for software interchange; or,\n"
+"\n"
+"    b) Accompany it with a written offer, valid for at least three\n"
+"    years, to give any third party, for a charge no more than your\n"
+"    cost of physically performing source distribution, a complete\n"
+"    machine-readable copy of the corresponding source code, to be\n"
+"    distributed under the terms of Sections 1 and 2 above on a medium\n"
+"        customarily used for software interchange; or,\n"
+"\n"
+"    c) Accompany it with the information you received as to the offer\n"
+"    to distribute corresponding source code.  (This alternative is\n"
+"    allowed only for noncommercial distribution and only if you\n"
+"    received the program in object code or executable form with such\n"
+"    an offer, in accord with Subsection b above.)\n"
+"\n"
+"The source code for a work means the preferred form of the work for\n"
+"making modifications to it.  For an executable work, complete source\n"
+"code means all the source code for all modules it contains, plus any\n"
+"associated interface definition files, plus the scripts used to\n"
+"control compilation and installation of the executable.  However, as a\n"
+"special exception, the source code distributed need not include\n"
+"anything that is normally distributed (in either source or binary\n"
+"form) with the major components (compiler, kernel, and so on) of the\n"
+"operating system on which the executable runs, unless that component\n"
+"itself accompanies the executable.\n"
+"\n"
+"If distribution of executable or object code is made by offering\n"
+"access to copy from a designated place, then offering equivalent\n"
+"access to copy the source code from the same place counts as\n"
+"distribution of the source code, even though third parties are not\n"
+"compelled to copy the source along with the object code.\n"
+"\n"
+"  4. You may not copy, modify, sublicense, or distribute the Program\n"
+"except as expressly provided under this License.  Any attempt\n"
+"otherwise to copy, modify, sublicense or distribute the Program is\n"
+"void, and will automatically terminate your rights under this License.\n"
+"However, parties who have received copies, or rights, from you under\n"
+"this License will not have their licenses terminated so long as such\n"
+"parties remain in full compliance.\n"
+"\n"
+"  5. You are not required to accept this License, since you have not\n"
+"signed it.  However, nothing else grants you permission to modify or\n"
+"distribute the Program or its derivative works.  These actions are\n"
+"prohibited by law if you do not accept this License.  Therefore, by\n"
+"modifying or distributing the Program (or any work based on the\n"
+"Program), you indicate your acceptance of this License to do so, and\n"
+"all its terms and conditions for copying, distributing or modifying\n"
+"the Program or works based on it.\n"
+"\n"
+"  6. Each time you redistribute the Program (or any work based on the\n"
+"Program), the recipient automatically receives a license from the\n"
+"original licensor to copy, distribute or modify the Program subject to\n"
+"these terms and conditions.  You may not impose any further\n"
+"restrictions on the recipients' exercise of the rights granted herein.\n"
+"You are not responsible for enforcing compliance by third parties to\n"
+"this License.\n"
+"\n"
+"  7. If, as a consequence of a court judgment or allegation of patent\n"
+"infringement or for any other reason (not limited to patent issues),\n"
+"conditions are imposed on you (whether by court order, agreement or\n"
+"otherwise) that contradict the conditions of this License, they do not\n"
+"excuse you from the conditions of this License.  If you cannot\n"
+"distribute so as to satisfy simultaneously your obligations under this\n"
+"License and any other pertinent obligations, then as a consequence you\n"
+"may not distribute the Program at all.  For example, if a patent\n"
+"license would not permit royalty-free redistribution of the Program by\n"
+"all those who receive copies directly or indirectly through you, then\n"
+"the only way you could satisfy both it and this License would be to\n"
+"refrain entirely from distribution of the Program.\n"
+"\n"
+"If any portion of this section is held invalid or unenforceable under\n"
+"any particular circumstance, the balance of the section is intended to\n"
+"apply and the section as a whole is intended to apply in other\n"
+"circumstances.\n"
+"\n"
+"It is not the purpose of this section to induce you to infringe any\n"
+"patents or other property right claims or to contest validity of any\n"
+"such claims; this section has the sole purpose of protecting the\n"
+"integrity of the free software distribution system, which is\n"
+"implemented by public license practices.  Many people have made\n"
+"generous contributions to the wide range of software distributed\n"
+"through that system in reliance on consistent application of that\n"
+"system; it is up to the author/donor to decide if he or she is willing\n"
+"to distribute software through any other system and a licensee cannot\n"
+"impose that choice.\n"
+"\n"
+"This section is intended to make thoroughly clear what is believed to\n"
+"be a consequence of the rest of this License.\n"
+"\n"
+"  8. If the distribution and/or use of the Program is restricted in\n"
+"certain countries either by patents or by copyrighted interfaces, the\n"
+"original copyright holder who places the Program under this License\n"
+"may add an explicit geographical distribution limitation excluding\n"
+"those countries, so that distribution is permitted only in or among\n"
+"countries not thus excluded.  In such case, this License incorporates\n"
+"the limitation as if written in the body of this License.\n"
+"\n"
+"  9. The Free Software Foundation may publish revised and/or new versions\n"
+"of the General Public License from time to time.  Such new versions will\n"
+"be similar in spirit to the present version, but may differ in detail to\n"
+"address new problems or concerns.\n"
+"\n"
+"Each version is given a distinguishing version number.  If the Program\n"
+"specifies a version number of this License which applies to it and \"any\n"
+"later version\", you have the option of following the terms and conditions\n"
+"either of that version or of any later version published by the Free\n"
+"Software Foundation.  If the Program does not specify a version number of\n"
+"this License, you may choose any version ever published by the Free Software\n"
+"Foundation.\n"
+"\n"
+"  10. If you wish to incorporate parts of the Program into other free\n"
+"programs whose distribution conditions are different, write to the author\n"
+"to ask for permission.  For software which is copyrighted by the Free\n"
+"Software Foundation, write to the Free Software Foundation; we sometimes\n"
+"make exceptions for this.  Our decision will be guided by the two goals\n"
+"of preserving the free status of all derivatives of our free software and\n"
+"of promoting the sharing and reuse of software generally.\n"
+"\n"
+"    NO WARRANTY\n"
+"\n"
+"  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY\n"
+"FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN\n"
+"OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES\n"
+"PROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED\n"
+"OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\n"
+"MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS\n"
+"TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE\n"
+"PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,\n"
+"REPAIR OR CORRECTION.\n"
+"\n"
+"  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\n"
+"WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR\n"
+"REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,\n"
+"INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING\n"
+"OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED\n"
+"TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY\n"
+"YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER\n"
+"PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE\n"
+"POSSIBILITY OF SUCH DAMAGES.\n"
+"\n"
+"     END OF TERMS AND CONDITIONS\n"
+"\n"
+"    How to Apply These Terms to Your New Programs\n"
+"\n"
+"  If you develop a new program, and you want it to be of the greatest\n"
+"possible use to the public, the best way to achieve this is to make it\n"
+"free software which everyone can redistribute and change under these terms.\n"
+"\n"
+"  To do so, attach the following notices to the program.  It is safest\n"
+"to attach them to the start of each source file to most effectively\n"
+"convey the exclusion of warranty; and each file should have at least\n"
+"the \"copyright\" line and a pointer to where the full notice is found.\n"
+"\n"
+"    <one line to give the program's name and a brief idea of what it does.>\n"
+"    Copyright (C) <year>  <name of author>\n"
+"\n"
+"        This program is free software; you can redistribute it and/or modify\n"
+"    it under the terms of the GNU General Public License as published by\n"
+"        the Free Software Foundation; either version 2 of the License, or\n"
+"    (at your option) any later version.\n"
+"\n"
+"    This program is distributed in the hope that it will be useful,\n"
+"        but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"    GNU General Public License for more details.\n"
+"\n"
+"    You should have received a copy of the GNU General Public License\n"
+"        along with this program; if not, write to the Free Software\n"
+"    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n"
+"\n"
+"\n"
+"Also add information on how to contact you by electronic and paper mail.\n"
+"\n"
+"If the program is interactive, make it output a short notice like this\n"
+"when it starts in an interactive mode:\n"
+"\n"
+"    Gnomovision version 69, Copyright (C) year name of author\n"
+"        Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n"
+"    This is free software, and you are welcome to redistribute it\n"
+"    under certain conditions; type `show c' for details.\n"
+"\n"
+"The hypothetical commands `show w' and `show c' should show the appropriate\n"
+"parts of the General Public License.  Of course, the commands you use may\n"
+"be called something other than `show w' and `show c'; they could even be\n"
+"mouse-clicks or menu items--whatever suits your program.\n"
+"\n"
+"You should also get your employer (if you work as a programmer) or your\n"
+"school, if any, to sign a \"copyright disclaimer\" for the program, if\n"
+"        necessary.  Here is a sample; alter the names:\n"
+"\n"
+"  Yoyodyne, Inc., hereby disclaims all copyright interest in the program\n"
+"  `Gnomovision' (which makes passes at compilers) written by James Hacker.\n"
+"\n"
+"  <signature of Ty Coon>, 1 April 1989\n"
+"  Ty Coon, President of Vice\n"
+"\n"
+"This General Public License does not permit incorporating your program into\n"
+"proprietary programs.  If your program is a subroutine library, you may\n"
+"consider it more useful to permit linking proprietary applications with the\n"
+"library.  If this is what you want to do, use the GNU Library General\n"
+"Public License instead of this License.\n"
+msgstr "--literal--\nOpenGrade %s (версия Perl/Tk %s, версия Perl %s, версия GTK2 %s)\n(C) 2002-2009 Бенджамин Кроуэлл\n\nOpenGrade - это свободное программное обеспечение, которое помогает учителям следить за\nоценками своих учеников.\nНа веб-странице OpenGrade в\n  http://www.lightandmatter.com/ogr/ogr.html\nвы можете найти документацию и информацию о том, как связаться со мной.\n\nЯ буду особенно благодарен, если вы можете помочь мне улучшить OpenGrade отчётами\nоб ошибках.Однако, прежде чем сообщать об ошибке, пожалуйста, убедитесь, что вы\nработаете в самой последней версии OpenGrade, и что ваша ошибка уже не упоминаются\nв документации. Если вы напишите мне чтобы сообщить об ошибке, пожалуйста, скажите\nмне, какую операционную систему вы используете и то, какую версию OpenGrade, а также,\nесли возможно, приложите копию файла журнала успеваемости\n(я понимаю, что есть проблемы частной жизни).\n\nOpenGrade указана на веб-сайте FreshMeat\n  http://freshmeat.net\nгде вы можете посмотреть на историю версий, подписаться на E-Mail объявления о\nновых релизах и сделать публичные замечания по поводу программного обеспечения.\n\n-------------------------------------------------- ------------------------------------------- \n\nНиже лицензионное соглашение, согласно которому распространяется OpenGrade.\n\n            GNU GENERAL PUBLIC LICENSE\n               Version 2, June 1991\n\n Copyright (C) 1989, 1991 Free Software Foundation, Inc.\n                       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n            Preamble\n\n  The licenses for most software are designed to take away your\nfreedom to share and change it.  By contrast, the GNU General Public\nLicense is intended to guarantee your freedom to share and change free\nsoftware--to make sure the software is free for all its users.  This\nGeneral Public License applies to most of the Free Software\nFoundation's software and to any other program whose authors commit to\nusing it.  (Some other Free Software Foundation software is covered by\nthe GNU Library General Public License instead.)  You can apply it to\nyour programs, too.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthis service if you wish), that you receive source code or can get it\nif you want it, that you can change the software or use pieces of it\nin new free programs; and that you know you can do these things.\n\n  To protect your rights, we need to make restrictions that forbid\nanyone to deny you these rights or to ask you to surrender the rights.\nThese restrictions translate to certain responsibilities for you if you\ndistribute copies of the software, or if you modify it.\n\n  For example, if you distribute copies of such a program, whether\ngratis or for a fee, you must give the recipients all the rights that\nyou have.  You must make sure that they, too, receive or can get the\nsource code.  And you must show them these terms so they know their\nrights.\n\n  We protect your rights with two steps: (1) copyright the software, and\n(2) offer you this license which gives you legal permission to copy,\ndistribute and/or modify the software.\n\n  Also, for each author's protection and ours, we want to make certain\nthat everyone understands that there is no warranty for this free\nsoftware.  If the software is modified by someone else and passed on, we\nwant its recipients to know that what they have is not the original, so\nthat any problems introduced by others will not reflect on the original\nauthors' reputations.\n\n  Finally, any free program is threatened constantly by software\npatents.  We wish to avoid the danger that redistributors of a free\nprogram will individually obtain patent licenses, in effect making the\nprogram proprietary.  To prevent this, we have made it clear that any\npatent must be licensed for everyone's free use or not licensed at all.\n\n  The precise terms and conditions for copying, distribution and\nmodification follow.\n\n    GNU GENERAL PUBLIC LICENSE\n   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n\n  0. This License applies to any program or other work which contains\na notice placed by the copyright holder saying it may be distributed\nunder the terms of this General Public License.  The \"Program\", below,\nrefers to any such program or work, and a \"work based on the Program\"\nmeans either the Program or any derivative work under copyright law:\nthat is to say, a work containing the Program or a portion of it,\neither verbatim or with modifications and/or translated into another\nlanguage.  (Hereinafter, translation is included without limitation in\nthe term \"modification\".)  Each licensee is addressed as \"you\".\n\nActivities other than copying, distribution and modification are not\ncovered by this License; they are outside its scope.  The act of\nrunning the Program is not restricted, and the output from the Program\nis covered only if its contents constitute a work based on the\nProgram (independent of having been made by running the Program).\nWhether that is true depends on what the Program does.\n\n  1. You may copy and distribute verbatim copies of the Program's\nsource code as you receive it, in any medium, provided that you\nconspicuously and appropriately publish on each copy an appropriate\n        copyright notice and disclaimer of warranty; keep intact all the\n        notices that refer to this License and to the absence of any warranty;\nand give any other recipients of the Program a copy of this License\nalong with the Program.\n\nYou may charge a fee for the physical act of transferring a copy, and\nyou may at your option offer warranty protection in exchange for a fee.\n\n  2. You may modify your copy or copies of the Program or any portion\nof it, thus forming a work based on the Program, and copy and\ndistribute such modifications or work under the terms of Section 1\nabove, provided that you also meet all of these conditions:\n\n    a) You must cause the modified files to carry prominent notices\n    stating that you changed the files and the date of any change.\n\n    b) You must cause any work that you distribute or publish, that in\n    whole or in part contains or is derived from the Program or any\n    part thereof, to be licensed as a whole at no charge to all third\n    parties under the terms of this License.\n\n    c) If the modified program normally reads commands interactively\n    when run, you must cause it, when started running for such\n    interactive use in the most ordinary way, to print or display an\n    announcement including an appropriate copyright notice and a\n    notice that there is no warranty (or else, saying that you provide\n    a warranty) and that users may redistribute the program under\n    these conditions, and telling the user how to view a copy of this\n    License.  (Exception: if the Program itself is interactive but\n    does not normally print such an announcement, your work based on\n    the Program is not required to print an announcement.)\n\nThese requirements apply to the modified work as a whole.  If\nidentifiable sections of that work are not derived from the Program,\nand can be reasonably considered independent and separate works in\nthemselves, then this License, and its terms, do not apply to those\nsections when you distribute them as separate works.  But when you\ndistribute the same sections as part of a whole which is a work based\non the Program, the distribution of the whole must be on the terms of\nthis License, whose permissions for other licensees extend to the\nentire whole, and thus to each and every part regardless of who wrote it.\n\nThus, it is not the intent of this section to claim rights or contest\n        your rights to work written entirely by you; rather, the intent is to\nexercise the right to control the distribution of derivative or\ncollective works based on the Program.\n\nIn addition, mere aggregation of another work not based on the Program\nwith the Program (or with a work based on the Program) on a volume of\na storage or distribution medium does not bring the other work under\nthe scope of this License.\n\n  3. You may copy and distribute the Program (or a work based on it,\nunder Section 2) in object code or executable form under the terms of\nSections 1 and 2 above provided that you also do one of the following:\n\n    a) Accompany it with the complete corresponding machine-readable\n    source code, which must be distributed under the terms of Sections\n        1 and 2 above on a medium customarily used for software interchange; or,\n\n    b) Accompany it with a written offer, valid for at least three\n    years, to give any third party, for a charge no more than your\n    cost of physically performing source distribution, a complete\n    machine-readable copy of the corresponding source code, to be\n    distributed under the terms of Sections 1 and 2 above on a medium\n        customarily used for software interchange; or,\n\n    c) Accompany it with the information you received as to the offer\n    to distribute corresponding source code.  (This alternative is\n    allowed only for noncommercial distribution and only if you\n    received the program in object code or executable form with such\n    an offer, in accord with Subsection b above.)\n\nThe source code for a work means the preferred form of the work for\nmaking modifications to it.  For an executable work, complete source\ncode means all the source code for all modules it contains, plus any\nassociated interface definition files, plus the scripts used to\ncontrol compilation and installation of the executable.  However, as a\nspecial exception, the source code distributed need not include\nanything that is normally distributed (in either source or binary\nform) with the major components (compiler, kernel, and so on) of the\noperating system on which the executable runs, unless that component\nitself accompanies the executable.\n\nIf distribution of executable or object code is made by offering\naccess to copy from a designated place, then offering equivalent\naccess to copy the source code from the same place counts as\ndistribution of the source code, even though third parties are not\ncompelled to copy the source along with the object code.\n\n  4. You may not copy, modify, sublicense, or distribute the Program\nexcept as expressly provided under this License.  Any attempt\notherwise to copy, modify, sublicense or distribute the Program is\nvoid, and will automatically terminate your rights under this License.\nHowever, parties who have received copies, or rights, from you under\nthis License will not have their licenses terminated so long as such\nparties remain in full compliance.\n\n  5. You are not required to accept this License, since you have not\nsigned it.  However, nothing else grants you permission to modify or\ndistribute the Program or its derivative works.  These actions are\nprohibited by law if you do not accept this License.  Therefore, by\nmodifying or distributing the Program (or any work based on the\nProgram), you indicate your acceptance of this License to do so, and\nall its terms and conditions for copying, distributing or modifying\nthe Program or works based on it.\n\n  6. Each time you redistribute the Program (or any work based on the\nProgram), the recipient automatically receives a license from the\noriginal licensor to copy, distribute or modify the Program subject to\nthese terms and conditions.  You may not impose any further\nrestrictions on the recipients' exercise of the rights granted herein.\nYou are not responsible for enforcing compliance by third parties to\nthis License.\n\n  7. If, as a consequence of a court judgment or allegation of patent\ninfringement or for any other reason (not limited to patent issues),\nconditions are imposed on you (whether by court order, agreement or\notherwise) that contradict the conditions of this License, they do not\nexcuse you from the conditions of this License.  If you cannot\ndistribute so as to satisfy simultaneously your obligations under this\nLicense and any other pertinent obligations, then as a consequence you\nmay not distribute the Program at all.  For example, if a patent\nlicense would not permit royalty-free redistribution of the Program by\nall those who receive copies directly or indirectly through you, then\nthe only way you could satisfy both it and this License would be to\nrefrain entirely from distribution of the Program.\n\nIf any portion of this section is held invalid or unenforceable under\nany particular circumstance, the balance of the section is intended to\napply and the section as a whole is intended to apply in other\ncircumstances.\n\nIt is not the purpose of this section to induce you to infringe any\npatents or other property right claims or to contest validity of any\nsuch claims; this section has the sole purpose of protecting the\nintegrity of the free software distribution system, which is\nimplemented by public license practices.  Many people have made\ngenerous contributions to the wide range of software distributed\nthrough that system in reliance on consistent application of that\nsystem; it is up to the author/donor to decide if he or she is willing\nto distribute software through any other system and a licensee cannot\nimpose that choice.\n\nThis section is intended to make thoroughly clear what is believed to\nbe a consequence of the rest of this License.\n\n  8. If the distribution and/or use of the Program is restricted in\ncertain countries either by patents or by copyrighted interfaces, the\noriginal copyright holder who places the Program under this License\nmay add an explicit geographical distribution limitation excluding\nthose countries, so that distribution is permitted only in or among\ncountries not thus excluded.  In such case, this License incorporates\nthe limitation as if written in the body of this License.\n\n  9. The Free Software Foundation may publish revised and/or new versions\nof the General Public License from time to time.  Such new versions will\nbe similar in spirit to the present version, but may differ in detail to\naddress new problems or concerns.\n\nEach version is given a distinguishing version number.  If the Program\nspecifies a version number of this License which applies to it and \"any\nlater version\", you have the option of following the terms and conditions\neither of that version or of any later version published by the Free\nSoftware Foundation.  If the Program does not specify a version number of\nthis License, you may choose any version ever published by the Free Software\nFoundation.\n\n  10. If you wish to incorporate parts of the Program into other free\nprograms whose distribution conditions are different, write to the author\nto ask for permission.  For software which is copyrighted by the Free\nSoftware Foundation, write to the Free Software Foundation; we sometimes\nmake exceptions for this.  Our decision will be guided by the two goals\nof preserving the free status of all derivatives of our free software and\nof promoting the sharing and reuse of software generally.\n\n    NO WARRANTY\n\n  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY\nFOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN\nOTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES\nPROVIDE THE PROGRAM \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED\nOR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF\nMERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS\nTO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE\nPROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,\nREPAIR OR CORRECTION.\n\n  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING\nWILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR\nREDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,\nINCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING\nOUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED\nTO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY\nYOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER\nPROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE\nPOSSIBILITY OF SUCH DAMAGES.\n\n     END OF TERMS AND CONDITIONS\n\n    How to Apply These Terms to Your New Programs\n\n  If you develop a new program, and you want it to be of the greatest\npossible use to the public, the best way to achieve this is to make it\nfree software which everyone can redistribute and change under these terms.\n\n  To do so, attach the following notices to the program.  It is safest\nto attach them to the start of each source file to most effectively\nconvey the exclusion of warranty; and each file should have at least\nthe \"copyright\" line and a pointer to where the full notice is found.\n\n    <one line to give the program's name and a brief idea of what it does.>\n    Copyright (C) <year>  <name of author>\n\n        This program is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n        the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n        but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n        along with this program; if not, write to the Free Software\n    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n\n\nAlso add information on how to contact you by electronic and paper mail.\n\nIf the program is interactive, make it output a short notice like this\nwhen it starts in an interactive mode:\n\n    Gnomovision version 69, Copyright (C) year name of author\n        Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n    This is free software, and you are welcome to redistribute it\n    under certain conditions; type `show c' for details.\n\nThe hypothetical commands `show w' and `show c' should show the appropriate\nparts of the General Public License.  Of course, the commands you use may\nbe called something other than `show w' and `show c'; they could even be\nmouse-clicks or menu items--whatever suits your program.\n\nYou should also get your employer (if you work as a programmer) or your\nschool, if any, to sign a \"copyright disclaimer\" for the program, if\n        necessary.  Here is a sample; alter the names:\n\n  Yoyodyne, Inc., hereby disclaims all copyright interest in the program\n  `Gnomovision' (which makes passes at compilers) written by James Hacker.\n\n  <signature of Ty Coon>, 1 April 1989\n  Ty Coon, President of Vice\n\nThis General Public License does not permit incorporating your program into\nproprietary programs.  If your program is a subroutine library, you may\nconsider it more useful to permit linking proprietary applications with the\nlibrary.  If this is what you want to do, use the GNU Library General\nPublic License instead of this License.\n"
+
+#: MyWords_.pm:600
+msgid "Student: "
+msgstr "Студент:"
+
+#: MyWords_.pm:601
+msgid "Assignment: "
+msgstr "Задание:"
+
+#: MyWords_.pm:602
+msgid "Grade: "
+msgstr "Оценка:"
+
+#: MyWords_.pm:603
+msgid "Open Gradebook"
+msgstr "Открыть журнал успеваемости"
+
+#: MyWords_.pm:607
+msgid "Summary of Changes"
+msgstr "Сводка изменений"
+
+#: MyWords_.pm:608
+msgid "File to Change"
+msgstr "Файл для изменения"
+
+#: MyWords_.pm:610
+msgid "File to Fold In"
+msgstr "Файл для сложения"
+
+#: MyWords_.pm:611
+#, perl-format
+msgid "The grade for %s on %s is %s. Change it to %s?"
+msgstr "Оценка для %s на %s является %s. Изменить её на %s?"
+
+#: MyWords_.pm:612
+msgid "Yes"
+msgstr "Да"
+
+#: MyWords_.pm:613
+msgid "No"
+msgstr "Нет"
+
+#: MyWords_.pm:615
+msgid "New password"
+msgstr "Новый пароль"
+
+#: MyWords_.pm:616
+msgid "Filename"
+msgstr "Имя файла"
+
+#: MyWords_.pm:617
+msgid "New File"
+msgstr "Новый файл"
+
+#: MyWords_.pm:618
+#, perl-format
+msgid "The file %s already exists."
+msgstr "Файл %s уже существует."
+
+#: MyWords_.pm:620
+msgid ""
+"Your file has been created. You might want to use the File menu now to\n"
+"set your grading standards, and the Server menu to set yourself up to let students\n"
+"view their grades on the web. You will also need to use the Assignments menu\n"
+"to create categories (exams, homework, etc.) and make assignments within those\n"
+"categories. And of course you have students! You can put in their names using the\n"
+"Students menu.\n"
+msgstr "Ваш файл был создан. Теперь вы можете использовать меню Файл, чтобы\nустановить ваши стандарты оценивания, и меню сервера, чтобы установить себя, позволив студентам\nсмотреть свои оценки в Интернете. Вам также нужно использовать меню Заданий, чтобы\nсоздать категории (экзамены, домашние задания, и т.д.) и назначить задания в пределах этих\nкатегорий. И, конечно, у вас есть студенты! Вы можете поместить их имена,\nпользуясь меню Студентов.\n"
+
+#: MyWords_.pm:627
+msgid "Delete an Entire Category"
+msgstr "Удалить всю категорию"
+
+#: MyWords_.pm:628
+#, perl-format
+msgid ""
+"You are asking to delete the entire category %s, which contains %s %s. Are "
+"you sure you want to do this?"
+msgstr "Вас спрашивают удалить ли всю категорию %s, которая содержит %s %s. Вы уверены, что хотите это сделать?"
+
+#: MyWords_.pm:629
+msgid "Editing Category Weights"
+msgstr "Редактирование весов категорий"
+
+#: MyWords_.pm:630
+msgid ""
+"This gradebook has been set up using point-total grading, not weighted "
+"grading."
+msgstr "Этот журнал успеваемости был создан, используя полностью точечное оценивание, не взвешенное оценивание."
+
+#: MyWords_.pm:631
+msgid "This gradebook doesn't yet have any categories."
+msgstr "Этот журнал успеваемости ещё не имеет категорий."
+
+#: MyWords_.pm:632
+#, perl-format
+msgid "Weight for %s"
+msgstr "Вес для %s"
+
+#: MyWords_.pm:633
+msgid ""
+"This is a single-assignment category, and it already has an assignment in "
+"it."
+msgstr "Это однозадачная категория, и в ней уже есть задание."
+
+#: MyWords_.pm:634
+#, perl-format
+msgid "The assignment %s already exists in category %s."
+msgstr "Задание %s уже существует в категории %s."
+
+#: MyWords_.pm:636
+msgid "Number or name"
+msgstr "Число или имя"
+
+#: MyWords_.pm:637
+msgid "Maximum score"
+msgstr "Максимальный балл"
+
+#: MyWords_.pm:638
+msgid "Due date (optional)"
+msgstr "Срок (опционально)"
+
+#: MyWords_.pm:640
+msgid "Grade Must Be Numeric"
+msgstr "Оценка должна быть числом"
+
+#: MyWords_.pm:642
+msgid "Grades must be numeric.\n"
+msgstr "Оценка должна быть числом.\n"
+
+#: MyWords_.pm:644
+msgid "Score Greater Than Maximum"
+msgstr "Балл больше максимального"
+
+#: MyWords_.pm:646
+#, perl-format
+msgid ""
+"The score of %s for %s on %s is greater than the maximum of %s. \n"
+"To confirm this score, hit OK.\n"
+"To restore this score to its previous value, hit cancel.\n"
+"To correct this score, enter the corrected value and hit OK. To avoid this\n"
+"warning in the future, you can enter a greater-than-maximum score with an x on the\n"
+"end, e.g., 105x.\n"
+msgstr "Балл из %s для %s на %s больше, чем максимум %s.\nЧтобы подтвердить этот балл, нажмите ОК.\nДля восстановления этого балла к своему предыдущему значению, нажмите Отмену.\nЧтобы исправить этот балл, введите скорректированное значение и нажмите кнопку ОК. Чтобы избежать этого\nпредупреждения в будущем, вы можете ввести больше, чем максимальный балл с х на\nконце, например, 105x.\n"
+
+#: MyWords_.pm:653
+msgid "Which marking period?"
+msgstr "Какой период маркировать?"
+
+#: MyWords_.pm:654
+msgid "All marking periods"
+msgstr "Все промаркированные периоды"
+
+#: MyWords_.pm:655
+msgid "Class Statistics"
+msgstr "Статистика класса"
+
+#: MyWords_.pm:657
+msgid "Report: Overall Grade"
+msgstr "Отчёт: Оценка в целом"
+
+#: MyWords_.pm:658
+msgid "Report: Averages in a Category"
+msgstr "Отчёт: Среднее в категории"
+
+#: MyWords_.pm:659
+msgid "Report: Scores on an Assignment"
+msgstr "Отчёт: Баллы за задание"
+
+#: MyWords_.pm:660
+msgid "Report: Statistics For an Assignment"
+msgstr "Отчёт: Статистика для задания"
+
+#: MyWords_.pm:661
+msgid "Sort by score"
+msgstr "Сортировать по баллу"
+
+#: MyWords_.pm:662
+msgid "Sort by name"
+msgstr "Сортировать по имени"
+
+#: MyWords_.pm:663
+msgid "Print Graphical Version"
+msgstr "Напечатать графическую версию"
+
+#: MyWords_.pm:664
+msgid "Save Graphical Version as PDF"
+msgstr "Сохранить графическую версию в PDF"
+
+#: MyWords_.pm:666
+msgid "Weighting mode"
+msgstr "Режим измерения веса"
+
+#: MyWords_.pm:667
+msgid "straight points"
+msgstr "ровные точки"
+
+#: MyWords_.pm:668
+msgid "weighted"
+msgstr "взвешенно"
+
+#: MyWords_.pm:669
+msgid "not defined, because no categories have been set up yet"
+msgstr "не определено, потому что ещё не было установлено категорий"
+
+#: MyWords_.pm:670
+msgid "Marking periods"
+msgstr "Маркировка периодов"
+
+#: MyWords_.pm:672
+msgid "Cloning a File"
+msgstr "Клонировать файл"
+
+#: MyWords_.pm:674 MyWords_.pm:1022
+msgid ""
+"Please enter a description of the class, to appear at the top of reports."
+msgstr "Пожалуйста, введите описание класса, появляющееся в верхней части отчётов."
+
+#: MyWords_.pm:676
+msgid ""
+"Please enter the days of the week on which the class meets, using R for\n"
+"Thursday, and U for Sunday. Supplying accurate information here will make it\n"
+"quicker for you to enter due dates. If the class doesn't meet on definite days\n"
+"of the week, just leave it blank to accept the default, which is MTWRF.\n"
+msgstr "Пожалуйста, введите дни недели, в которые класс встречается, используя R для\nчетверга и U для воскресенья. Указание точной информации здесь ускорит\nвам ввод сроков. Если класс не встречается в определённые дни\nнедели, просто оставьте это поле пустым, чтобы принять значение по умолчанию, то есть MTWRF.\n"
+
+#: MyWords_.pm:682 MyWords_.pm:1065
+msgid ""
+"Please enter the time the class meets, in 24-hour hh:mm format. For example,\n"
+"if it meets at 1:30 in the afternoon, enter 13:30.\n"
+"It's OK if you leave this blank.\n"
+msgstr "Пожалуйста, введите время встреч класса в 24-часовом формате чч:мм. Например,\nесли встречи в 1:30 во второй половине дня, то введите 13:30.\nЭто нормально, если вы оставите здесь пусто.\n"
+
+#: MyWords_.pm:686 MyWords_.pm:1074
+msgid "Please enter the calendar year during which the term started."
+msgstr "Пожалуйста, введите календарный год, в течение которого начат семестр."
+
+#: MyWords_.pm:687 MyWords_.pm:1077
+msgid "Please enter the number of the month (1-12) in which the term started."
+msgstr "Пожалуйста, введите номер месяца (1-12), в котором начат семестр."
+
+#: MyWords_.pm:689 MyWords_.pm:1039
+msgid ""
+"Please enter a password that you will use for authentication. You will need\n"
+"to enter this password whenever you open this file. The password can be blank\n"
+"if you don't want to remember a real one.\n"
+msgstr "Пожалуйста, введите пароль, который вы будете использовать для аутентификации. Вам потребуется\nвводить этот пароль каждый раз, когда вы открываете этот файл. Пароль может быть пустым,\nесли вы не хотите запоминать реальный пароль.\n"
+
+#: MyWords_.pm:694
+msgid ""
+"If you will be posting students' grades on a server using Spotter, please "
+"enter the subdirectory for the class.\n"
+msgstr "Если вы будете размещать оценки учащихся на сервере, используя Spotter,  то пожалуйста, введите подкаталог для класса.\n"
+
+#: MyWords_.pm:696
+msgid "Format"
+msgstr "Формат"
+
+#: MyWords_.pm:698
+msgid ""
+"For Online Grades format, make sure you have the right options set up in Settings under the Online Grades menu.\n"
+"To make the Online Grades menu appear, use the Preferences menu and restart OpenGrade.\n"
+msgstr "Для формата онлайн оценок убедитесь, что у вас использованы правильные опции, установленные в настройках в меню онлайн оценок.\nДля того, чтобы меню онлайн оценок появилось, используйте меню Настроек и перезагрузите OpenGrade.\n"
+
+#: MyWords_.pm:704
+msgid ""
+"The web server gave an error.\n"
+"The file ServerOG.log on the server has more detailed information on the error, which is not revealed here for security reasons.\n"
+"If the error is incorrect_password_or_server_key, then either the server key or the password is wrong.\n"
+"For the server key, you can check against the file YOURNAME.instructor_info on the server and make sure that it is the\n"
+"same as the value set in the Spotter menu under Client/Server Settings.\n"
+"The password you used to open this gradebook file must also match the one in the .instructor_info file. (Actually the password itself\n"
+"is not stored in that file; only a hash of the password is stored there.)\n"
+"For documentation on this kind of thing, see the Spotter documentation, under \"Interfacing.\"\n"
+msgstr "Веб-сервер выдал ошибку.\nФайл ServerOG.log на сервере имеет более подробную информацию об ошибке, которая не показана здесь по соображениям безопасности.\nЕсли ошибка incorrect_password_or_server_key, то либо ключ сервера, либо неверный пароль.\nДля ключа сервера вы можете проверить файл YOURNAME.instructor_info на сервере и убедиться, что он\nтакой же, как и значение, установленное в меню Spotter под параметрами клиента/сервера.\nПароль, используемый вами для открытия этого файла журнала успеваемости, должен также соответствовать паролю в файле .instructor_info. (На самом деле сам пароль\nне хранится в этом файле; только хеш пароля хранится там.)\nДля документации на такого рода вещи обратитесь к документации Spotter, под \"Интерфейсом.\"\n"
+
+#: MyWords_.pm:713
+msgid "Broadcast a message to the whole class -- are you sure?"
+msgstr "Трансляция сообщения для целого класса -- вы уверены?"
+
+#: MyWords_.pm:716
+msgid "Deactivate Account"
+msgstr "Деактивировать аккаунт"
+
+#: MyWords_.pm:718
+msgid "to"
+msgstr "к"
+
+#: MyWords_.pm:719
+msgid "send e-mail?"
+msgstr "отправить почту?"
+
+#: MyWords_.pm:720
+msgid "subject"
+msgstr "предмет"
+
+#: MyWords_.pm:721
+msgid "body"
+msgstr "тело"
+
+#: MyWords_.pm:723
+msgid ""
+"You must set the server key. This is done through Client/Server Settings in the\n"
+"Spotter menu.\n"
+msgstr "Вы должны установить ключ сервера. Это делается с помощью настройки клиента/сервера в\nМеню Spotter.\n"
+
+#: MyWords_.pm:726
+msgid "There was an error connecting to the server."
+msgstr "Случилась ошибка подключения к серверу."
+
+#: MyWords_.pm:728 MyWords_.pm:1159
+msgid "yes"
+msgstr "да"
+
+#: MyWords_.pm:729 MyWords_.pm:1160
+msgid "no"
+msgstr "нет"
+
+#: MyWords_.pm:733
+msgid "Grade Symbols"
+msgstr "Символы оценок"
+
+#: MyWords_.pm:734
+msgid "Minimum Percentages"
+msgstr "Минимальные проценты"
+
+#: MyWords_.pm:735
+msgid ""
+"Custom: Enter a series of symbols separated by spaces, in order from highest"
+" to lowest. At the end, you must include a grade symbol that is the lowest "
+"of all, requiring zero percent to attain."
+msgstr "Пользовательское: Введите серию символов, разделённых пробелами, в порядке от высшего к низшему. В конце вы должны включить символ оценки, который является самым низким из всех, требуя ноль процентов для достижения."
+
+#: MyWords_.pm:736
+msgid "You must have at least two grade symbols."
+msgstr "У вас должно быть по крайней мере два символа оценки."
+
+#: MyWords_.pm:737
+msgid "Too many grade symbols."
+msgstr "Слишком много символов оценки."
+
+#: MyWords_.pm:738
+msgid "All grade symbols must be unique."
+msgstr "Все символы оценки должны быть уникальными."
+
+#: MyWords_.pm:739
+msgid "Percentages must be in descending order, and must not be the same."
+msgstr "Проценты должны быть в порядке убывания и не должны быть идентичны."
+
+#: MyWords_.pm:741
+#, perl-format
+msgid "Name of marking period %s"
+msgstr "Имя промаркированного периода %s"
+
+#: MyWords_.pm:742
+#, perl-format
+msgid "Starting date of marking period %s"
+msgstr "Начальная дата промаркированного периода %s"
+
+#: MyWords_.pm:747
+msgid "Please enter the username you'll use on the server."
+msgstr "Пожалуйста, введите имя пользователя, которое будет использоваться на сервере."
+
+#: MyWords_.pm:750
+msgid "Please enter account you'll use on the server."
+msgstr "Пожалуйста, введите аккаунт, который будет использоваться на сервере."
+
+#: MyWords_.pm:753
+msgid "Please enter the name of the server, e.g., myserver.edu.\n"
+msgstr "Пожалуйста, введите имя сервера, например, myserver.edu.\n"
+
+#: MyWords_.pm:757
+msgid "Please enter the subdirectory for the class, e.g., f2002/205.\n"
+msgstr "Пожалуйста, введите подкаталог для класса, например, f2002/205.\n"
+
+#: MyWords_.pm:761
+msgid "Please enter the server key.\n"
+msgstr "Пожалуйста, введите ключ сервера.\n"
+
+#: MyWords_.pm:765 MyWords_.pm:1108
+msgid "Please enter the location of the cgi-bin on your server."
+msgstr "Пожалуйста, введите расположение cgi-bin на сервере."
+
+#: MyWords_.pm:768
+msgid ""
+"Please enter the class's subdirectory, relative to cgi-bin.\n"
+"This is typically of the form spotter/username/term/course.\n"
+msgstr "Пожалуйста, введите подкаталог класса, привязанный к cgi-bin.\nЭто, как правило, форма spotter/имя пользователя /семестр/курс.\n"
+
+#: MyWords_.pm:772
+msgid "Settings for Online Grades"
+msgstr "Настройки для онлайн оценок"
+
+#: MyWords_.pm:773
+msgid "Server"
+msgstr "Сервер"
+
+#: MyWords_.pm:774
+msgid "Title of course"
+msgstr "Название курса"
+
+#: MyWords_.pm:775
+msgid "Username or email address"
+msgstr "Имя пользователя или адрес почты"
+
+#: MyWords_.pm:776
+msgid "Course code"
+msgstr "Код курса"
+
+#: MyWords_.pm:777
+msgid "Section number"
+msgstr "Номер секции"
+
+#: MyWords_.pm:778
+msgid "Teacher's name to display on reports, e.g., Ms. Smith"
+msgstr "Имя учителя для отображения в отчётах, например, г-жа Смит"
+
+#: MyWords_.pm:779
+msgid "Term"
+msgstr "Семестр"
+
+#: MyWords_.pm:780
+msgid "Text to display regarding the class"
+msgstr "Текст для отображения в отношении класса"
+
+#: MyWords_.pm:781
+msgid "Period (optional)"
+msgstr "Период (опционально)"
+
+#: MyWords_.pm:782
+msgid "Phone number (optional)"
+msgstr "Номер телефона (опционально)"
+
+#: MyWords_.pm:786
+msgid ""
+"Enter a constant to add onto all font sizes. For example, if you enter 2, "
+"all font sizes will be increased by 2.\n"
+msgstr "Введите константу, добавляемую на все размеры шрифта. Например, если ввести 2, то все размеры шрифтов будут увеличены на 2.\n"
+
+#: MyWords_.pm:790
+msgid "Do you want OpenGrade to beep at you?\n"
+msgstr "Вы хотите чтобы OpenGrade издавал звуковой сигнал на вас?\n"
+
+#: MyWords_.pm:794
+msgid "Do you want grades left-justified, or right-justified?\n"
+msgstr "Вы хотите оценки, выровненные влево или вправо?\n"
+
+#: MyWords_.pm:798
+msgid ""
+"Enter the Unix shell command you want to use for opening a text file in an "
+"external editor, e.g., gedit.\n"
+msgstr "Введите команду оболочки Unix, которую вы хотите использовать для открытия текстового файла во внешнем редакторе, например, gedit.\n"
+
+#: MyWords_.pm:802
+msgid ""
+"Enter the Unix shell command you want to use to print a text file, e.g., lpr"
+" -o page-left=40 -o page-right=36 -o page-top=100 -o page-bottom=36.\n"
+msgstr "Введите команду оболочки Unix, которую вы хотите использовать для печати текстового файла, например, lpr -o page-left=40 -o page-right=36 -o page-top=100 -o page-bottom=36.\n"
+
+#: MyWords_.pm:806
+msgid ""
+"Enter the Unix shell command you want to use to open a spreadsheet file, "
+"e.g., soffice -calc.\n"
+msgstr "Введите команду оболочки Unix, которую вы хотите использовать для открытия файла электронной таблицы, например, soffice -calc.\n"
+
+#: MyWords_.pm:810
+msgid ""
+"You can set the cryptographic algorithm used for creating the digital watermarks in gradebook files. SHA1 is automatically supported\n"
+"if you install OpenGrade with all its dependencies, but weaknesses in the SHA1 algorithm have been showing up, leading to the possibility\n"
+"of forgery at some point in the future. Whirlpool is also automatically supported\n"
+"if you install OpenGrade with all its dependencies, but will be slow unless you also install the Digest::Whirlpool module from CPAN.\n"
+msgstr "Вы можете установить криптографический алгоритм, используемый для создания водяных знаков в цифровых файлах журнала успеваемости. SHA1 поддерживается автоматически,\nесли вы установите OpenGrade со всеми его зависимостями, но есть недостатки в алгоритме SHA1, что приводит к возможности\nподделки в какой-то момент в будущем. Whirlpool также автоматически поддерживается,\nесли вы установите OpenGrade со всеми его зависимостями, но будет медленным, пока вы не установите модуль Digest::Whirlpool из CPAN.\n"
+
+#: MyWords_.pm:817
+msgid "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/opengrade"
+msgstr "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/opengrade"
+
+#: MyWords_.pm:819
+msgid "to enter grades on an assignment, in alphabetical order,"
+msgstr "ввести оценки для заданий в алфавитном порядке,"
+
+#: MyWords_.pm:821
+msgid "to enter grades on an assignment, selecting one student at a time,"
+msgstr "ввести оценки для заданий, выбирая одного студента за раз,"
+
+#: MyWords_.pm:823
+msgid "to edit the roster or the list of categories,"
+msgstr "редактировать реестр или список категорий,"
+
+#: MyWords_.pm:825
+msgid "for reports,"
+msgstr "для отчётов,"
+
+#: MyWords_.pm:827
+msgid "to upload grades,"
+msgstr "выгрузить оценки,"
+
+#: MyWords_.pm:829
+msgid "to save and close this file"
+msgstr "сохранить и закрыть этот файл"
+
+#: MyWords_.pm:831
+msgid "to close this file,"
+msgstr "закрыть этот файл,"
+
+#: MyWords_.pm:833
+msgid "to save this file"
+msgstr "сохранить этот файл"
+
+#: MyWords_.pm:835
+msgid "(not necessary, because it has not been modified)"
+msgstr "(нет необходимости, так как он не был изменён)"
+
+#: MyWords_.pm:837
+msgid "to close this file without saving it,"
+msgstr "закрыть этот файл без его сохранения,"
+
+#: MyWords_.pm:839
+msgid "to create a new file,"
+msgstr "создать новый файл,"
+
+#: MyWords_.pm:841
+msgid "to open a file,"
+msgstr "открыть файл,"
+
+#: MyWords_.pm:843
+msgid "to quit."
+msgstr "выйти."
+
+#: MyWords_.pm:845
+msgid "to save this file and quit."
+msgstr "сохранить этот файл и выйти."
+
+#: MyWords_.pm:847
+msgid "user"
+msgstr "пользователь"
+
+#: MyWords_.pm:849
+msgid "date"
+msgstr "дата"
+
+#: MyWords_.pm:851
+msgid "Main menu --- enter"
+msgstr "Главное меню --- ввод"
+
+#: MyWords_.pm:853
+msgid "Writing file."
+msgstr "Записывается файл."
+
+#: MyWords_.pm:855
+msgid "Enter the name of the gradebook file to open."
+msgstr "Введите имя файла журнала успеваемости для открытия"
+
+#: MyWords_.pm:857
+msgid "Done."
+msgstr "Завершено."
+
+#: MyWords_.pm:860 MyWords_.pm:980
+msgid "Edit menu --- enter"
+msgstr "Меню редактирования --- ввод"
+
+#: MyWords_.pm:862
+msgid "to edit categories,"
+msgstr "редактировать категории,"
+
+#: MyWords_.pm:864
+msgid "to edit students,"
+msgstr "редактировать студентов,"
+
+#: MyWords_.pm:866
+msgid "- or m to return to the main menu."
+msgstr "- или m для возврата в главное меню."
+
+#: MyWords_.pm:868
+msgid "Edit Category"
+msgstr "Редактировать категорию"
+
+#: MyWords_.pm:871
+msgid "to add a new category,"
+msgstr "добавить новую категорию,"
+
+#: MyWords_.pm:873
+msgid "to go back to the edit menu,"
+msgstr "вернуться к меню редактирования,"
+
+#: MyWords_.pm:875
+msgid "to go back to the main menu."
+msgstr "вернуться к главному меню."
+
+#: MyWords_.pm:877
+msgid "That category already exists."
+msgstr "Такая категория уже существует."
+
+#: MyWords_.pm:880
+msgid ""
+"Please enter a short name for the category,\n"
+" e.g., e for exams, or hw for homework.\n"
+"It should contain only lowercase letters from a to z. It will be used\n"
+"as a column header in table reports.\n"
+msgstr "Пожалуйста, введите краткое имя для категории,\nнапример, е для экзаменов, или hw для домашней работы.\nОно должно содержать только строчные буквы от a до z. Оно будет использоваться\nв качестве заголовка столбца в табличных отчётах.\n"
+
+#: MyWords_.pm:887
+msgid ""
+"Please enter a singular noun to describe this category. This will\n"
+"be combined with the names of assignments, e.g., exam+1=exam 1.\n"
+msgstr "Пожалуйста, введите простое существительное, чтобы описать эту категорию. Оно будет\nскомбинировано в сочетании с именами заданий, например, экзамен+1=экзамен 1.\n"
+
+#: MyWords_.pm:892
+msgid ""
+"Please enter a plural form of this noun. This will be used as a header\n"
+"in reports.\n"
+msgstr "Пожалуйста, введите форму множественного числа этого существительного. Оно будет использоваться в качестве заголовка\nв отчётах.\n"
+
+#: MyWords_.pm:897
+msgid ""
+"Please enter the number of assignments in this category that will be\n"
+"dropped, e.g. 2 if you want to ignore the lowest two scores.\n"
+msgstr "Пожалуйста, введите число заданий в этой категории, которые будут\nвычеркнуты, например 2, если вы хотите игнорировать два самых низких балла.\n"
+
+#: MyWords_.pm:900
+msgid "Type"
+msgstr "Тип"
+
+#: MyWords_.pm:901
+msgid "numerical"
+msgstr "численный"
+
+#: MyWords_.pm:902
+msgid "attendance"
+msgstr "посещаемость"
+
+#: MyWords_.pm:905
+msgid ""
+"If this category will count toward the students' grades, just leave this blank.\n"
+"If it won't count, enter a period (.)\n"
+msgstr "Если эта категория будет считать оценки студентов, просто оставьте её пустой.\nЕсли она не будет считать, то введите период (.)\n"
+
+#: MyWords_.pm:910
+msgid "Will this category will count toward the students' grades?\n"
+msgstr "Эта категория будет считать оценки студентов?\n"
+
+#: MyWords_.pm:914
+msgid ""
+"Should we normalize grades in this category (i.e., give all assignments equal weight, even if they\n"
+"are scored with different numbers of points)?\n"
+msgstr "Должны ли мы нормализовать оценки в этой категории (то есть, дать всем заданиям равный вес, даже если они\nнабрали различное число точек)?\n"
+
+#: MyWords_.pm:919
+msgid "Will this category be ignored for purposes of computing grades?\n"
+msgstr "Эта категория игнорируется для целей расчёта оценок?\n"
+
+#: MyWords_.pm:923
+msgid "Will there only be one assignment in this category?\n"
+msgstr "Будет ли только одно задание в этой категории?\n"
+
+#: MyWords_.pm:927
+msgid ""
+"Newly created assignments in this category will be ignored in the\n"
+"calculation of grades. Do you want to ignore all preexisting\n"
+"assignments as well?\n"
+msgstr "Свежесозданные задания в этой категории будут проигнорированы в\nрасчёте оценок. Вы хотите игнорировать все существовавшие ранее\nзадания тоже?\n"
+
+#: MyWords_.pm:933
+msgid ""
+"Newly created assignments in this category will be counted in the\n"
+"calculation of grades. Do you want to make all preexisting\n"
+"assignments count as well?\n"
+msgstr "Свежесозданные задания в этой категории будут подсчитаны в\nрасчёте оценок. Вы хотите подсчитать все существовавшие ранее\nзадания тоже?\n"
+
+#: MyWords_.pm:939
+msgid ""
+"Newly created assignments in this category will have the new value\n"
+"for the maximum number of points. Do you want to apply this to\n"
+"preexisting assignments as well?\n"
+msgstr "Свежесозданные задания в этой категории будут иметь новое значение\nдля максимального числа точек. Вы хотите применить это ко всем\nсуществовавшим ранее заданиям тоже?\n"
+
+#: MyWords_.pm:946
+msgid ""
+" If every assignment in this category will be worth a different number\n"
+" of points, leave this blank. If they will all be worth the same number\n"
+" of points, enter that number.\n"
+msgstr "Если каждое задание в этой категории будет стоить разное число\nточек, то оставьте это поле пустым. Если все они будут стоить такое же число\nточек, то введите это число.\n"
+
+#: MyWords_.pm:951
+msgid "weight"
+msgstr "вес"
+
+#: MyWords_.pm:954
+msgid ""
+" If you want to use point-total grading for this class, leave this\n"
+" blank. Otherwise, enter the weight for this category.\n"
+msgstr "Если вы хотите использовать полностью точечное оценивание, то оставьте\nэто пустым. В противном случае введите вес для этой категории.\n"
+
+#: MyWords_.pm:959
+msgid ""
+" Weight for this category. Leave this blank if you don't want weighted grading.\n"
+" Setting a weight will turn on weighted grading for this gradebook.\n"
+msgstr "Вес для этой категории. Оставьте это поле пустым, если вы не хотите взвешенное оценивание.\nУстановка веса переключится на взвешенное оценивание для этого журнала успеваемости.\n"
+
+#: MyWords_.pm:964
+msgid ""
+" Weight for this category (required, because this gradebook is using "
+"weighted grading).\n"
+msgstr "Вес для этой категории (требуется, потому что этот журнал успеваемости использует взвешенное оценивание).\n"
+
+#: MyWords_.pm:970
+msgid "Add this category?"
+msgstr "Добавить эту категорию?"
+
+#: MyWords_.pm:972
+msgid "Error, couldn't find where to insert assignment."
+msgstr "Ошибка, не удалось найти куда вставить задание."
+
+#: MyWords_.pm:973
+#, perl-format
+msgid "Error, assignment %s already exists."
+msgstr "Ошибка, задание %s уже существует."
+
+#: MyWords_.pm:983
+msgid "to add students"
+msgstr "добавить студентов"
+
+#: MyWords_.pm:986
+msgid "to drop a student"
+msgstr "вычеркнуть студента"
+
+#: MyWords_.pm:989
+msgid "to reinstate a student whom you previously dropped"
+msgstr "восстановить студента, которого вы до этого вычеркнули"
+
+#: MyWords_.pm:992
+msgid "to return to the edit menu"
+msgstr "вернуться к меню редактирования"
+
+#: MyWords_.pm:995
+msgid "to return to the main menu"
+msgstr "вернуться к главному меню"
+
+#: MyWords_.pm:998
+msgid "Last name, or return to quit"
+msgstr "Фамилия или клавиша Enter для выхода"
+
+#: MyWords_.pm:1001
+msgid "First name"
+msgstr "Имя"
+
+#: MyWords_.pm:1010
+#, perl-format
+msgid "Added %s %s."
+msgstr "Добавлен %s %s."
+
+#: MyWords_.pm:1013
+#, perl-format
+msgid "Dropped %s. This student can be reinstated later."
+msgstr "Вычеркнут %s. Этот студент может быть восстановлен позже."
+
+#: MyWords_.pm:1016
+#, perl-format
+msgid "Reinstated %s."
+msgstr "Восстановлен %s."
+
+#: MyWords_.pm:1026
+msgid ""
+"Please enter a list, separated by commas, of the usernames of all the\n"
+"people who will be editing this file. If you will be the only person editing\n"
+"this file, then you can just hit return to accept the default username supplied\n"
+"below.\n"
+msgstr "Пожалуйста, введите список через запятую из имён пользователей из всех\nлюдей, которые будут редактировать этот файл. Если только вы будете человеком, редактирующим\nэтот файл, то вы можете просто нажать клавишу Enter чтобы принять имя пользователя по умолчанию, обеспеченное\nниже.\n"
+
+#: MyWords_.pm:1033
+msgid ""
+"Please enter a list, separated by commas, of the usernames of all the\n"
+"people who will be editing this file. If you are using a system that doesn't\n"
+"have usernames, you can leave this blank.\n"
+msgstr "Пожалуйста, введите список через запятую из имён пользователей из всех\nлюдей, которые будут редактировать этот файл. Если вы используете систему, которая не\nимеет имён пользователей, то вы можете оставить это пустым.\n"
+
+#: MyWords_.pm:1045
+msgid ""
+" Since your system doesn't seem to support usernames, it doesn't really\n"
+" matter what naming convention you pick, as long as it's easy for you and\n"
+" your co-instructors to remember.\n"
+msgstr "Так как ваша система, кажется, не поддерживает имена пользователей, это\nдействительно не имеет значения, какое именование вы выбираете, тех пор,\nпока это легко для вас и ваших коллег-инструкторов чтобы запоминать.\n"
+
+#: MyWords_.pm:1051
+msgid ""
+" Your system seems to support usernames, so it will be most convenient if\n"
+" you use the ones it supplies, rather than making up new ones. That way you\n"
+" will simply be recognized automatically when you start the software\n"
+msgstr "Ваша система, кажется, поддерживает имена пользователей, так что это будет наиболее\nудобно, если вы используете это, вместо того, чтобы создавать что-то новое.\nТаким образом, вы просто будете признаны автоматически, когда вы запустите программу\n"
+
+#: MyWords_.pm:1057
+msgid ""
+"Please enter the days of the week on which the class meets, using R for\n"
+"Thursday, and U for Sunday. Supplying accurate information here will make it\n"
+"quicker for you to enter due dates. If the class doesn't meet on definite days\n"
+"of the week, just leave it blank to accept the default, which is MTWRF.\n"
+"It's OK if you leave this blank.\n"
+msgstr "Пожалуйста, введите дни недели, в которые класс встречается, используя R для\nчетверга и U для воскресенья. Указание точной информации здесь ускорит\nвам ввод сроков. Если класс не встречается в определённые дни\nнедели, просто оставьте это поле пустым, чтобы принять значение по умолчанию, то есть MTWRF.\nЭто нормально, если вы оставите это пустым.\n"
+
+#: MyWords_.pm:1071
+msgid "Please use only the letters M, T, W, R, F, S, and U."
+msgstr "Пожалуйста, используйте только буквы M, T, W, R, F, S и U."
+
+#: MyWords_.pm:1080
+msgid ""
+"Grading standards: If you don't want to set grading standards right now,\n"
+"just hit return. The lowest letter grade in your grading system, typically\n"
+"F, needs to be entered explicitly, with a minimum percentage of zero.\n"
+msgstr "Стандарты оценивания: Если вы не хотите устанавливать стандарты оценивания прямо сейчас,\nто просто нажмите клавишу Enter. Самая низкая оценка письма в вашей системе оценивания,\nобычно F, должна быть введена в явном виде с минимальным процентом нуля.\n"
+
+#: MyWords_.pm:1086
+msgid "Enter a letter grade, or hit return if you're done."
+msgstr "Введите оценку письма или нажмите клавишу Enter, если вы завершили."
+
+#: MyWords_.pm:1089
+msgid "Enter the minimum percentage required for this grade."
+msgstr "Введите минимальный процент, необходимый для этой оценки."
+
+#: MyWords_.pm:1092
+msgid "Please enter a numerical value from 0 to 100."
+msgstr "Пожалуйста, введите числовое значение от 0 до 100."
+
+#: MyWords_.pm:1095
+msgid ""
+"The following questions relate to posting grades on the web. You can leave\n"
+"these blank if you won't be using this feature.\n"
+msgstr "Следующие вопросы относятся к размещению оценок в Интернете. Вы можете\nоставить это поле пустым, если вы не будете использовать эту функцию.\n"
+
+#: MyWords_.pm:1100
+msgid "Please enter the FTP username you'll use for uploading web reports."
+msgstr "Пожалуйста, введите имя пользователя FTP, которое вы будете использовать для выгрузки веб-отчётов."
+
+#: MyWords_.pm:1103
+msgid ""
+"Please enter the name of the FTP server to which you'll\n"
+"upload web reports, e.g., myserver.edu.\n"
+msgstr "Пожалуйста, введите имя FTP сервера, куда вы будете\nвыгружать веб-отчёты, например, myserver.edu.\n"
+
+#: MyWords_.pm:1111
+msgid ""
+"Please enter the subdirectory for web reports, relative to cgi-bin. This "
+"directory should exist before you upload grades.\n"
+msgstr "Пожалуйста, введите подкаталог для веб-отчётов, привязанный к cgi-bin.\nЭтот каталог должен существовать до вашей выгрузки оценок.\n"
+
+#: MyWords_.pm:1115
+msgid "Please enter the name of the file to create."
+msgstr "Пожалуйста, введите имя файла, чтобы создать его."
+
+#: MyWords_.pm:1121
+msgid ""
+"Your new gradebook has been created. You will probably want to choose 'e'\n"
+"from the main menu to input your assignment categories and the names of the\n"
+"students, and then 's' to save the file.\n"
+msgstr "Ваш новый журнал успеваемости был создан. Вы, вероятно, хотите выбрать 'e'\nиз главного меню чтобы ввести свои категории заданий и имена студентов,\nа затем 's' чтобы сохранить файл.\n"
+
+#: MyWords_.pm:1129
+msgid "Enter password"
+msgstr "Введите пароль"
+
+#: MyWords_.pm:1135
+msgid "Reports menu --- enter"
+msgstr "Меню отчётов --- ввод"
+
+#: MyWords_.pm:1138
+msgid "to view class totals"
+msgstr "смотреть итоги класса"
+
+#: MyWords_.pm:1141
+msgid "to view a report for one student"
+msgstr "смотреть отчёт для одного студента"
+
+#: MyWords_.pm:1144
+msgid "to view a report on one assignment for the whole class"
+msgstr "смотреть отчёт для одного задания для целого класса"
+
+#: MyWords_.pm:1147
+msgid "to create web reports"
+msgstr "создать веб-отчёты"
+
+#: MyWords_.pm:1150
+msgid "to see statistics"
+msgstr "смотреть статистику"
+
+#: MyWords_.pm:1153
+msgid "Please make sure you have an active internet connection."
+msgstr "Пожалуйста, убедитесь, что у вас есть активное подключение к Интернету."
+
+#: MyWords_.pm:1155
+msgid "server"
+msgstr "сервер"
+
+#: MyWords_.pm:1156
+msgid "cgi_bin"
+msgstr "cgi_bin"
+
+#: MyWords_.pm:1157
+msgid "dir"
+msgstr "каталог"
+
+#: MyWords_.pm:1158
+msgid "backup"
+msgstr "резервная копия"
+
+#: MyWords_.pm:1161
+msgid "username"
+msgstr "имя пользователя"
+
+#: MyWords_.pm:1164
+#, perl-format
+msgid "Enter ftp password for %s"
+msgstr "Введите пароль ftp для %s"
+
+#: MyWords_.pm:1167
+msgid "All files were uploaded successfully."
+msgstr "Все файлы были успешно выгружены."
+
+#: MyWords_.pm:1173
+msgid "Enter the beginning of the student's last name"
+msgstr "Введите начальные буквы фамилии студента"
+
+#: MyWords_.pm:1175
+msgid "No students have last names beginning with"
+msgstr "Нет студентов, фамилии которых начинаются с"
+
+#: MyWords_.pm:1181
+msgid "Enter the short name of the assignment."
+msgstr "Введите короткое имя задания."
+
+#: MyWords_.pm:1183
+msgid "Create new assignment"
+msgstr "Создать новое задание"
+
+#: MyWords_.pm:1189
+msgid "Enter the beginning of the category's name"
+msgstr "Введите начальные буквы имени категории"
+
+#: MyWords_.pm:1191
+msgid "No categories have names beginning with"
+msgstr "Нет категорий, имена которых начинаются с"
+
+#: MyWords_.pm:1197
+msgid "You must create categories first."
+msgstr "Сначала вы должны создать категории."
+
+#: MyWords_.pm:1200
+msgid "Entering grades for an assignment:"
+msgstr "Ввод оценок для задания:"
+
+#: MyWords_.pm:1203
+msgid "No such category"
+msgstr "Такой категории нет"
+
+#: MyWords_.pm:1206
+msgid ""
+" To add this new assignment to the end of the list of\n"
+" assignments for this category, type return. If you don't want to create\n"
+" it, type a period (.). If you want to add it before the end of the list, enter\n"
+" the beginning of the name of the assignment before which you want to insert it.\n"
+msgstr "Чтобы добавить новое задание в конец списка заданий для этой категории,\nвведите клавишой Enter. Если вы не хотите создавать его, то введите период (.). Если\nвы хотите добавить его до конца списка, введите начало имени задания, перед\nкоторым вы хотите вставить его.\n"
+
+#: MyWords_.pm:1213
+msgid "Action canceled."
+msgstr "Действие отменено."
+
+#: MyWords_.pm:1216
+msgid "maximum score"
+msgstr "максимальный балл"
+
+#: MyWords_.pm:1219
+msgid "The maximum score possible."
+msgstr "Возможный максимальный балл."
+
+#: MyWords_.pm:1222
+msgid "due date, in mm-dd format (optional)"
+msgstr "Срок в формате мм-дд (опционально)"
+
+#: MyWords_.pm:1225
+msgid "The date when the assignment is due."
+msgstr "Дата, на которую намечено задание."
+
+#: MyWords_.pm:1228
+#, perl-format
+msgid "The maximum score is %s."
+msgstr "Максимальный балл %s."
+
+#: MyWords_.pm:1231
+msgid ""
+"Enter a grade for each student, or press return to leave it as it is.\n"
+"Type q to quit before the end of the list, c to cancel, up arrow\n"
+"to back up to the previous student, and b to change a preexisting\n"
+" grade to a blank.\n"
+msgstr "Введите оценку для каждого студента или нажмите клавишу Enter, чтобы оставить\nвсё как есть. Введите q чтобы выйти перед концом списка, латинскую c для\nотмены, стрелку вверх чтобы создать резервную копию предыдущего\nстудента и b чтобы изменить уже существующую оценку на пустую.\n"
+
+#: MyWords_.pm:1238
+msgid ""
+" When you're done entering grades, hit return instead of selecting a student.\n"
+" That is greater than the maximum score for this assignment.\n"
+" Hit return to confirm this score, or enter another value.\n"
+" Type x to leave this score unchanged.\n"
+msgstr "Когда вы закончите ввод оценок, нажмите клавишу Enter вместо выбора студента.\nЭто больше, чем максимальный балл для этого задания. Нажмите ввод, чтобы\nподтвердить этот балл, или введите другое значение. Введите х, чтобы оставить\nэтот балл без изменений.\n"
+
+#: MyWords_.pm:1249
+msgid ""
+"That is greater than the maximum score for this assignment.\n"
+"Hit return to confirm this score, or enter another value.\n"
+"Type x to leave this score unchanged.\n"
+msgstr "Это больше, чем максимальный балл для этого задания. Нажмите клавишу Enter, чтобы\nподтвердить этот балл, или введите другое значение. Введите х, чтобы оставить\nэтот балл без изменений.\n"
+
+#: MyWords_.pm:1255
+msgid "Invalid input."
+msgstr "Недопустимый ввод."
