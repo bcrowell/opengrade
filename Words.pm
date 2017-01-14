@@ -45,6 +45,12 @@ use vars qw(@ISA @EXPORT $VERSION);
 @EXPORT = qw(w get_w words_prefix);
 $VERSION = 1.0;
 
+use utf8;
+use Encode;
+use Locale::gettext;
+
+Locale::gettext::bind_textdomain_codeset("opengrade", 'UTF-8');
+
 our $words_prefix; # intended to be modified from outside the package: local $Words::words_prefix = "en.b.foo"
 our $words; # This is typically initialized in main_loop (of which there are two versions, one for terminal and one for gui).
 
@@ -118,6 +124,7 @@ sub get_fancy {
                 );
     my $key = $self->{LANGUAGE}.".".$args{KEY};
     my $the_string = MyWords::retrieve($key);
+    $the_string = Locale::gettext::dgettext("opengrade",$the_string);
     if ($the_string=~m/^\s*\-\-literal\-\-/) {
       $the_string =~ s/^\s*\-\-literal\-\-\n?//;
       return $the_string;
