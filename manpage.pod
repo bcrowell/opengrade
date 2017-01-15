@@ -122,6 +122,8 @@ Extract data from a gradbook file.
 
 =head1 FILES
 
+/usr/local/share/icons/hicolor/48x48/apps/opengrade_icon.png - the program's icon
+
 /usr/share/apps/opengrade/sounds/*.wav - sounds used for auditory feedback while entering grades
 
 B<$HOME>/.OpenGrade_prefs - a text file containing the user's preferences

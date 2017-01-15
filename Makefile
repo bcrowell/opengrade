@@ -159,3 +159,7 @@ opengrade.1: manpage.pod Version.pm
 
 test:
 	cd test_suite && perl test.pl
+
+gettext:
+	# creates subdirectory locale
+	cd i18n && opengrade_18n_compile.sh
