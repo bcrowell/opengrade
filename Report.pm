@@ -605,7 +605,14 @@ for (my $i=0; $i<=@names-1; $i+=6) {
        y="$y_rect" />
 SVG
 }
+# The first rectangle below is to force portrait orientation and margin when printing from evince.
 $svg_body = $svg_body . <<'SVG';
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;"
+       width="1"
+       height="880"
+       x="-10"
+       y="40" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
