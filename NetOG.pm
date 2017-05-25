@@ -71,17 +71,22 @@ sub be_client_given_spotter_version {
   my $host = $args{HOST};
   my $port = $args{PORT};
 
+  my $debug = 0;
+
   #------------ send request --------------
   if (!$server_key) {$server_key = $gb->preferences()->get('server_key')}
   if (!$server_key) {return 'set_server_key'}
   if (!$password) {$password = $gb->password()}
+  if ($debug) {print "host=$host, port=$port\n"}
   if (!defined open_TCP('F',$host, $port)) {return "error_connecting"}
   my $date = current_date_string();
   $pars_ref->{'client_date'} = $date;
   my $body = stringify_pars($pars_ref) . "\n" . $data;
   my $use_for_auth = $server_key . hash('spotter_instructor_password',$password) . hash($date,'*',$body);
   my $message =  hash($use_for_auth) . "\n" .  $body;
-  print F (build_post_request(MESSAGE=>$message));
+  my $request = build_post_request(MESSAGE=>$message);
+  if ($debug) {print "request:\n============\n$request===========\n"}
+  print F ($request);
 
   #-------------- get response --------------
   <F>; # HTTP line
@@ -113,12 +118,14 @@ sub build_post_request {
   my $cgi_bin =   $args{CGI_BIN};
   my $script =   $args{SCRIPT};
   my $message =     $args{MESSAGE};
-  my $request = "POST $cgi_bin$script HTTP/1.0\n"
-     ."Accept: */*\n"
-     ."User-Agent: OpenGrade\n"
-     ."Content-Length: ".length($message)."\n"
-     ."\n"
+  my $request = "POST $cgi_bin$script HTTP/1.0\r\n"
+     ."Accept: */*\r\n"
+     ."User-Agent: OpenGrade\r\n"
+     ."Content-Length: ".length($message)."\r\n"
+             #     ."Content-Type: text/plain\r\n"
+     ."\r\n"
      .$message;
+  return $request;
 }
 
 sub be_server_accepting {
@@ -135,7 +142,7 @@ sub be_server_accepting {
   while((length $stuff)<$content_length && ($line=<STDIN>)) {
     $stuff = $stuff . $line;
   }
-  $stuff =~ m/^([^\n]+)\n(([^=\n]+=[^\n]*\n)*)\n(.*)$/s;
+  $stuff =~ m/^([^\n<]+)\n(([^=\n]+=[^\n]*\n)*)\n(.*)$/s;
   #open(FILE,">foo"); print FILE "---$content_length\n==================================\n$stuff\n==================================\n1=\n$1\n2=\n$2\n4=\n$4\n"; close FILE;
   my $body = $2."\n".$4;
   $self->{REQUEST_AUTH} = $1;
