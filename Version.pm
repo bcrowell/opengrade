@@ -5,7 +5,7 @@
 package Version;
 
 sub version {
-  return "3.2.0";
+  return "3.2.1";
 }
 
 sub default_hash_function {
