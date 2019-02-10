@@ -85,19 +85,7 @@
 \newcommand{\fig}[1]{\includegraphics[width=\textwidth]{#1}\label{#1}}
 
 %========================= graphicx package=========================
-\newif\ifpdf
-\ifx\pdfoutput\undefined
-\pdffalse % we are not running PDFLaTeX
-\else
-\pdfoutput=1 % we are running PDFLaTeX
-\pdftrue
-\fi
-
-\ifpdf
-\usepackage[pdftex]{graphicx}
-\else
 \usepackage{graphicx}
-\fi
 %========================= AtBeginDocument stuff=========================
 \AtBeginDocument{
   %------------------------------- pdf stuff

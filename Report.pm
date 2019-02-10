@@ -316,8 +316,15 @@ sub format_fraction {
         my $frac = shift;
         if ($frac eq '' || $frac eq '--') {return $frac}
         my ($total,$possible) = split("/",$frac);
-        $possible = sprintf "%d",int($possible);
-        $total = sprintf "%".length(int($possible))."d",int($total);
+        if ($possible<10 && (int($total)<$total || int($possible)<$possible)) {
+          # unusual case, very small numbers like 0.2/0.3
+          # Don't change formatting or do any rounding.
+        }
+        else {
+          # normal case
+          $possible = sprintf "%d",int($possible);
+          $total = sprintf "%".length(int($possible))."d",int($total);
+        }
         return sprintf "$total/$possible";
 }
 
@@ -560,7 +567,7 @@ sub empty_array_ref {
 
 sub roster_to_svg {
 
-my $n = shift;
+my $n = shift; # ref to list of names
 my $title = shift;
 my @names = @$n;
 
@@ -577,11 +584,25 @@ my $svg_tail = <<'SVG';
 </svg>
 SVG
 
+my $count = @names;
+
 my $svg_body = '';
 my $y_offset = 125;
 my $x_text = 51;
 my $y_text = 56;
 my $line_spacing = 22.5;
+
+# fiddle with format for large class, try to fit everyone on one page:
+my $nominal_max_count = 33; # the number that normally would fit on the page
+if ($count>$nominal_max_count) {
+  my $excess = $count-$nominal_max_count;
+  if ($excess>15) {$excess=15}
+  # reduce line spacing and scoot everything up:
+  $line_spacing = $line_spacing * $nominal_max_count / ($nominal_max_count+$excess);
+  $y_offset = $y_offset - 30;
+}
+my $shaded_rectangle_height = 3*$line_spacing;
+
 
 my $y_title = $y_offset;
 my $x_title = $x_text+250;
@@ -594,18 +615,22 @@ $svg_body = $svg_body . <<SVG;
     <tspan x='$x_title' y='$y_title'>$title</tspan>
     </text>
 SVG
+# make shaded rectangles:
 for (my $i=0; $i<=@names-1; $i+=6) {
   my $y_rect = 56 + $i*$line_spacing + $y_offset;
   $svg_body = $svg_body . <<SVG;
     <rect
        style="fill:#dedede;fill-opacity:1;stroke:none;"
        width="632"
-       height="67"
+       height="$shaded_rectangle_height"
        x="49"
        y="$y_rect" />
 SVG
 }
 # The first rectangle below is to force portrait orientation and margin when printing from evince.
+# The tiny black circle is because the invisible rectangle doesn't seem to convince some printer drivers,
+# so they scale the page up. The dot doesn't actually show up on the paper, because it's outside the
+# printable area.
 $svg_body = $svg_body . <<'SVG';
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;"
@@ -613,6 +638,7 @@ $svg_body = $svg_body . <<'SVG';
        height="880"
        x="-10"
        y="40" />
+    <circle style="color:#000000" cx="762.0" cy="1000.0" r="0.1" />
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"

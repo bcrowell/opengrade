@@ -24,6 +24,7 @@ use DateOG;
 use Input;
 use NetOG;
 use Fun;
+use Extension;
 use Digest::SHA;
 use Version;
 use POSIX qw(tmpnam);
@@ -350,6 +351,8 @@ BEGIN {
               $entry->icursor('end'); # otherwise the cursor gets out of whack because we edited the entry
             }
           };
+          my $postinput = $gb->category_property2($cat,"postinput");
+          $grade = Extension::apply_scalar_function_of_x($postinput,$grade); # no-op if $postinput is undef
           my $max = $gb->assignment_property($cat.".".$ass,"max");
           if ($bogus eq '' && $grade>$max && !$trailing_x && $max>0) {
             $bogus = 'too_high';
@@ -581,6 +584,8 @@ sub new_assignment {
     if (defined $max_points && exists $max_points->{$name}) {
       if ($max eq '') {
         $max = $max_points->{$name};
+        my $postinput = $gb->category_property2($cat,"postinput");
+        $max = Extension::apply_scalar_function_of_x($postinput,$max); # no-op if $postinput is undef
         ExtraGUI::message("The maximum number of points was automatically set to $max.");
       }
       else {

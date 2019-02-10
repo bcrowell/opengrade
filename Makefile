@@ -21,7 +21,7 @@ CHOPSTICKS_SOUND = chopsticks.wav
 EXECUTABLE = opengrade.pl
 EXECUTABLE_LINK = opengrade
 ICON_STEM = opengrade_icon
-REQUIRED_SOURCES = Browser.pm BrowserData.pm BrowserWindow.pm Crunch.pm DateOG.pm ExtraGUI.pm Fun.pm GradeBook.pm Input.pm LineByLine.pm MyWords.pm NetOG.pm Portable.pm Preferences.pm Report.pm TermUI.pm Text.pm UtilOG.pm Words.pm Version.pm Stage.pm Assignments.pm Roster.pm Score.pm $(EXECUTABLE)
+REQUIRED_SOURCES = Browser.pm BrowserData.pm BrowserWindow.pm Crunch.pm DateOG.pm ExtraGUI.pm Fun.pm GradeBook.pm Input.pm LineByLine.pm MyWords.pm NetOG.pm Portable.pm Preferences.pm Report.pm TermUI.pm Text.pm UtilOG.pm Words.pm Version.pm Stage.pm Assignments.pm Roster.pm Score.pm Extension.pm $(EXECUTABLE)
 # ... This is the list that's installed by default; doesn't include plugins.
 PLUGINS = ServerDialogs.pm OnlineGrades.pm
 SOURCES = $(REQUIRED_SOURCES) $(PLUGINS)
@@ -113,9 +113,9 @@ opengrade_doc.pdf: opengrade_doc.tex
 	pdflatex opengrade_doc
 	pdflatex opengrade_doc
 
-internals.html: Browser.pm BrowserData.pm BrowserWindow.pm ExtraGUI.pm GradeBook.pm Input.pm Fun.pm ServerDialogs.pm
+internals.html: Browser.pm BrowserData.pm BrowserWindow.pm ExtraGUI.pm GradeBook.pm Input.pm Fun.pm ServerDialogs.pm Extension.pm
 	rm -f internals.pl
-	cat Browser.pm BrowserData.pm BrowserWindow.pm ExtraGUI.pm GradeBook.pm Input.pm Fun.pm ServerDialogs.pm >internals.pl
+	cat Browser.pm BrowserData.pm BrowserWindow.pm ExtraGUI.pm GradeBook.pm Input.pm Fun.pm ServerDialogs.pm Extension.pm >internals.pl
 	pod2html --title="OpenGrade internals" <internals.pl >internals.html
 	rm -f internals.pl
 

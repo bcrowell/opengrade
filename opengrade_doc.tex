@@ -22,6 +22,7 @@ Posting Grades on the Web & \pageref{web} \\
 How Grades Are Calculated & \pageref{howcalc} \\
 Format of Gradebook Files & \pageref{format} \\
 Scripting & \pageref{scripting} \\
+User-defined Extensions & \pageref{extensions} \\
 Future Improvements & \pageref{improve} \\
 Bugs & \pageref{bugs} \\
 Programming Stuff & \pageref{programming} \\
@@ -842,6 +843,46 @@ integer, it is output without quotes, but otherwise scalar results
 are output with double quotes surrounding them. An error occurs only if
 a non-integer value is used to index into an array, or if an attempt
 is made to index into a scalar, i.e., if too many indices are provided.
+
+\mysection{User-defined Extensions}\label{extensions}
+There is a mechanism for allowing users to define their own rules for
+performing certain operations. Currently there is only one ``hook''
+supplied, which is that before a grade is entered into the database,
+there can be an operation to be performed on it. This operation
+can be defined for a particular caregory. My use-case for
+this feature was that for a certain class I decided to make each
+homework problem worth one tenth of a point, but I didn't want to have
+to type all the decimals. Therefore I decided to have OpenGrade automatically
+take the grades that I typed in and divide them by 10. This documentation
+shows how to do this particular extension as an example.
+
+When I originally created my gradebook file, opening the file in
+a text editor showed the following line describing the homework category:
+
+\verb@"hw":{"catname":"hw,hw"},@
+
+To add the divide-by-ten step, I edited this line to look like the following:
+
+\verb@"hw":{"catname":"hw,hw","postinput":"* x 0.1"},@
+
+The string \verb@* x 0.1@ is a snippet of code written in a dialect of the
+programming language Lisp. The dialect is called Guile. Guile is a standard
+extension language for linux software, and most linux machines will already
+have Guile installed. If you want to check whether Guile is installed on
+your machine, you can try this from the command line, and the result should
+be that it prints 4:
+
+\verb@guile -c "(display(+ 2 2))"@
+
+Getting back to our example, the star is a multiplication
+operator, and it's prefixed to the operands. That is, the expression in this
+code snippet is what you would enter on a calculator as \verb@x*0.1@, meaning
+to multiply x by 0.1.
+
+Once you've edited the gradebook file, you will need to remove the watermark
+so that OpenGrade doesn't flag the file as having been tampered with. After
+you've gone through this process once, you can just clone the gradebook file,
+and cloned versions will also have the rule.
 
 \mysection{Future Improvements}\label{improve}
 \mysubsection{general}

@@ -478,6 +478,8 @@ sub list_work {
                     my $a_key = shift;
                     foreach my $who(@roster) {
                       if (exists $scores{$who}) {
+                        # Note that we shouldn't do the postinput extension here; if we did, it would
+                        # be applied twice.
                         $self->grades_queue(ACTION=>'put',KEY=>"$who.$a_key",SCORE=>$scores{$who}); # sets is_modified(1)
                       }
                     }
