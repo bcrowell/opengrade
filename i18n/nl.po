@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Heimen Stoffels <vistausss@outlook.com>, 2017
 # Klaas van Gend <klaas@opentux.nl>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: opengrade\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-25 17:36+0300\n"
-"PO-Revision-Date: 2016-04-20 22:33+0000\n"
-"Last-Translator: Klaas van Gend <klaas@opentux.nl>\n"
+"PO-Revision-Date: 2017-09-22 16:50+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/Magic/opengrade/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: MyWords_.pm:33
 msgid "A blank value is not allowed."
-msgstr "Een leeg veld is niet toegestaan."
+msgstr "Een lege waarde is niet toegestaan."
 
 #: MyWords_.pm:34
 #, perl-format
@@ -34,14 +35,14 @@ msgstr "De maximale waarde is %s."
 
 #: MyWords_.pm:36
 msgid "Times must be in the format h:mm or hh:mm."
-msgstr "Tijdnotatie in de vorm h:mm of hh:mm."
+msgstr "Tijdnotatie moet in de vorm h:mm of hh:mm."
 
 #: MyWords_.pm:37
 #, perl-format
 msgid ""
 "Illegal date format: %s. Dates must be in the format month-day or year-"
 "month-day. Years, if supplied, must be four digits."
-msgstr "Verkeerd datumformaat: %s. Datums moeten in het formaat maand-dag of jaar-maand-dag. Indien jaren worden opgegeven, hebben jaartallen vier cijfers."
+msgstr "Ongeldig datumformaat: %s. Data moeten in het formaat maand-dag of jaar-maand-dag. Indien jaren worden opgegeven, hebben jaartallen vier cijfers."
 
 #: MyWords_.pm:38
 msgid "Illegal hour or minute."
@@ -52,7 +53,7 @@ msgstr "Ongeldige uren of minuten."
 msgid ""
 "Illegal month or day: %s.  Dates must be in the format month-day or year-"
 "month-day. Years, if supplied, must be four digits."
-msgstr "Ongeldige maand of dag: %s. Datums moeten in het formaat maand-dag of jaar-maand-dag. Indien jaren worden opgegeven, hebben jaartallen vier cijfers."
+msgstr "Ongeldige maand of dag: %s. Data moeten in het formaat maand-dag of jaar-maand-dag. Indien jaren worden opgegeven, hebben jaartallen vier cijfers."
 
 #: MyWords_.pm:43 MyWords_.pm:671
 msgid "none"
@@ -113,15 +114,15 @@ msgstr "Ongeldige toets aangeslagen tijdens het invullen van een cijfer: %s"
 
 #: MyWords_.pm:57
 msgid "Num lock appears to be turned off."
-msgstr "Numlock staat klaarblijkelijk uit."
+msgstr "Numlock lijkt uit te staan."
 
 #: MyWords_.pm:58
 msgid "Hit tab to change to the grade column."
-msgstr "Druk op tab om naar de cijferskolom te schakelen."
+msgstr "Druk op tab om over te schakelen naar de cijferkolom"
 
 #: MyWords_.pm:59
 msgid "There is no file open, or the roster is empty."
-msgstr "Er is geen bestand open, of de lijst is leeg."
+msgstr "Er is geen bestand open of het rooster is leeg."
 
 #: MyWords_.pm:60
 msgid "There is nothing in the keyboard selection left to delete."
@@ -135,7 +136,7 @@ msgstr "Toets niet herkend: %s"
 #: MyWords_.pm:62
 #, perl-format
 msgid "No student's name begins with %s"
-msgstr "Geen studentennaam begint met %s"
+msgstr "Geen studentennaam die begint met %s"
 
 #: MyWords_.pm:67
 msgid ""
@@ -145,7 +146,7 @@ msgid ""
 "authenticate the alterations using your password; in this situation, you should click\n"
 "on the View Report button and see what lines were changed. See the documentation for\n"
 "suggestions on how to handle a case of apparent tampering.\n"
-msgstr ""
+msgstr "Het digitale watermerk komt niet overeen met dit wachtwoord. Dit komt waarschijnlijk omdat u\neen onjuist wachtwoord hebt opgegeven. Als u zeker weet dat u het juiste wachtwoord heeft getypt, dan\nis het bestand bewerkt door iemand (uzelf of iemand anders) die niet heeft geautenticeerd met uw wachtwoord. In dat geval moet u klikken op Rapport weergeven om te zien welke regels er zijn gewijzigd. Bekijk de documentatie voor suggesties hoe hiermee om te gaan.\n"
 
 #: MyWords_.pm:74 MyWords_.pm:100 MyWords_.pm:133 MyWords_.pm:146
 #: MyWords_.pm:701 MyWords_.pm:731
@@ -154,7 +155,7 @@ msgstr "Oké"
 
 #: MyWords_.pm:75
 msgid "View Report"
-msgstr "Bekijk rapport"
+msgstr "Rapport weergeven"
 
 #: MyWords_.pm:77
 #, perl-format
@@ -164,7 +165,7 @@ msgid ""
 "while OpenGrade has a file open. You should probably hit Cancel, get out of OpenGrade, and\n"
 "see if the autosave file really has different data in it than the original file.\n"
 "If you click on OK to open the file, your autosave file will be deleted.\n"
-msgstr ""
+msgstr "Een auto-opslaanbestand, %s, \nbestaat al. Dit kan gebeuren als, bijv., uw computer gecrasht is\ntoen u OpenGrade had draaien. U kunt waarschijnlijk het beste op Annuleren drukken, OpenGrade afsluiten en bekijken of het auto-opslaanbestand andere gegevens bevat dan het origineel.\nAls u op Oké klikt om het bestand te openen, zal het auto-opslaanbestand worden verwijderd.\n"
 
 #: MyWords_.pm:83
 msgid "grade"
@@ -176,11 +177,11 @@ msgstr "totaal"
 
 #: MyWords_.pm:85
 msgid "Revert all changes, are you sure?"
-msgstr "Alle wijzigingen terugdraaien, zeker weten?"
+msgstr "Weet u zeker dat u alle wijzigingen wilt terugdaaien?"
 
 #: MyWords_.pm:87
 msgid "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/ogr/ogr.html"
-msgstr ""
+msgstr "OpenGrade    (c) 2002 B. Crowell, www.lightandmatter.com/ogr/ogr.html"
 
 #: MyWords_.pm:89
 msgid "OpenGrade"
@@ -210,11 +211,11 @@ msgstr "Opslaan als"
 #: MyWords_.pm:97
 #, perl-format
 msgid "There was an error opening the file %s for output."
-msgstr "Tijdens het openen van bestand %s ontstond een fout."
+msgstr "Er is een fout opgetreden tijdens het openen van het bestand %s."
 
 #: MyWords_.pm:98
 msgid "Can't save on top of a gradebook file."
-msgstr "Kan niet opslaan over een gradebook bestand."
+msgstr "Kan niet opslaan over een gradebook-bestand."
 
 #: MyWords_.pm:99 MyWords_.pm:154
 msgid "Save"
@@ -222,7 +223,7 @@ msgstr "Opslaan"
 
 #: MyWords_.pm:101
 msgid "Open in an Editor"
-msgstr "Open in een editor"
+msgstr "Openen in een bewerker"
 
 #: MyWords_.pm:102
 msgid "Print"
@@ -232,13 +233,13 @@ msgstr "Afdrukken"
 msgid ""
 "You have not specified a unix shell command to use for opening a file in an "
 "editor. See the Preferences menu."
-msgstr "Je hebt geen unix shell commando opgegeven om te gebruiken om een bestand te openen. Zie menu Voorkeuren."
+msgstr "U heeft geen unix shell-commando opgegeven om te gebruiken om een bestand te openen. Zie het Voorkeuren-menu."
 
 #: MyWords_.pm:104
 msgid ""
 "You have not specified a unix shell command to use for printing a file. See "
 "the Preferences menu."
-msgstr "Je hebt geen unix shell commando opgegeven om te gebruiken om een bestand te printen. Zie menu Voorkeuren."
+msgstr "U heeft geen unix shell-commando opgegeven om te gebruiken om een bestand te printen. Zie het Voorkeuren-menu."
 
 #: MyWords_.pm:105 MyWords_.pm:134 MyWords_.pm:702 MyWords_.pm:732
 msgid "Cancel"
@@ -246,12 +247,12 @@ msgstr "Annuleren"
 
 #: MyWords_.pm:106
 msgid "Confirm"
-msgstr "Bevestig"
+msgstr "Bevestigen"
 
 #: MyWords_.pm:107 MyWords_.pm:1118
 #, perl-format
 msgid "The file %s already exists. Overwrite it?"
-msgstr "Het bestand %s bestaat al. Overschrijven?"
+msgstr "Het bestand %s bestaat al. Wilt u het overschrijven?"
 
 #: MyWords_.pm:108
 msgid "Property to Edit"
@@ -260,17 +261,17 @@ msgstr "Te wijzigen eigenschap "
 #: MyWords_.pm:109
 #, perl-format
 msgid "Editing %s"
-msgstr "Wijzig %s"
+msgstr "Bewerken van %s"
 
 #: MyWords_.pm:110 MyWords_.pm:119 MyWords_.pm:165 MyWords_.pm:176
 #: MyWords_.pm:178
 #, perl-format
 msgid "Edit Information for %s"
-msgstr "Wijzig informatie voor %s"
+msgstr "Informatie bewerken van %s"
 
 #: MyWords_.pm:111 MyWords_.pm:1004
 msgid "Student ID"
-msgstr "Leerling ID"
+msgstr "Leerling-ID"
 
 #: MyWords_.pm:112 MyWords_.pm:604 MyWords_.pm:605 MyWords_.pm:609
 #: MyWords_.pm:656 MyWords_.pm:1007
@@ -295,36 +296,36 @@ msgstr "Waarde van de zojuist gedefinieerde leerlingeigenschap"
 
 #: MyWords_.pm:117
 msgid "You must define a name for the new student property you're defining."
-msgstr ""
+msgstr "U moet een naam opgeven voor de nieuwe leerlingeigenschap die u wilt definieren."
 
 #: MyWords_.pm:118
 #, perl-format
 msgid "Delete %s?"
-msgstr ""
+msgstr "%s verwijderen?"
 
 #: MyWords_.pm:120
 msgid "Due Date"
-msgstr ""
+msgstr "Vervaldatum"
 
 #: MyWords_.pm:121
 msgid "Long Name"
-msgstr "lange naam"
+msgstr "Lange naam"
 
 #: MyWords_.pm:122
 msgid "Short Name"
-msgstr "korte naam"
+msgstr "Korte naam"
 
 #: MyWords_.pm:123
 msgid "Maximum Score"
-msgstr "hoogste score"
+msgstr "Hoogste score"
 
 #: MyWords_.pm:124
 msgid "Ignored"
-msgstr "genegeerd"
+msgstr "Genegeerd"
 
 #: MyWords_.pm:125 MyWords_.pm:639
 msgid "Marking Period"
-msgstr ""
+msgstr "Markeringsperiode"
 
 #: MyWords_.pm:126
 #, perl-format
@@ -345,15 +346,15 @@ msgstr "ID (optioneel)"
 
 #: MyWords_.pm:130
 msgid "password (optional, defaults to id)"
-msgstr "wachtwoord (optioneel, default gelijk aan ID)"
+msgstr "wachtwoord (optioneel, standaar gelijk aan ID)"
 
 #: MyWords_.pm:131
 msgid "Add Students"
-msgstr "Voeg leerling toe"
+msgstr "Leerlingen toevoegen"
 
 #: MyWords_.pm:132
 msgid "Reinstate Student"
-msgstr ""
+msgstr "Leerling opnieuw aanstellen"
 
 #: MyWords_.pm:135 MyWords_.pm:162
 msgid "Add"
@@ -361,14 +362,14 @@ msgstr "Toevoegen"
 
 #: MyWords_.pm:136
 msgid "Done"
-msgstr "Klaar"
+msgstr "Afronden"
 
 #: MyWords_.pm:137
 #, perl-format
 msgid ""
 "%s already exists. You may have dropped this student, in which case you can "
 "reinstate her/him."
-msgstr ""
+msgstr "%s bestaat al. U heeft deze leerling waarschijnlijk laten vallen. In dat geval kunt hem/haar opnieuw aanstellen."
 
 #: MyWords_.pm:139
 msgid ""
@@ -378,7 +379,7 @@ msgid ""
 "reinstated rather than added.\n"
 "After adding the last student, click on\n"
 "Add, and then when the blank form reappears, click on Done.\n"
-msgstr ""
+msgstr "U kunt zoveel leerlingen toevoegen als u wilt, door het invullen van het formulier en\ndaarna op Toevoegen te klikken.\nU wordt gewaarschuwd als de leerling al bestaat of\nals deze opnieuw\nmoet worden aangesteld.\nKlik, na het toevoegen van de laatste leerling, op Toevoegen en daarna op Afronden.\n"
 
 #: MyWords_.pm:147 MyWords_.pm:717
 msgid "Error"
@@ -398,308 +399,308 @@ msgstr "Nieuw"
 
 #: MyWords_.pm:151
 msgid "Open..."
-msgstr ""
+msgstr "Openen..."
 
 #: MyWords_.pm:152
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: MyWords_.pm:153 MyWords_.pm:614
 msgid "Change Password"
-msgstr ""
+msgstr "Wachtwoord wijzigen"
 
 #: MyWords_.pm:155
 msgid "Clear List of Recent Files"
-msgstr ""
+msgstr "Lijst met recente bestanden wissen"
 
 #: MyWords_.pm:156
 msgid "Prevent Changes to this List"
-msgstr ""
+msgstr "Voorkomen dat deze lijst kan worden bewerkt"
 
 #: MyWords_.pm:157
 msgid "Quit"
-msgstr "Stop"
+msgstr "Afsluiten"
 
 #: MyWords_.pm:158
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 #: MyWords_.pm:159
 #, perl-format
 msgid "Undo %s"
-msgstr ""
+msgstr "%s ongedaan maken"
 
 #: MyWords_.pm:160
 msgid "Revert"
-msgstr ""
+msgstr "Terugdraaien"
 
 #: MyWords_.pm:161
 msgid "Students"
-msgstr ""
+msgstr "Leerlingen"
 
 #: MyWords_.pm:163
 msgid "Reinstate"
-msgstr ""
+msgstr "Opnieuw aanstellen"
 
 #: MyWords_.pm:164
 #, perl-format
 msgid "Drop %s"
-msgstr ""
+msgstr "%s laten valle"
 
 #: MyWords_.pm:166
 msgid "Edit Property for Whole Class"
-msgstr ""
+msgstr "Waarde voor gehele klas wijzigen"
 
 #: MyWords_.pm:167
 msgid "Edit Information"
-msgstr ""
+msgstr "Informatie bewerken"
 
 #: MyWords_.pm:168
 msgid "Assignments"
-msgstr ""
+msgstr "Opdrachten"
 
 #: MyWords_.pm:169
 msgid "New Assignment"
-msgstr ""
+msgstr "Nieuwe opdracht"
 
 #: MyWords_.pm:170 MyWords_.pm:635
 #, perl-format
 msgid "New %s"
-msgstr ""
+msgstr "Nieuw %s"
 
 #: MyWords_.pm:171
 msgid "Edit Category Weights"
-msgstr ""
+msgstr "Categorie-gewichten wijzigen"
 
 #: MyWords_.pm:172
 msgid "Delete Category"
-msgstr ""
+msgstr "Categorie verwijderen"
 
 #: MyWords_.pm:173
 #, perl-format
 msgid "Delete Category %s"
-msgstr ""
+msgstr "Categorie %s verwijderen"
 
 #: MyWords_.pm:174 MyWords_.pm:967
 msgid "New Category"
-msgstr ""
+msgstr "Nieuwe categorie"
 
 #: MyWords_.pm:175
 msgid "Edit Category Information"
-msgstr ""
+msgstr "Categorie-informatie bewerken"
 
 #: MyWords_.pm:177
 msgid "Edit Assignment Information"
-msgstr ""
+msgstr "Opdrachtinformatie bewerken"
 
 #: MyWords_.pm:179
 msgid "Delete Assignment"
-msgstr ""
+msgstr "Opdracht verwijderen"
 
 #: MyWords_.pm:180
 #, perl-format
 msgid "Delete %s"
-msgstr ""
+msgstr "%s verwijderen"
 
 #: MyWords_.pm:181
 msgid "Reports"
-msgstr ""
+msgstr "Rapporten"
 
 #: MyWords_.pm:182
 msgid "Overall Grade"
-msgstr ""
+msgstr "Totaalcijfer"
 
 #: MyWords_.pm:183
 #, perl-format
 msgid "Average in %s"
-msgstr ""
+msgstr "Gemiddeld in %s"
 
 #: MyWords_.pm:184
 msgid "Average in Category"
-msgstr ""
+msgstr "Gemiddeld in categorie"
 
 #: MyWords_.pm:185
 #, perl-format
 msgid "Score on %s"
-msgstr ""
+msgstr "Score op %s"
 
 #: MyWords_.pm:186
 msgid "Score on Assignment"
-msgstr ""
+msgstr "Score op opdracht"
 
 #: MyWords_.pm:187
 msgid "Spreadsheet"
-msgstr ""
+msgstr "Rekenblad"
 
 #: MyWords_.pm:188
 #, perl-format
 msgid "Statistics for %s"
-msgstr ""
+msgstr "Stastieken voor %s"
 
 #: MyWords_.pm:189
 msgid "Statistics for an Assignment"
-msgstr ""
+msgstr "Statistieken voor een opdracht"
 
 #: MyWords_.pm:190
 msgid "Table"
-msgstr ""
+msgstr "Tabel"
 
 #: MyWords_.pm:191 MyWords_.pm:197 MyWords_.pm:715
 msgid "Roster"
-msgstr ""
+msgstr "Rooster"
 
 #: MyWords_.pm:192
 msgid "General Statistics"
-msgstr ""
+msgstr "Algemene statistieken"
 
 #: MyWords_.pm:193
 msgid "Post Grades"
-msgstr ""
+msgstr "Cijfers publiceren"
 
 #: MyWords_.pm:194
 msgid "Spotter"
-msgstr ""
+msgstr "Spotter"
 
 #: MyWords_.pm:195 MyWords_.pm:744
 msgid "Client/Server Settings"
-msgstr ""
+msgstr "Client-/Serverinstellingen"
 
 #: MyWords_.pm:196 MyWords_.pm:714
 msgid "Class Description"
-msgstr ""
+msgstr "Klasomschrijving"
 
 #: MyWords_.pm:198
 msgid "Disable Account of Dropped Student"
-msgstr ""
+msgstr "Account uitschakelen van weggevallen leerling"
 
 #: MyWords_.pm:199
 msgid "List Work"
-msgstr ""
+msgstr "Lijstwerk"
 
 #: MyWords_.pm:200
 msgid "E-Mail List"
-msgstr ""
+msgstr "E-maillijst"
 
 #: MyWords_.pm:201
 msgid "E-Mail for One Student"
-msgstr ""
+msgstr "E-mailadres voor één leerling"
 
 #: MyWords_.pm:202
 msgid "Send Message"
-msgstr ""
+msgstr "Bericht versturen"
 
 #: MyWords_.pm:203
 msgid "Send Message to One Student"
-msgstr ""
+msgstr "Bericht versturen naar één leerling"
 
 #: MyWords_.pm:204
 msgid "View Messages Sent to One Student"
-msgstr ""
+msgstr "Verstuurde berichten aan één leerling weergeven"
 
 #: MyWords_.pm:205
 #, perl-format
 msgid "E-Mail for %s"
-msgstr ""
+msgstr "E-mailadres voor %s"
 
 #: MyWords_.pm:206
 #, perl-format
 msgid "Send Message to %s"
-msgstr ""
+msgstr "Bericht versturen aan %s"
 
 #: MyWords_.pm:207
 #, perl-format
 msgid "View Messages Sent to %s"
-msgstr ""
+msgstr "Verstuurde berichten aan %s weergeven"
 
 #: MyWords_.pm:208
 msgid "Online Grades"
-msgstr ""
+msgstr "Online-cijfers"
 
 #: MyWords_.pm:209
 msgid "Export Grades to Online Grades Format for Uploading"
-msgstr ""
+msgstr "Cijfers exporteren naar online-cijferlijstindeling voor uploaden"
 
 #: MyWords_.pm:210
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: MyWords_.pm:211
 msgid "Grading Standards"
-msgstr ""
+msgstr "Cijferstandaarden"
 
 #: MyWords_.pm:212
 msgid "Marking Periods"
-msgstr ""
+msgstr "Markeringsperioden"
 
 #: MyWords_.pm:213 MyWords_.pm:665
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschappen"
 
 #: MyWords_.pm:214
 msgid "Clone"
-msgstr ""
+msgstr "Klonen"
 
 #: MyWords_.pm:215
 msgid "Export..."
-msgstr ""
+msgstr "Exporteren..."
 
 #: MyWords_.pm:216 MyWords_.pm:606
 msgid "Remove Watermark"
-msgstr ""
+msgstr "Watermerk verwijderen"
 
 #: MyWords_.pm:217
 msgid "Reconcile"
-msgstr ""
+msgstr "Verzoenen"
 
 #: MyWords_.pm:218
 msgid "Student"
-msgstr ""
+msgstr "Leerling"
 
 #: MyWords_.pm:219
 msgid "Preferences"
-msgstr ""
+msgstr "Voorkeuren"
 
 #: MyWords_.pm:220
 msgid "Beeping"
-msgstr ""
+msgstr "Piepen"
 
 #: MyWords_.pm:221
 msgid "Left or Right Justification of Grades"
-msgstr ""
+msgstr "Linkse of rechtse rechtzetting van cijfers"
 
 #: MyWords_.pm:222
 msgid "Font Size"
-msgstr ""
+msgstr "Lettertypegrootte"
 
 #: MyWords_.pm:223
 msgid "Command Used to Open an External Text Editor"
-msgstr ""
+msgstr "Opdracht op externe tekstbewerker te openen"
 
 #: MyWords_.pm:224
 msgid "Command Used to Print a Text File"
-msgstr ""
+msgstr "Opdracht om een tekstbestand te printen"
 
 #: MyWords_.pm:225
 msgid "Command Used to Open a Spreadsheet"
-msgstr ""
+msgstr "Opdracht om een rekenblad te openen"
 
 #: MyWords_.pm:226
 msgid "Type of Digital Watermark"
-msgstr ""
+msgstr "Soort digitaal watermerk"
 
 #: MyWords_.pm:227
 msgid "Show Online Grades Menu"
-msgstr ""
+msgstr "Online-cijfers-menu weergeven"
 
 #: MyWords_.pm:228
 msgid "Show Server Menu for Spotter"
-msgstr ""
+msgstr "Server-menu weergeven voor Spotter"
 
 #: MyWords_.pm:229
 msgid ""
 "The change you've made to the menu bar will show up the next time you start "
 "OpenGrade."
-msgstr ""
+msgstr "De aan de menubalk aangebrachte wijziging zal zichtbaar zijn de volgende keer dat u OpenGrade opstart."
 
 #: MyWords_.pm:230
 msgid "Help"
@@ -707,7 +708,7 @@ msgstr "Hulp"
 
 #: MyWords_.pm:231 MyWords_.pm:599
 msgid "About OpenGrade"
-msgstr ""
+msgstr "Over OpenGrade"
 
 #: MyWords_.pm:233
 #, perl-format
@@ -1081,61 +1082,61 @@ msgstr ""
 
 #: MyWords_.pm:600
 msgid "Student: "
-msgstr ""
+msgstr "Leerling:"
 
 #: MyWords_.pm:601
 msgid "Assignment: "
-msgstr ""
+msgstr "Opdracht:"
 
 #: MyWords_.pm:602
 msgid "Grade: "
-msgstr ""
+msgstr "Cijfer:"
 
 #: MyWords_.pm:603
 msgid "Open Gradebook"
-msgstr ""
+msgstr "Cijferlijst openen"
 
 #: MyWords_.pm:607
 msgid "Summary of Changes"
-msgstr ""
+msgstr "Samenvatting van wijzigingen"
 
 #: MyWords_.pm:608
 msgid "File to Change"
-msgstr ""
+msgstr "Te wijzigen bestand"
 
 #: MyWords_.pm:610
 msgid "File to Fold In"
-msgstr ""
+msgstr "Bestand om in op te bergen"
 
 #: MyWords_.pm:611
 #, perl-format
 msgid "The grade for %s on %s is %s. Change it to %s?"
-msgstr ""
+msgstr "Het cijfer voor %s op %s is %s. Wilt u dit wijzigen in %s?"
 
 #: MyWords_.pm:612
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: MyWords_.pm:613
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: MyWords_.pm:615
 msgid "New password"
-msgstr ""
+msgstr "Nieuw wachtwoord"
 
 #: MyWords_.pm:616
 msgid "Filename"
-msgstr ""
+msgstr "Bestandsnaam"
 
 #: MyWords_.pm:617
 msgid "New File"
-msgstr ""
+msgstr "Nieuw bestand"
 
 #: MyWords_.pm:618
 #, perl-format
 msgid "The file %s already exists."
-msgstr ""
+msgstr "Het bestand, %s, bestaat al."
 
 #: MyWords_.pm:620
 msgid ""
@@ -1149,7 +1150,7 @@ msgstr ""
 
 #: MyWords_.pm:627
 msgid "Delete an Entire Category"
-msgstr ""
+msgstr "Hele categorie verwijderen"
 
 #: MyWords_.pm:628
 #, perl-format
@@ -1565,7 +1566,7 @@ msgstr ""
 
 #: MyWords_.pm:823
 msgid "to edit the roster or the list of categories,"
-msgstr ""
+msgstr "om het rooster of de categorieënlijst te bewerken, "
 
 #: MyWords_.pm:825
 msgid "for reports,"
