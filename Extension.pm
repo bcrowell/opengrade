@@ -1,5 +1,6 @@
 use strict;
 package Extension;
+use IPC::System::Simple;
 
 
 sub apply_scalar_function_of_x {
@@ -8,16 +9,18 @@ sub apply_scalar_function_of_x {
   my $x = shift;
   if (!defined $f) {return $x}
   my $lisp = "(display ((lambda (x) ($f)) $x))";
-  my $result = `guile -c '$lisp'`;
-  if ($? == 0) {
-    return $result;
+  return execute_guile_code($lisp);
+}
+
+# Returns the output of the Guile program. If there's an error, prints error info to stderr and returns undef.
+sub execute_guile_code {
+  my $lisp = shift; # the source code of a complete Guile program
+  my $result;
+  if (not eval { $result = IPC::System::Simple::capturex('guile','-c',$lisp); 1 }) {
+      print STDERR "Error executing scheme code using guile:\n$@.\n";
+      return undef;
   }
-  else {
-    print STDERR "Error executing scheme code $lisp using guile.";
-    return undef; # occurs if guile is not installed or the guile code dies with an error
-  }
-  # to do:
-  #   Escape single quotes inside the string.
+  return $result;
 }
 
 1;
