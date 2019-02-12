@@ -13,6 +13,7 @@ sub apply_scalar_function_of_x {
 }
 
 # Returns the output of the Guile program. If there's an error, prints error info to stderr and returns undef.
+# Thanks to haukex for the code.
 sub execute_guile_code {
   my $lisp = shift; # the source code of a complete Guile program
   my $result;
