@@ -863,10 +863,14 @@ a text editor showed the following line describing the homework category:
 
 To add the divide-by-ten step, I edited this line to look like the following:
 
-\verb@"hw":{"catname":"hw,hw","postinput":"x*0.1"},@
+\verb@"hw":{"catname":"hw,hw","postinput":"bc:x*0.1"},@
 
 The string \verb@x*0.1@ is a snippet of code written in the language of a
-calculator program called bc. 
+calculator program called bc. For security, bc is run with the -s option,
+which makes it adhere to a stricter subset of its language. This makes it
+pretty finicky about syntax and newlines. If you're having trouble getting
+something to work, try starting Opengrade from a terminal window, and any
+error messages from bc will be printed out on the terminal.
 
 Once you've edited the gradebook file, you will need to remove the watermark
 so that OpenGrade doesn't flag the file as having been tampered with. After
