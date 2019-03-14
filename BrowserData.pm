@@ -27,7 +27,6 @@ use NetOG;
 use Fun;
 use Digest::SHA;
 use Version;
-use POSIX qw(tmpnam);
 
 #---------------------------------------------------
 # BrowserData class

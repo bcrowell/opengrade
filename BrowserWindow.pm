@@ -27,11 +27,11 @@ use Fun;
 use Extension;
 use Digest::SHA;
 use Version;
-use POSIX qw(tmpnam);
 use Stage;
 use Assignments;
 use Roster;
 use Score;
+use File::Temp qw(tempfile);
 
 BEGIN {
   eval "use ServerDialogs";
@@ -1145,7 +1145,7 @@ sub export {
     if ($format eq 'json' || $format eq 'old') {
       # Write to a temp file and then slurp the contents back out, so we can use ExtraGUI::save_plain_text_to_file on the resulting string.
       my $err;
-      my $temp_file = POSIX::tmpnam();
+      my $temp_file = ((File::Temp::tempfile())[1]);
       $err = $gb->write_to_named_file($temp_file,$format);
       if ($err) {
         ExtraGUI::error_message($err);
@@ -1569,7 +1569,7 @@ sub report {
     if (Portable::os_has_unix_shell()) {
       $extra_buttons = {
         w('graphical_roster')=>sub {
-           my $file_stem = POSIX::tmpnam();
+           my $file_stem = ((File::Temp::tempfile())[1]);
            my $svg = $file_stem.".svg"; # without the SVG, inkscape prints a warning to the console
            my $pdf = $file_stem.".pdf";
            unless (open(F,">$svg")) {ExtraGUI::error_message("Error opening file $svg for output, $!"); exit}
@@ -1579,7 +1579,7 @@ sub report {
            unless (system($c)==0) { ExtraGUI::error_message("Error executing Unix shell command $c, $?\n"); }
          },
         w('roster_to_pdf')=>sub {
-           my $svg = POSIX::tmpnam().".svg";
+           my $svg = ((File::Temp::tempfile())[1]).".svg";
            my $pdf = $gb->file_name();
            $pdf =~ s/(.*\/)([^\/]+)\.gb/$1roster_$2\.pdf/;
            unless (open(F,">$svg")) {ExtraGUI::error_message("Error opening file $svg for output, $!"); exit}

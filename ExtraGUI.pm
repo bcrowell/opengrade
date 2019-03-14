@@ -28,6 +28,7 @@ use Browser;
 use MyWords;
 use Input;
 use Preferences;
+use File::Temp qw(tempfile);
 
 if (Portable::os_type() eq 'windows') {
   eval("require Win32::Sound;")
@@ -320,7 +321,7 @@ sub print_file {
 
 sub save_text_in_temporary_file {
   my $text = shift;
-  my $temp_file = POSIX::tmpnam();
+  my $temp_file = ((File::Temp::tempfile())[1]);
   END {unlink($temp_file)}
   open(FILE,">$temp_file");
   print FILE $text;
