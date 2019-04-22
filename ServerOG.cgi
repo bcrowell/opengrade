@@ -14,6 +14,9 @@
 
 use strict;
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 # The following four modules are distributed with Spotter, not with OpenGrade:
 use FileTree;
 use Query;
