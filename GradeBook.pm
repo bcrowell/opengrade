@@ -1167,7 +1167,7 @@ sub do_watermark_hash_function {
   my $function = $self->hash_function();
   if (@_) {$function = shift}
   if ($function eq 'SHA1') {
-    return Digest::SHA::sha1_base64($data);
+    return Digest::SHA::sha1_base64(Encode::encode_utf8($data));
   }
   # The following code is duplicated in LineByLine.pm, for legacy support of old format.
   # Returns undef if they requested Whirlpool, but don't have either Digest::Whirlpool or whirlpooldeep installed.
