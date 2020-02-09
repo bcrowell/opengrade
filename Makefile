@@ -44,7 +44,7 @@ all:
 	@echo "and then 'make install'."
 
 ubuntu:
-	apt-get install perl-tk libdate-calc-perl libclone-perl libterm-readkey-perl md5deep build-essential alsa-utils libjson-perl
+	apt-get install perl-tk libdate-calc-perl libclone-perl libterm-readkey-perl md5deep build-essential alsa-utils libjson-perl libipc-run-perl
 	perl -e '`lsb_release -d`=~/(\d+\.\d+)/; if ($$1>=9.10) {system("apt-get install libdigest-whirlpool-perl")}'
 
 depend:
