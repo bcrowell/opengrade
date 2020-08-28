@@ -622,7 +622,7 @@ sub new_assignment {
     if ($gb->category_contains_assignments($cat)) {$whoops = w('single_assignment_cat_already_has_one')}
   }
   else {
-    push @inputs,Input->new(KEY=>"name",PROMPT=>w("name"),TYPE=>'string',BLANK_ALLOWED=>0);
+    push @inputs,Input->new(KEY=>"name",PROMPT=>w("name"),TYPE=>'string',BLANK_ALLOWED=>0,ZERO_ALLOWED=>0);
   }
   my $max = $gb->category_max($cat);
 

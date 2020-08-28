@@ -61,6 +61,7 @@ sub new {
       MIN=>"",
       MAX=>"",
       BLANK_ALLOWED=>1,
+      ZERO_ALLOWED=>1,
       WIDGET_TYPE=>'entry', # can also be 'text' for multiline text, or 'radio_buttons', or 'date', or 'menu'
       ITEM_MAP=>{1=>Browser::get_w($words_prefix,'yes'),0=>Browser::get_w($words_prefix,'no')}, # a ref to a hash, giving the text for each value
       ITEM_KEYS=>[1,0],
@@ -76,6 +77,7 @@ sub new {
     $self->{MAX} = $args{MAX};
     $self->{MIN} = $args{MIN};
     $self->{BLANK_ALLOWED} = $args{BLANK_ALLOWED};
+    $self->{ZERO_ALLOWED} = $args{ZERO_ALLOWED};
     $self->{WIDGET_TYPE} = $args{WIDGET_TYPE};
     $self->{ITEM_MAP} = $args{ITEM_MAP};
     $self->{ITEM_KEYS} = $args{ITEM_KEYS};
@@ -95,6 +97,7 @@ sub check {
 
   my @stuff = ();
   if ($x eq "" && !($self->{BLANK_ALLOWED})) {push @stuff,"blank_not_allowed"}
+  if ($x eq "0" && !($self->{ZERO_ALLOWED})) {push @stuff,"zero_not_allowed"}
   if ($self->{TYPE} eq "numeric") {
     if (!($x eq "" && $self->{BLANK_ALLOWED})) {
       if ($self->{MIN} ne "" && $x<$self->{MIN}) {@stuff = ("below_min",$self->{MIN})}

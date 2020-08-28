@@ -31,6 +31,7 @@ BEGIN {
 # Generic error messages from the Input module
 #--------------------------------------------------
 "en.input.blank_not_allowed" => "A blank value is not allowed.",
+"en.input.zero_not_allowed" => "The value 0 is not allowed.",
 "en.input.below_min" => "The minimum value is %s.",
 "en.input.above_max" => "The maximum value is %s.",
 "en.input.illegal_time_format" => "Times must be in the format h:mm or hh:mm.",
