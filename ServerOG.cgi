@@ -219,12 +219,27 @@ if ($request->{VALID}) {
           if ($do_email && !$email_severe_error) {
             my $email = $tree->get_student_par($recipient,"email");
             print LOG_FILE "  email address=$email\n";
+            my $no_reply = 0;
             $subject =~ m/subject\=(.*)/;
             my $email_subject = $1;
-            my $email_body = "$body\n---\nReplying to this address will not work. To reply, log in to Spotter and click on e-mail.\n";
+            my $email_body;
+            my $return_addr = "no-reply\@invalid.com";
+            my $i = $tree->instructor_emails();
+            my @instructor_names = keys %$i;
+            my @instructor_emails = values %$i;
+            if ($no_reply) {
+              $email_body = "$body\n---\nReplying to this address will not work. To reply, log in to Spotter and click on e-mail.\n";
+            }
+            else {
+              $email_body = $body;
+              if (@instructor_emails==1) { # kludge
+                $return_addr = "$instructor_names[0] <$instructor_emails[0]>";
+              }
+              print LOG_FILE "  return address=$return_addr\n";
+            }
             if ($email ne '') {
               print LOG_FILE "  sending e-mail\n";
-              my $r = Email::send_email(TO=>$email,SUBJECT=>$email_subject,BODY=>$email_body,DK=>1);
+              my $r = Email::send_email(TO=>$email,SUBJECT=>$email_subject,BODY=>$email_body,DK=>1,FROM=>$return_addr);
               my $err2 = $r->[0];
               my $severity2 = $r->[1];
               print LOG_FILE "  ...result=$err2=\n";
